@@ -66,7 +66,7 @@
             <span>Total</span>
             <strong id="cart-total">&#8377; {{ number_format($total, 2) }}</strong>
           </div>
-          <a href="{{ route('checkout') }}" class="btn btn-primary w-100">Proceed to Checkout</a>
+          <a href="#" class="btn btn-primary w-100">Proceed to Checkout</a>
           <a href="{{ route('home.index') }}" class="btn btn-outline-secondary w-100 mt-2">
             Continue Shopping
           </a>
@@ -118,3 +118,5 @@ $(document).on('click', '.btn-remove', function () {
     });
 });
 </script>
+@endpush
+@endsection

@@ -44,7 +44,7 @@
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{{ route('client.profile') }}">My Profile</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">My Profile</a></li>
                             <li><a class="dropdown-item" href="{{ route('orders') }}">My Orders</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
@@ -78,4 +78,4 @@
 
     </div>
   </div>
-</h
+</header>

@@ -184,7 +184,7 @@
                 <strong class="text-primary offcanvas-total">&#8377; {{ number_format($cartTotal ?? 0, 2) }}</strong>
             </div>
             <a href="{{ route('cart.view') }}" class="btn btn-outline-primary w-100 mb-2">View Full Cart</a>
-            <a href="{{ route('checkout') }}" class="btn btn-primary w-100">Proceed to Checkout</a>
+            <a href="#" class="btn btn-primary w-100">Proceed to Checkout</a>
         </div>
 
     </div>
@@ -284,4 +284,6 @@
     <script defer src="{{ asset('/assets/home/js/script.js') }}?v={{ filemtime(public_path('assets/home/js/script.js')) }}"></script>
 
     @stack('scripts')
-   
+    
+  </body>
+</html>
