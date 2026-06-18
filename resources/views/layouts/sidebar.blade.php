@@ -1,0 +1,87 @@
+ @php $user = auth()->user(); @endphp
+
+ <aside class="mdc-drawer mdc-drawer--dismissible mdc-drawer--open">
+     <div class="mdc-drawer__header">
+         <a href="{{ route('dashboard') }}" class="brand-logo">
+             <img src="{{ asset('/assets/images/kalpak-logo.jpeg') }}" class="w-100" alt="logo">
+         </a>
+     </div>
+     <div class="mdc-drawer__content">
+         <div class="user-info">
+             <p class="name">{{ auth()->user()->name }}</p>
+             <p class="email">{{ auth()->user()->email }}</p>
+         </div>
+         <div class="mdc-list-group">
+             <nav class="mdc-list mdc-drawer-menu">
+                 @if ($user->hasPermission('dashboard'))
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                             href="{{ route('dashboard') }}">
+                             <i class="fa-solid fa-house"></i> Dashboard
+                         </a>
+                     </div>
+                 @endif
+                 @if ($user->hasPermission('vendors'))
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('vendor.index') ? 'active' : '' }}"
+                             href="{{ route('vendor.index') }}">
+                             <i class="fa-solid fa-shop"></i> Vendor
+                         </a>
+                     </div>
+                 @endif
+                 @if ($user->hasPermission('category'))
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('category.index') ? 'active' : '' }}"
+                             href="{{ route('category.index') }}">
+                             <i class="fa-solid fa-tags"></i> Category
+                         </a>
+                     </div>
+                 @endif
+                 @if ($user->hasPermission('products'))
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('products.index') ? 'active' : '' }}"
+                             href="{{ route('products.index') }}">
+                             <i class="fa-solid fa-boxes-stacked"></i> Products
+                         </a>
+                     </div>
+                 @endif
+
+                 <!--<div class="mdc-list-item mdc-drawer-item">-->
+                 <!--    <a class="mdc-expansion-panel-link gap-3" href="#" data-toggle="expansionPanel"-->
+                 <!--        data-target="ui-sub-menu">-->
+                 <!--        <i class="fa-solid fa-table-list"></i> UI Features-->
+                 <!--        <i class="fa-solid fa-angle-right"></i>-->
+                 <!--    </a>-->
+                 <!--    <div class="mdc-expansion-panel" id="ui-sub-menu">-->
+                 <!--        <nav class="mdc-list mdc-drawer-submenu">-->
+                 <!--            <div class="mdc-list-item mdc-drawer-item">-->
+                 <!--                <a class="mdc-drawer-link" href="#">-->
+                 <!--                    Buttons-->
+                 <!--                </a>-->
+                 <!--            </div>-->
+                 <!--            <div class="mdc-list-item mdc-drawer-item">-->
+                 <!--                <a class="mdc-drawer-link" href="#">-->
+                 <!--                    Typography-->
+                 <!--                </a>-->
+                 <!--            </div>-->
+                 <!--        </nav>-->
+                 <!--    </div>-->
+                 <!--</div>-->
+
+
+             </nav>
+         </div>
+         <div class="profile-actions">
+             <a href="javascript:;" class="pt-1">Settings</a>
+             <span class="divider pt-4"></span>
+             <form method="POST" action="{{ route('logout') }}">
+                 @csrf
+
+                 <a :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();" style="cursor: pointer;">
+                     Logout
+                 </a>
+             </form>
+         </div>
+
+     </div>
+ </aside>
