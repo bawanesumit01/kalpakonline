@@ -1,265 +1,253 @@
 @extends('home.app')
 
 @section('content')
-    <section
-        style="background-image: url('/assets/images/bg.jpg');background-repeat: no-repeat;background-size: cover;">
-        <div class="container-lg pt-5">
-            <div class="row pt-4">
-                <div class="col-lg-6 pt-5 mt-5">
-
-                    <div class="d-flex gap-3">
-                        <a href="{{ route('shop') }}"
-                            class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Start Shopping</a>
-                    </div>
-                    <div class="row my-5">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 g-0 justify-content-center">
-                <div class="col d-flex">
-                    <div class="card border-0 bg-primary rounded-0 p-4 text-light flex-fill">
-                        <div class="row">
-                            <div class="col-md-3 text-center">
-                                <svg width="60" height="60">
-                                    <use xlink:href="#fresh"></use>
-                                </svg>
+    <!-- Hero Section -->
+    <section class="hero-section-modern">
+        <div class="hero-background">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+            <div class="hero-shape hero-shape-3"></div>
+        </div>
+        <div class="container-lg">
+            <div class="row align-items-center" style="min-height: 60vh;">
+                <div class="col-lg-6 col-md-8">
+                    <div class="hero-content-modern" data-aos="fade-up">
+                        <span class="hero-badge-modern">
+                            <i class="bi bi-stars"></i> Welcome to Kalpak Online
+                        </span>
+                        <h1 class="hero-title-modern">
+                            Your Daily Essentials,<br>
+                            <span class="gradient-text">Delivered Fresh</span>
+                        </h1>
+                        <p class="hero-description-modern">
+                            Experience hassle-free shopping with a wide range of quality products from groceries to mobile
+                            accessories, all at your fingertips.
+                        </p>
+                        <div class="hero-buttons-modern">
+                            <a href="{{ route('shop') }}" class="btn-primary-modern">
+                                Start Shopping
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                            <a href="#products" class="btn-outline-modern">
+                                <i class="bi bi-grid-3x3-gap"></i>
+                                Explore Products
+                            </a>
+                        </div>
+                        <div class="hero-stats-modern">
+                            <div class="stat-card-modern">
+                                <h3 class="stat-number">1000+</h3>
+                                <p class="stat-label">Products</p>
                             </div>
-                            <div class="col-md-9">
-                                <div class="card-body p-0">
-                                    <h5 class="text-light">Wide Product Range</h5>
-                                    <p class="card-text">All your daily needs from edible oil to mobile accessories in one
-                                        place.</p>
-                                </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-card-modern">
+                                <h3 class="stat-number">5000+</h3>
+                                <p class="stat-label">Happy Customers</p>
+                            </div>
+                            <div class="stat-divider"></div>
+                            <div class="stat-card-modern">
+                                <h3 class="stat-number">24/7</h3>
+                                <p class="stat-label">Support</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col d-flex">
-                    <div class="card border-0 bg-secondary rounded-0 p-4 text-light flex-fill">
-                        <div class="row">
-                            <div class="col-md-3 text-center">
-                                <svg width="60" height="60">
-                                    <use xlink:href="#organic"></use>
-                                </svg>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body p-0">
-                                    <h5 class="text-light">Quality & Trusted Products</h5>
-                                    <p class="card-text">We provide carefully selected, reliable and genuine products for
-                                        every customer.</p>
-                                </div>
-                            </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="hero-image-modern" data-aos="fade-left" data-aos-delay="200">
+                        <div class="floating-card floating-card-1">
+                            <i class="bi bi-basket"></i>
+                            <span>Fresh Products</span>
                         </div>
-                    </div>
-                </div>
-                <div class="col d-flex">
-                    <div class="card border-0 bg-danger rounded-0 p-4 text-light flex-fill">
-                        <div class="row">
-                            <div class="col-md-3 text-center">
-                                <svg width="60" height="60">
-                                    <use xlink:href="#delivery"></use>
-                                </svg>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="card-body p-0">
-                                    <h5 class="text-light">Easy & Convenient Shopping</h5>
-                                    <p class="card-text">Simple ordering, affordable prices and quick service you can trust.
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="floating-card floating-card-2">
+                            <i class="bi bi-truck"></i>
+                            <span>Fast Delivery</span>
+                        </div>
+                        <div class="floating-card floating-card-3">
+                            <i class="bi bi-shield-check"></i>
+                            <span>Secure Payment</span>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!--category-->
-    <section class="py-5 overflow-hidden">
+    <!-- Features Section -->
+    <section class="features-section-modern">
         <div class="container-lg">
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="section-header d-flex flex-wrap justify-content-between mb-5">
-                        <h2 class="section-title">Category</h2>
-
-                        <div class="d-flex align-items-center">
-                            <a href="#" class="btn btn-primary me-2">View All</a>
-                            <div class="swiper-buttons">
-                                <button class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
-                                <button class="swiper-next category-carousel-next btn btn-yellow">❯</button>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card-modern">
+                        <div class="feature-icon-wrapper">
+                            <div class="feature-icon-modern feature-icon-1">
+                                <i class="bi bi-box-seam"></i>
                             </div>
                         </div>
+                        <h3 class="feature-title-modern">Wide Product Range</h3>
+                        <p class="feature-description-modern">All your daily needs from edible oil to mobile accessories in
+                            one place.</p>
+                        <div class="feature-number">01</div>
                     </div>
-
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card-modern">
+                        <div class="feature-icon-wrapper">
+                            <div class="feature-icon-modern feature-icon-2">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-title-modern">Quality & Trusted</h3>
+                        <p class="feature-description-modern">Carefully selected, reliable and genuine products for every
+                            customer.</p>
+                        <div class="feature-number">02</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card-modern">
+                        <div class="feature-icon-wrapper">
+                            <div class="feature-icon-modern feature-icon-3">
+                                <i class="bi bi-lightning-charge"></i>
+                            </div>
+                        </div>
+                        <h3 class="feature-title-modern">Fast Delivery</h3>
+                        <p class="feature-description-modern">Quick and reliable delivery service to your doorstep with
+                            care.</p>
+                        <div class="feature-number">03</div>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-12">
+        </div>
+    </section>
 
-                    <div class="category-carousel swiper">
-                        <div class="swiper-wrapper">
-                            @foreach ($categories as $category)
-                                <a href="#" class="nav-link swiper-slide text-center">
-                                    <img src="{{ !empty($category->cat_image) ? asset('/categoryImage/' . $category->cat_image) : asset('/categoryImage/default_category_img.png') }}"
-                                        class="rounded-circle w-100" style="aspect-ratio: 3 / 3;"
-                                        alt="{{ $category->category_name ?? 'Category Thumbnail' }}">
-                                    <h4 class="fs-6 mt-3 fw-normal category-title">{{ $category->category_name ?? null }}
-                                    </h4>
+    <!-- Category Section -->
+    <section class="category-section-modern">
+        <div class="container-lg">
+            <div class="section-header-new" data-aos="fade-up">
+                <div class="section-subtitle-new">Browse by</div>
+                <h2 class="section-title-new">Popular Categories</h2>
+                <p class="section-description-new">Discover our wide range of product categories</p>
+            </div>
+
+            <div class="category-grid-modern" data-aos="fade-up" data-aos-delay="100">
+                @foreach ($categories as $category)
+                    <a href="#" class="category-card-modern">
+                        <div class="category-image-modern">
+                            <img src="{{ !empty($category->cat_image) ? asset('/categoryImage/' . $category->cat_image) : asset('/categoryImage/default_category_img.png') }}"
+                                alt="{{ $category->category_name ?? 'Category' }}">
+                            <div class="category-overlay-modern"></div>
+                        </div>
+                        <div class="category-content-modern">
+                            <h4 class="category-name-modern">{{ $category->category_name ?? 'Category' }}</h4>
+                            <span class="category-link-modern">
+                                Explore Now
+                                <i class="bi bi-arrow-right"></i>
+                            </span>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section-modern" id="products">
+        <div class="container-lg">
+            <div class="section-header-new" data-aos="fade-up">
+                <div class="section-subtitle-new">Shop Now</div>
+                <h2 class="section-title-new">Best Selling Products</h2>
+                <p class="section-description-new">Top-rated products loved by our customers</p>
+            </div>
+
+            <div class="product-grid-modern" data-aos="fade-up" data-aos-delay="100">
+                @foreach ($products as $product)
+                    <div class="product-card-modern">
+                        <div class="product-image-wrapper-modern">
+                            <a href="{{ route('product.details', $product->id) }}">
+                                <img src="{{ asset('/' . $product->main_image) }}"
+                                    alt="{{ $product->product_name ?? null }}" class="product-image-modern">
+                            </a>
+                            <div class="product-badge-modern">New</div>
+                        </div>
+                        <div class="product-content-modern">
+                            <h3 class="product-title-modern">
+                                <a href="{{ route('product.details', $product->id) }}">
+                                    {{ $product->product_name ?? null }}
                                 </a>
-                            @endforeach
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!--products -->
-    <section class="pb-5">
-        <div class="container-lg">
-
-            <div class="row">
-                <div class="col-md-12">
-
-                    <div class="section-header d-flex flex-wrap justify-content-between my-4">
-
-                        <h2 class="section-title">Best selling products</h2>
-
-                        <div class="d-flex align-items-center">
-                            <a href="{{ route('shop') }}" class="btn btn-primary rounded-1">View All</a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row" id="start-shopping">
-                <div class="col-md-12">
-
-                    <div
-                        class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
-
-                        @foreach ($products as $product)
-                            <div class="col">
-                                <div class="product-item">
-                                    <figure>
-                                        <a href="{{ route('product.details', $product->id) }}" title="Product Title">
-                                            <img src="{{ asset('/' . $product->main_image) }}"
-                                                alt="{{ $product->product_name ?? null }}" class="tab-image">
-                                        </a>
-                                    </figure>
-                                    <div class="d-flex flex-column text-center">
-                                        <h3 class="fs-6 fw-normal">{{ $product->product_name ?? null }}</h3>
-                                        <div class="d-flex justify-content-center align-items-center gap-2">
-                                            <!--<del>$24.00</del>-->
-                                            <span class="text-dark fw-semibold">&#8377;
-                                                {{ $product->final_price ?? null }}</span>
-                                        </div>
-                                        <div class="button-area p-3 pt-0">
-                                            <div class="row g-1 mt-2">
-                                                <div class="col-3">
-                                                    <input type="number" name="quantity"
-                                                        class="form-control border-dark-subtle input-number quantity"
-                                                        value="1" min="1">
-                                                </div>
-                                                <div class="col-9">
-                                                    <a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"
-                                                        data-product-id="{{ $product->id }}">
-                                                        <svg width="18" height="18">
-                                                            <use xlink:href="#cart"></use>
-                                                        </svg>
-                                                        Add to Cart
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            </h3>
+                            <div class="product-price-modern">
+                                <span class="price-current">&#8377; {{ $product->final_price ?? null }}</span>
                             </div>
-                        @endforeach
-
-
+                            <div class="product-actions-modern">
+                                <div class="quantity-wrapper-modern">
+                                    <input type="number" class="quantity-input-modern quantity" value="1"
+                                        min="1">
+                                </div>
+                                <button class="btn-add-cart-modern btn-cart" data-product-id="{{ $product->id }}">
+                                    <i class="bi bi-cart-plus"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <!-- / product-grid -->
+                @endforeach
+            </div>
 
-
-                </div>
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="{{ route('shop') }}" class="btn-view-all-modern">
+                    View All Products
+                    <i class="bi bi-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
 
 
-    <section class="py-5">
+    <!-- Benefits Section -->
+    <section class="benefits-section-modern">
         <div class="container-lg">
-            <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-5">
-                <div class="col">
-                    <div class="card mb-3 border border-dark-subtle p-3">
-                        <div class="text-dark mb-3">
-                            <svg width="32" height="32">
-                                <use xlink:href="#package"></use>
-                            </svg>
-                        </div>
-                        <div class="card-body p-0">
-                            <h5>Free delivery</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
-                        </div>
+            <div class="benefits-grid-modern">
+                <div class="benefit-card-modern" data-aos="fade-up" data-aos-delay="100">
+                    <div class="benefit-icon-modern benefit-icon-1">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
+                    <div class="benefit-content-modern">
+                        <h5 class="benefit-title-modern">Free Delivery</h5>
+                        <p class="benefit-text-modern">On orders above ₹500</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card mb-3 border border-dark-subtle p-3">
-                        <div class="text-dark mb-3">
-                            <svg width="32" height="32">
-                                <use xlink:href="#secure"></use>
-                            </svg>
-                        </div>
-                        <div class="card-body p-0">
-                            <h5>100% secure payment</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
-                        </div>
+                <div class="benefit-card-modern" data-aos="fade-up" data-aos-delay="200">
+                    <div class="benefit-icon-modern benefit-icon-2">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <div class="benefit-content-modern">
+                        <h5 class="benefit-title-modern">100% Secure Payment</h5>
+                        <p class="benefit-text-modern">Your money is safe with us</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card mb-3 border border-dark-subtle p-3">
-                        <div class="text-dark mb-3">
-                            <svg width="32" height="32">
-                                <use xlink:href="#quality"></use>
-                            </svg>
-                        </div>
-                        <div class="card-body p-0">
-                            <h5>Quality guarantee</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
-                        </div>
+                <div class="benefit-card-modern" data-aos="fade-up" data-aos-delay="300">
+                    <div class="benefit-icon-modern benefit-icon-3">
+                        <i class="bi bi-award"></i>
+                    </div>
+                    <div class="benefit-content-modern">
+                        <h5 class="benefit-title-modern">Quality Guarantee</h5>
+                        <p class="benefit-text-modern">Premium quality products</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card mb-3 border border-dark-subtle p-3">
-                        <div class="text-dark mb-3">
-                            <svg width="32" height="32">
-                                <use xlink:href="#savings"></use>
-                            </svg>
-                        </div>
-                        <div class="card-body p-0">
-                            <h5>guaranteed savings</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
-                        </div>
+                <div class="benefit-card-modern" data-aos="fade-up" data-aos-delay="400">
+                    <div class="benefit-icon-modern benefit-icon-4">
+                        <i class="bi bi-piggy-bank"></i>
+                    </div>
+                    <div class="benefit-content-modern">
+                        <h5 class="benefit-title-modern">Guaranteed Savings</h5>
+                        <p class="benefit-text-modern">Best prices guaranteed</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card mb-3 border border-dark-subtle p-3">
-                        <div class="text-dark mb-3">
-                            <svg width="32" height="32">
-                                <use xlink:href="#offers"></use>
-                            </svg>
-                        </div>
-                        <div class="card-body p-0">
-                            <h5>Daily offers</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipi elit.</p>
-                        </div>
+                <div class="benefit-card-modern" data-aos="fade-up" data-aos-delay="500">
+                    <div class="benefit-icon-modern benefit-icon-5">
+                        <i class="bi bi-tag"></i>
+                    </div>
+                    <div class="benefit-content-modern">
+                        <h5 class="benefit-title-modern">Daily Offers</h5>
+                        <p class="benefit-text-modern">New deals every day</p>
                     </div>
                 </div>
             </div>
@@ -321,7 +309,8 @@
 
                             if (xhr.status === 419) {
                                 alert(
-                                    'CSRF token mismatch. Make sure meta csrf tag is in your <head>.');
+                                    'CSRF token mismatch. Make sure meta csrf tag is in your <head>.'
+                                    );
                             } else if (xhr.status === 404) {
                                 alert('Route not found. Check route name cart.add exists.');
                             } else if (xhr.status === 500) {

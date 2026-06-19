@@ -39,6 +39,9 @@
     <link rel="preload" href="<?php echo e(asset('/assets/home/js/jquery-1.11.0.min.js')); ?>" as="script">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('/assets/home/css/vendor.css')); ?>?v=<?php echo e(filemtime(public_path('assets/home/css/vendor.css'))); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('/assets/home/css/style.css')); ?>?v=<?php echo e(filemtime(public_path('assets/home/css/style.css'))); ?>">
+    
+    
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('/assets/home/css/home-modern.css')); ?>?v=<?php echo e(filemtime(public_path('assets/home/css/home-modern.css'))); ?>">
 
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
@@ -46,6 +49,10 @@
     <noscript>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     </noscript>
+    
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
 
 
   </head>
@@ -283,6 +290,18 @@
     <script src="<?php echo e(asset('/assets/home/js/jquery-1.11.0.min.js')); ?>?v=<?php echo e(filemtime(public_path('assets/home/js/jquery-1.11.0.min.js'))); ?>"></script>
     <script defer src="<?php echo e(asset('/assets/home/js/plugins.js')); ?>?v=<?php echo e(filemtime(public_path('assets/home/js/plugins.js'))); ?>"></script>
     <script defer src="<?php echo e(asset('/assets/home/js/script.js')); ?>?v=<?php echo e(filemtime(public_path('assets/home/js/script.js'))); ?>"></script>
+
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+    </script>
 
     <?php echo $__env->yieldPushContent('scripts'); ?>
     

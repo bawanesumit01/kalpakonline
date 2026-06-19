@@ -1,6 +1,6 @@
 <header>
     
-<div style="background: #6bb252; color: #fff; padding: 2px 0; position: relative;">
+<div style="background: #5285b2; color: #fff; padding: 2px 0; position: relative;">
     <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.stop()" onmouseout="this.start()">
         <span class="mx-5">🛒 Free Delivery on orders above ₹499</span>
         <span class="mx-5">⚡ Flash Sale — Up to 50% OFF on selected items!</span>
