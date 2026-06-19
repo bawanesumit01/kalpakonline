@@ -20,7 +20,8 @@
                             <span class="gradient-text">Delivered Fresh</span>
                         </h1>
                         <p class="hero-description-modern">
-                            Experience hassle-free shopping with a wide range of quality products from groceries to mobile accessories, all at your fingertips.
+                            Experience hassle-free shopping with a wide range of quality products from groceries to mobile
+                            accessories, all at your fingertips.
                         </p>
                         <div class="hero-buttons-modern">
                             <a href="<?php echo e(route('shop')); ?>" class="btn-primary-modern">
@@ -82,7 +83,8 @@
                             </div>
                         </div>
                         <h3 class="feature-title-modern">Wide Product Range</h3>
-                        <p class="feature-description-modern">All your daily needs from edible oil to mobile accessories in one place.</p>
+                        <p class="feature-description-modern">All your daily needs from edible oil to mobile accessories in
+                            one place.</p>
                         <div class="feature-number">01</div>
                     </div>
                 </div>
@@ -94,7 +96,8 @@
                             </div>
                         </div>
                         <h3 class="feature-title-modern">Quality & Trusted</h3>
-                        <p class="feature-description-modern">Carefully selected, reliable and genuine products for every customer.</p>
+                        <p class="feature-description-modern">Carefully selected, reliable and genuine products for every
+                            customer.</p>
                         <div class="feature-number">02</div>
                     </div>
                 </div>
@@ -106,7 +109,8 @@
                             </div>
                         </div>
                         <h3 class="feature-title-modern">Fast Delivery</h3>
-                        <p class="feature-description-modern">Quick and reliable delivery service to your doorstep with care.</p>
+                        <p class="feature-description-modern">Quick and reliable delivery service to your doorstep with
+                            care.</p>
                         <div class="feature-number">03</div>
                     </div>
                 </div>
@@ -159,8 +163,7 @@
                         <div class="product-image-wrapper-modern">
                             <a href="<?php echo e(route('product.details', $product->id)); ?>">
                                 <img src="<?php echo e(asset('/' . $product->main_image)); ?>"
-                                    alt="<?php echo e($product->product_name ?? null); ?>"
-                                    class="product-image-modern">
+                                    alt="<?php echo e($product->product_name ?? null); ?>" class="product-image-modern">
                             </a>
                             <div class="product-badge-modern">New</div>
                         </div>
@@ -176,7 +179,8 @@
                             </div>
                             <div class="product-actions-modern">
                                 <div class="quantity-wrapper-modern">
-                                    <input type="number" class="quantity-input-modern quantity" value="1" min="1">
+                                    <input type="number" class="quantity-input-modern quantity" value="1"
+                                        min="1">
                                 </div>
                                 <button class="btn-add-cart-modern btn-cart" data-product-id="<?php echo e($product->id); ?>">
                                     <i class="bi bi-cart-plus"></i>
@@ -306,7 +310,8 @@
 
                             if (xhr.status === 419) {
                                 alert(
-                                    'CSRF token mismatch. Make sure meta csrf tag is in your <head>.');
+                                    'CSRF token mismatch. Make sure meta csrf tag is in your <head>.'
+                                    );
                             } else if (xhr.status === 404) {
                                 alert('Route not found. Check route name cart.add exists.');
                             } else if (xhr.status === 500) {
