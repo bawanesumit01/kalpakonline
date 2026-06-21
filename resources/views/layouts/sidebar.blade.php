@@ -46,6 +46,22 @@
                      </div>
                  @endif
 
+                 <!-- Orders Management -->
+                 <div class="mdc-list-item mdc-drawer-item">
+                     <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}"
+                         href="{{ route('admin.orders.index') }}">
+                         <i class="fa-solid fa-receipt"></i> Orders
+                     </a>
+                 </div>
+
+                 <!-- Customers Management -->
+                 <div class="mdc-list-item mdc-drawer-item">
+                     <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}"
+                         href="{{ route('admin.customers.index') }}">
+                         <i class="fa-solid fa-users"></i> Customers
+                     </a>
+                 </div>
+
                  <!--<div class="mdc-list-item mdc-drawer-item">-->
                  <!--    <a class="mdc-expansion-panel-link gap-3" href="#" data-toggle="expansionPanel"-->
                  <!--        data-target="ui-sub-menu">-->

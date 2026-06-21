@@ -9,6 +9,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Auth\ClientAuthController;
+use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminCustomerController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +71,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:superadmin|admin'])->prefix('account')->group(function () {
     
+    // Vendor Management
     Route::get('/vendor', [VendorController::class, 'index'])->middleware('permission:vendors')->name('vendor.index');
     Route::get('/vendor/create', [VendorController::class, 'create'])->name('vendor.create');
     Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
@@ -76,6 +79,7 @@ Route::middleware(['auth', 'role:superadmin|admin'])->prefix('account')->group(f
     Route::put('/vendor/{id}', [VendorController::class, 'update'])->name('vendor.update');
     Route::delete('/vendor/{id}', [VendorController::class, 'destroy'])->name('vendor.destroy');
 
+    // Category Management
     Route::get('/category', [CategoryController::class, 'index'])->middleware('permission:category')->name('category.index');
     Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
@@ -83,12 +87,38 @@ Route::middleware(['auth', 'role:superadmin|admin'])->prefix('account')->group(f
     Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
+    // Product Management
     Route::get('/products', [ProductController::class, 'index'])->middleware('permission:products')->name('products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+    // Order Management
+    Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/orders/{id}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+    Route::get('/orders/{id}/edit', [AdminOrderController::class, 'edit'])->name('admin.orders.edit');
+    Route::put('/orders/{id}', [AdminOrderController::class, 'update'])->name('admin.orders.update');
+    Route::get('/orders/{id}/invoice', [AdminOrderController::class, 'invoice'])->name('admin.orders.invoice');
+    Route::delete('/orders/{id}', [AdminOrderController::class, 'destroy'])->name('admin.orders.destroy');
+    Route::post('/orders/bulk-update', [AdminOrderController::class, 'bulkUpdate'])->name('admin.orders.bulk-update');
+    Route::get('/orders-export', [AdminOrderController::class, 'export'])->name('admin.orders.export');
+    Route::get('/orders-statistics', [AdminOrderController::class, 'statistics'])->name('admin.orders.statistics');
+
+    // Customer Management
+    Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
+    Route::get('/customers/{id}', [AdminCustomerController::class, 'show'])->name('admin.customers.show');
+    Route::get('/customers/{id}/edit', [AdminCustomerController::class, 'edit'])->name('admin.customers.edit');
+    Route::put('/customers/{id}', [AdminCustomerController::class, 'update'])->name('admin.customers.update');
+    Route::get('/customers/{id}/addresses', [AdminCustomerController::class, 'addresses'])->name('admin.customers.addresses');
+    Route::delete('/customers/{id}/addresses/{addressId}', [AdminCustomerController::class, 'deleteAddress'])->name('admin.customers.deleteAddress');
+    Route::get('/customers/{id}/orders', [AdminCustomerController::class, 'orders'])->name('admin.customers.orders');
+    Route::delete('/customers/{id}', [AdminCustomerController::class, 'destroy'])->name('admin.customers.destroy');
+    Route::post('/customers/bulk-action', [AdminCustomerController::class, 'bulkAction'])->name('admin.customers.bulk-action');
+    Route::get('/customers-export', [AdminCustomerController::class, 'export'])->name('admin.customers.export');
+    Route::get('/customers-statistics', [AdminCustomerController::class, 'statistics'])->name('admin.customers.statistics');
+    Route::post('/customers/{id}/notify', [AdminCustomerController::class, 'sendNotification'])->name('admin.customers.notify');
 
 });
 
