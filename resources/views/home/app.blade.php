@@ -46,6 +46,10 @@
     {{-- Modern Home Page Styles --}}
     <link rel="stylesheet" type="text/css"
         href="{{ asset('/assets/home/css/home-modern.css') }}?v={{ filemtime(public_path('assets/home/css/home-modern.css')) }}">
+    
+    {{-- Modern Checkout Page Styles --}}
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('/assets/home/css/checkout-modern.css') }}?v={{ filemtime(public_path('assets/home/css/checkout-modern.css')) }}">
 
     {{-- ✅ Bootstrap Icons - non blocking load --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" media="print"
@@ -438,7 +442,7 @@
                         {{ number_format($cartTotal ?? 0, 2) }}</strong>
                 </div>
                 <a href="{{ route('cart.view') }}" class="btn btn-outline-primary w-100 mb-2">View Full Cart</a>
-                <a href="#" class="btn btn-primary w-100">Proceed to Checkout</a>
+                <a href="{{ route('checkout.index') }}" class="btn btn-primary w-100">Proceed to Checkout</a>
             </div>
 
         </div>

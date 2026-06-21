@@ -23,11 +23,14 @@ class User extends Authenticatable
         'mobile',
         'password',
         'role',
-        'permissions'
+        'permissions',
+        'otp',
+        'otp_expires_at'
     ];
 
     protected $casts = [
         'permissions' => 'array',
+        'otp_expires_at' => 'datetime',
     ];
 
     /**
@@ -49,6 +52,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'otp_expires_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -80,6 +84,30 @@ class User extends Authenticatable
     public function vendor()
     {
         return $this->hasOne(Vendor::class, 'user_id', 'id');
+    }
+
+    /**
+     * Get the addresses for this user.
+     */
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
+    /**
+     * Get the orders for this user.
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * Get the default address for this user.
+     */
+    public function defaultAddress()
+    {
+        return $this->addresses()->where('is_default', true)->first();
     }
 
 }

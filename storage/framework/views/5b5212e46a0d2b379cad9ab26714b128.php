@@ -46,6 +46,10 @@
     
     <link rel="stylesheet" type="text/css"
         href="<?php echo e(asset('/assets/home/css/home-modern.css')); ?>?v=<?php echo e(filemtime(public_path('assets/home/css/home-modern.css'))); ?>">
+    
+    
+    <link rel="stylesheet" type="text/css"
+        href="<?php echo e(asset('/assets/home/css/checkout-modern.css')); ?>?v=<?php echo e(filemtime(public_path('assets/home/css/checkout-modern.css'))); ?>">
 
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" media="print"
@@ -439,7 +443,7 @@
                         <?php echo e(number_format($cartTotal ?? 0, 2)); ?></strong>
                 </div>
                 <a href="<?php echo e(route('cart.view')); ?>" class="btn btn-outline-primary w-100 mb-2">View Full Cart</a>
-                <a href="#" class="btn btn-primary w-100">Proceed to Checkout</a>
+                <a href="<?php echo e(route('checkout.index')); ?>" class="btn btn-primary w-100">Proceed to Checkout</a>
             </div>
 
         </div>

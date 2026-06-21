@@ -96,8 +96,13 @@ class ClientAuthController extends Controller
             return back()->withErrors(['otp' => 'User not found.']);
         }
 
-        // Check OTP expired
-        if (Carbon::now()->isAfter($user->otp_expires_at)) {
+        // Check if OTP exists and not empty
+        if (!$user->otp) {
+            return back()->withErrors(['otp' => 'No OTP found. Please request a new one.']);
+        }
+
+        // Check OTP expired (only if otp_expires_at exists)
+        if ($user->otp_expires_at && Carbon::now()->isAfter($user->otp_expires_at)) {
             return back()->withErrors(['otp' => 'OTP expired. Please request a new one.']);
         }
 

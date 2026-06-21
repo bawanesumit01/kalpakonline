@@ -52,8 +52,8 @@
 
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
-                                        <li><a class="dropdown-item" href="<?php echo e(route('profile')); ?>">My Profile</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo e(route('orders')); ?>">My Orders</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo e(route('client.profile')); ?>">My Profile</a></li>
+                                        <li><a class="dropdown-item" href="<?php echo e(route('client.orders')); ?>">My Orders</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>

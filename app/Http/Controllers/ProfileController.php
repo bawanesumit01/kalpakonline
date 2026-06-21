@@ -8,9 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Category;
 
 class ProfileController extends Controller
 {
+    /**
+     * Display the user's profile page (for clients).
+     */
+    public function index()
+    {
+        $user = Auth::user();
+        $categories = Category::all();
+        
+        return view('home.profile.index', compact('user', 'categories'));
+    }
+
     /**
      * Display the user's profile form.
      */
