@@ -30,11 +30,7 @@
                                         <i class="fa-solid fa-pen pe-1"></i>Edit
                                     </button>
                                 </a>
-                                <a href="{{ route('admin.customers.addresses', $customer->id) }}">
-                                    <button class="mdc-typography--button mdc-button mdc-button--raised mdc-button--dense mdc-ripple-upgraded">
-                                        <i class="fa-solid fa-map-pin pe-1"></i>Addresses
-                                    </button>
-                                </a>
+                               
                                 <a href="{{ route('admin.customers.orders', $customer->id) }}">
                                     <button class="mdc-typography--button mdc-button mdc-button--raised mdc-button--dense mdc-ripple-upgraded">
                                         <i class="fa-solid fa-box pe-1"></i>Orders
@@ -172,9 +168,6 @@
                                 <div class="btn-group-vertical w-100" role="group">
                                     <a href="{{ route('admin.customers.orders', $customer->id) }}" class="btn btn-outline-primary text-start" style="border-radius: 4px; margin-bottom: 8px;">
                                         <i class="fa-solid fa-box pe-2"></i>View All Orders
-                                    </a>
-                                    <a href="{{ route('admin.customers.addresses', $customer->id) }}" class="btn btn-outline-secondary text-start" style="border-radius: 4px; margin-bottom: 8px;">
-                                        <i class="fa-solid fa-map-pin pe-2"></i>Manage Addresses
                                     </a>
                                     <a href="{{ route('admin.customers.edit', $customer->id) }}" class="btn btn-outline-warning text-start" style="border-radius: 4px;">
                                         <i class="fa-solid fa-pen pe-2"></i>Edit Information

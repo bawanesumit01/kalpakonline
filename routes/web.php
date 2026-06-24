@@ -108,6 +108,8 @@ Route::middleware(['auth', 'role:superadmin|admin'])->prefix('account')->group(f
 
     // Customer Management
     Route::get('/customers', [AdminCustomerController::class, 'index'])->name('admin.customers.index');
+    Route::get('/customers/create', [AdminCustomerController::class, 'create'])->name('admin.customers.create');
+    Route::post('/customers', [AdminCustomerController::class, 'store'])->name('admin.customers.store');
     Route::get('/customers/{id}', [AdminCustomerController::class, 'show'])->name('admin.customers.show');
     Route::get('/customers/{id}/edit', [AdminCustomerController::class, 'edit'])->name('admin.customers.edit');
     Route::put('/customers/{id}', [AdminCustomerController::class, 'update'])->name('admin.customers.update');

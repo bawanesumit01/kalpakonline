@@ -9,7 +9,7 @@
                     <!-- Breadcrumbs & Header -->
                     <div class="row mx-4">
                         <div class="col-5 align-self-center">
-                            <h4 class="mdc-typography--headline4 pt-2">Edit Customer</h4>
+                            <h4 class="mdc-typography--headline4 pt-2">Create New Customer</h4>
                             <div class="d-flex align-items-center">
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -17,7 +17,7 @@
                                             <a href="{{ route('admin.customers.index') }}" class="text-decoration-none">Customers</a>
                                         </li>
                                         <li class="breadcrumb-item mdc-typography--subtitle1 active" aria-current="page">
-                                            {{ $customer->name }}
+                                            Create
                                         </li>
                                     </ol>
                                 </nav>
@@ -25,11 +25,6 @@
                         </div>
                         <div class="col-7 align-self-center">
                             <div class="d-flex no-block justify-content-end align-items-center gap-2">
-                                <a href="{{ route('admin.customers.show', $customer->id) }}">
-                                    <button class="mdc-typography--button mdc-button mdc-button--raised mdc-button--dense mdc-ripple-upgraded">
-                                        <i class="fa-solid fa-eye pe-1"></i>View Profile
-                                    </button>
-                                </a>
                                 <a href="{{ route('admin.customers.index') }}">
                                     <button class="mdc-typography--button mdc-button mdc-button--raised mdc-button--dense mdc-ripple-upgraded">
                                         <i class="fa-solid fa-arrow-left pe-1"></i>Back
@@ -56,9 +51,16 @@
                             </div>
                             @endif
 
-                            <form action="{{ route('admin.customers.update', $customer->id) }}" method="POST">
+                            <!-- Success Message -->
+                            @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show mb-3" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @endif
+
+                            <form action="{{ route('admin.customers.store') }}" method="POST">
                                 @csrf
-                                @method('PUT')
 
                                 <!-- Personal Information -->
                                 <div class="mdc-card mb-3 p-4">
@@ -67,9 +69,10 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="name" class="form-label">Full Name</label>
-                                                <input type="text" id="name" name="name" value="{{ $customer->name }}" 
-                                                       class="form-control @error('name') is-invalid @enderror" required>
+                                                <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                                <input type="text" id="name" name="name" value="{{ old('name') }}" 
+                                                       class="form-control @error('name') is-invalid @enderror" required 
+                                                       placeholder="Enter customer full name">
                                                 @error('name')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -77,8 +80,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="mobile" class="form-label">Mobile Number (10 digits)</label>
-                                                <input type="text" id="mobile" name="mobile" value="{{ $customer->mobile }}" 
+                                                <label for="mobile" class="form-label">Mobile Number (10 digits) <span class="text-danger">*</span></label>
+                                                <input type="text" id="mobile" name="mobile" value="{{ old('mobile') }}" 
                                                        placeholder="9876543210" class="form-control @error('mobile') is-invalid @enderror" 
                                                        required maxlength="10">
                                                 @error('mobile')
@@ -89,9 +92,10 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" id="email" name="email" value="{{ $customer->email }}" 
-                                               class="form-control @error('email') is-invalid @enderror" required>
+                                        <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                        <input type="email" id="email" name="email" value="{{ old('email') }}" 
+                                               class="form-control @error('email') is-invalid @enderror" required
+                                               placeholder="customer@example.com">
                                         @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -102,9 +106,9 @@
                                 <div class="mdc-card p-4">
                                     <div class="d-flex gap-2">
                                         <button type="submit" class="btn btn-primary">
-                                            <i class="fa-solid fa-save pe-2"></i>Save Changes
+                                            <i class="fa-solid fa-plus pe-2"></i>Create Customer
                                         </button>
-                                        <a href="{{ route('admin.customers.show', $customer->id) }}" class="btn btn-secondary">
+                                        <a href="{{ route('admin.customers.index') }}" class="btn btn-secondary">
                                             <i class="fa-solid fa-times pe-2"></i>Cancel
                                         </a>
                                     </div>
@@ -112,43 +116,38 @@
                             </form>
                         </div>
 
-                        <!-- Right Column (1/3) - Sidebar -->
+                        <!-- Right Column (1/3) - Info -->
                         <div class="col-lg-4">
-                            <!-- Account Information -->
+                            <!-- Information Card -->
                             <div class="mdc-card mb-3 p-4">
-                                <h5 class="mdc-typography--title mb-3">Account Information</h5>
+                                <h5 class="mdc-typography--title mb-3">Required Information</h5>
                                 
                                 <div class="mb-3 pb-3 border-bottom">
-                                    <p class="text-muted small mb-1">Joined Date</p>
-                                    <p class="fw-semibold mb-0">{{ $customer->created_at->format('M d, Y H:i') }}</p>
+                                    <p class="text-muted small mb-1">Full Name</p>
+                                    <p class="small">Customer's complete name as they would like it displayed</p>
                                 </div>
 
                                 <div class="mb-3 pb-3 border-bottom">
-                                    <p class="text-muted small mb-1">Total Orders</p>
-                                    <p class="fw-semibold mb-0">{{ $customer->orders()->count() }}</p>
+                                    <p class="text-muted small mb-1">Mobile Number</p>
+                                    <p class="small">10-digit mobile number without country code (e.g., 9876543210)</p>
                                 </div>
 
                                 <div>
-                                    <p class="text-muted small mb-1">Total Spent</p>
-                                    <p class="fw-semibold mb-0">₹{{ number_format($customer->orders()->sum('total') ?? 0, 2) }}</p>
+                                    <p class="text-muted small mb-1">Email Address</p>
+                                    <p class="small">Valid email address for communication and order updates</p>
                                 </div>
                             </div>
 
-                            <!-- Quick Links -->
-                            <div class="mdc-card p-4">
-                                <h5 class="mdc-typography--title mb-3">Quick Links</h5>
+                            <!-- Tips Card -->
+                            <div class="mdc-card p-4" style="background-color: #f5f5f5;">
+                                <h5 class="mdc-typography--title mb-3">Tips</h5>
                                 
-                                <div class="btn-group-vertical w-100" role="group">
-                                    <a href="{{ route('admin.customers.show', $customer->id) }}" class="btn btn-outline-primary text-start" style="border-radius: 4px; margin-bottom: 8px;">
-                                        <i class="fa-solid fa-user-circle pe-2"></i>View Profile
-                                    </a>
-                                    <a href="{{ route('admin.customers.orders', $customer->id) }}" class="btn btn-outline-info text-start" style="border-radius: 4px; margin-bottom: 8px;">
-                                        <i class="fa-solid fa-box pe-2"></i>View Orders
-                                    </a>
-                                    <a href="{{ route('admin.customers.addresses', $customer->id) }}" class="btn btn-outline-secondary text-start" style="border-radius: 4px;">
-                                        <i class="fa-solid fa-map-pin pe-2"></i>Manage Addresses
-                                    </a>
-                                </div>
+                                <ul style="font-size: 0.95rem; padding-left: 1rem;">
+                                    <li class="mb-2">Ensure mobile number is unique</li>
+                                    <li class="mb-2">Email should be valid and unique</li>
+                                    <li class="mb-2">Customer can update info later</li>
+                                    <li>All fields are required</li>
+                                </ul>
                             </div>
                         </div>
                     </div>

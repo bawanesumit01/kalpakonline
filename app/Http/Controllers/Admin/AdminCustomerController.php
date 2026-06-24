@@ -71,6 +71,40 @@ class AdminCustomerController extends Controller
     }
 
     /**
+     * Show customer create form
+     */
+    public function create()
+    {
+        return view('admin.customers.create');
+    }
+
+    /**
+     * Store new customer
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'mobile' => 'required|digits:10|unique:users,mobile',
+        ]);
+
+        // Create user with default password (customer can reset)
+        $customer = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'mobile' => $validated['mobile'],
+            'role' => 'client',
+            'email_verified_at' => now(), // Auto-verify for admin-created customers
+        ]);
+
+        \Log::info("Admin created new customer {$customer->id} ({$customer->name})");
+
+        return redirect()->route('admin.customers.show', $customer->id)
+                        ->with('success', 'Customer created successfully!');
+    }
+
+    /**
      * Show customer edit form
      */
     public function edit($customerId)
@@ -137,12 +171,28 @@ class AdminCustomerController extends Controller
     public function orders($customerId)
     {
         $customer = User::where('role', 'client')->findOrFail($customerId);
+        
+        // Get paginated orders for display
         $orders = $customer->orders()
                           ->with('items')
-                          ->orderBy('created_at', 'desc')
-                          ->paginate(15);
+                          ->orderBy('created_at', 'desc');
+        
+        // Apply filters
+        if (request('search')) {
+            $search = '%' . request('search') . '%';
+            $orders->where('order_number', 'like', $search);
+        }
+        
+        if (request('status')) {
+            $orders->where('status', request('status'));
+        }
+        
+        $orders = $orders->paginate(15);
+        
+        // Get all orders for statistics
+        $allOrders = $customer->orders()->get();
 
-        return view('admin.customers.orders', compact('customer', 'orders'));
+        return view('admin.customers.orders', compact('customer', 'orders', 'allOrders'));
     }
 
     /**

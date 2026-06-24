@@ -25,11 +25,7 @@
                         </div>
                         <div class="col-7 align-self-center">
                             <div class="d-flex no-block justify-content-end align-items-center gap-2">
-                                <a href="{{ route('admin.customers.statistics') }}">
-                                    <button class="mdc-typography--button mdc-button mdc-button--raised mdc-button--dense mdc-ripple-upgraded">
-                                        <i class="fa-solid fa-chart-bar pe-1"></i>Statistics
-                                    </button>
-                                </a>
+                               
                                 <a href="{{ route('admin.customers.export') }}">
                                     <button class="mdc-typography--button mdc-button mdc-button--raised mdc-button--dense mdc-ripple-upgraded">
                                         <i class="fa-solid fa-download pe-1"></i>Export CSV
