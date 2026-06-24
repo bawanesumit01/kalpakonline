@@ -8,7 +8,7 @@
     <title>Kalpak Online</title>
     @include('components.css')
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="{{ asset('/assets/images/favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('/assets/images/kp.png') }}" />
 </head>
 
 <body>

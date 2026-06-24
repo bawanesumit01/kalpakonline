@@ -12,6 +12,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" href="{{ asset('/assets/images/kp.png') }}" />
 
     {{-- ✅ Preconnect to external domains early --}}
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
