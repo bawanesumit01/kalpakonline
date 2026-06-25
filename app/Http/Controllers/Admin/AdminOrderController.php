@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Mail\OrderStatusUpdateMail;
 use Illuminate\Http\Request;
-use PDF;
+use Illuminate\Support\Facades\Mail;
 
 class AdminOrderController extends Controller
 {
@@ -80,6 +81,17 @@ class AdminOrderController extends Controller
 
         $order->update($validated);
 
+        // ── Send customer notification on status change ──
+        if ($statusChanged) {
+            try {
+                if (!empty($order->email)) {
+                    Mail::to($order->email)->send(new OrderStatusUpdateMail($order->fresh()));
+                }
+            } catch (\Exception $e) {
+                \Log::warning("Order status email failed for order {$order->order_number}: " . $e->getMessage());
+            }
+        }
+
         // Log the update
         \Log::info("Order {$order->order_number} updated - Status: {$validated['status']}, Payment: {$validated['payment_status']}");
 
@@ -93,12 +105,6 @@ class AdminOrderController extends Controller
     public function invoice($orderId)
     {
         $order = Order::with('user', 'items.product')->findOrFail($orderId);
-        
-        // Check if PDF library exists, otherwise return view
-        if (function_exists('pdf')) {
-            return PDF::loadView('admin.orders.invoice', compact('order'))->download("Invoice-{$order->order_number}.pdf");
-        }
-        
         return view('admin.orders.invoice', compact('order'));
     }
 

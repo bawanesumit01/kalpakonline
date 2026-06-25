@@ -62,6 +62,14 @@
                      </a>
                  </div>
 
+                 <!-- Enquiries Management -->
+                 <div class="mdc-list-item mdc-drawer-item">
+                     <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.enquiries.*') ? 'active' : '' }}"
+                         href="{{ route('admin.enquiries.index') }}">
+                         <i class="fa-solid fa-envelope"></i> Enquiries
+                     </a>
+                 </div>
+
                  <!--<div class="mdc-list-item mdc-drawer-item">-->
                  <!--    <a class="mdc-expansion-panel-link gap-3" href="#" data-toggle="expansionPanel"-->
                  <!--        data-target="ui-sub-menu">-->

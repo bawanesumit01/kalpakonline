@@ -9,10 +9,13 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
 use App\Models\UserAddress;
+use App\Services\CartCalculationService;
 use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
+    public function __construct(private CartCalculationService $cartCalculationService) {}
+
     // Helper: get identifier for current user/guest
     private function cartIdentifier()
     {
@@ -33,21 +36,26 @@ class CheckoutController extends Controller
             return redirect()->route('cart.view')->with('error', 'Your cart is empty');
         }
 
-        // Calculate totals
-        $subtotal = $cartItems->sum(fn($item) => $item->product->final_price * $item->quantity);
-        
-        // Shipping: Free if subtotal >= 499, else 40
-        $shipping = $subtotal >= 499 ? 0 : 40;
-        
-        // Tax: 5% of subtotal
-        $tax = $subtotal * 0.05;
-        
-        // Total
-        $total = $subtotal + $shipping + $tax;
+        // Calculate totals using service
+        $totals = $this->cartCalculationService->calculateTotals($cartItems);
+
+        // Pre-fill saved default address for logged-in users
+        $savedAddress = null;
+        if (auth()->check()) {
+            $savedAddress = UserAddress::where('user_id', auth()->id())
+                ->where('is_default', true)
+                ->first();
+            // Fall back to the most recent address if no default
+            if (!$savedAddress) {
+                $savedAddress = UserAddress::where('user_id', auth()->id())
+                    ->latest()
+                    ->first();
+            }
+        }
 
         $categories = Category::all();
 
-        return view('home.checkout', compact('cartItems', 'subtotal', 'shipping', 'tax', 'total', 'categories'));
+        return view('home.checkout', compact('cartItems', 'totals', 'categories', 'savedAddress'));
     }
 
     // Process checkout (handle order placement)
@@ -65,7 +73,7 @@ class CheckoutController extends Controller
                 'state' => 'required|string|max:100',
                 'pincode' => 'required|string|size:6|regex:/^[0-9]{6}$/',
                 'country' => 'nullable|string|max:100',
-                'payment_method' => 'required|in:cod,online,wallet',
+                'payment_method' => 'required|in:cod',
                 'order_notes' => 'nullable|string|max:1000',
                 'promo_code' => 'nullable|string|max:50',
             ]);
@@ -78,11 +86,20 @@ class CheckoutController extends Controller
                 return redirect()->route('cart.view')->with('error', 'Your cart is empty');
             }
 
-            // Calculate totals
-            $subtotal = $cartItems->sum(fn($item) => $item->product->final_price * $item->quantity);
-            $shipping = $subtotal >= 499 ? 0 : 40;
-            $tax = $subtotal * 0.05;
-            $total = $subtotal + $shipping + $tax;
+            // ── Stock availability check before charging ──
+            foreach ($cartItems as $item) {
+                if (!$item->product) {
+                    return back()->withErrors(['stock' => 'One or more products are no longer available.'])->withInput();
+                }
+                if ($item->product->stock_quantity < $item->quantity) {
+                    return back()->withErrors([
+                        'stock' => "Sorry, only {$item->product->stock_quantity} unit(s) of \"{$item->product->product_name}\" available."
+                    ])->withInput();
+                }
+            }
+
+            // Calculate totals using service
+            $totals = $this->cartCalculationService->calculateTotals($cartItems);
 
             DB::beginTransaction();
 
@@ -148,14 +165,14 @@ class CheckoutController extends Controller
                 'order_notes' => $validated['order_notes'] ?? null,
                 'promo_code' => $validated['promo_code'] ?? null,
                 'discount' => 0,
-                'subtotal' => $subtotal,
-                'shipping' => $shipping,
-                'tax' => $tax,
-                'total' => $total,
+                'subtotal' => $totals->subtotal,
+                'shipping' => $totals->shipping,
+                'tax' => $totals->tax,
+                'total' => $totals->total,
                 'status' => 'pending',
             ]);
 
-            // Create order items
+            // Create order items and decrement stock
             foreach ($cartItems as $item) {
                 OrderItem::create([
                     'order_id' => $order->id,
@@ -165,12 +182,27 @@ class CheckoutController extends Controller
                     'price' => $item->product->final_price,
                     'subtotal' => $item->product->final_price * $item->quantity,
                 ]);
+
+                // ── Decrement stock ──
+                $item->product->decrement('stock_quantity', $item->quantity);
+                if ($item->product->fresh()->stock_quantity <= 0) {
+                    $item->product->update(['stock_status' => 'out_of_stock']);
+                }
             }
 
             // Clear cart
             Cart::where($identifier)->delete();
 
             DB::commit();
+
+            // ── Send order confirmation email ──
+            try {
+                if (!empty($order->email)) {
+                    \Mail::to($order->email)->send(new \App\Mail\OrderConfirmationMail($order));
+                }
+            } catch (\Exception $mailEx) {
+                \Log::warning('Order confirmation email failed: ' . $mailEx->getMessage());
+            }
 
             // Redirect to order success page with order details
             return redirect()->route('order.success', $order->id)

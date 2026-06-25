@@ -248,21 +248,21 @@
                                 <div class="pricing-details">
                                     <div class="pricing-row">
                                         <span>Subtotal</span>
-                                        <span>&#8377; {{ number_format($subtotal, 2) }}</span>
+                                        <span>&#8377; {{ number_format($totals->subtotal, 2) }}</span>
                                     </div>
                                     <div class="pricing-row">
                                         <span>Shipping</span>
                                         <span class="text-success">
-                                            @if($subtotal >= 499)
+                                            @if($totals->shipping == 0)
                                                 FREE
                                             @else
-                                                &#8377; 00.00
+                                                &#8377; {{ number_format($totals->shipping, 2) }}
                                             @endif
                                         </span>
                                     </div>
                                     <div class="pricing-row">
                                         <span>Tax (GST)</span>
-                                        <span>&#8377; {{ number_format($tax, 2) }}</span>
+                                        <span>&#8377; {{ number_format($totals->tax, 2) }}</span>
                                     </div>
                                 </div>
 
@@ -271,7 +271,7 @@
                                 <!-- Total -->
                                 <div class="order-total">
                                     <span>Total</span>
-                                    <span>&#8377; {{ number_format($total, 2) }}</span>
+                                    <span>&#8377; {{ number_format($totals->total, 2) }}</span>
                                 </div>
 
                                 <!-- Promo Code -->

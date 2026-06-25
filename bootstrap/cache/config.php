@@ -598,18 +598,17 @@
   ),
   'mail' => 
   array (
-    'default' => 'log',
+    'default' => 'smtp',
     'mailers' => 
     array (
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'scheme' => NULL,
-        'url' => NULL,
-        'host' => '127.0.0.1',
-        'port' => 2525,
-        'username' => NULL,
-        'password' => NULL,
+        'host' => 'smtp.gmail.com',
+        'port' => '587',
+        'encryption' => 'tls',
+        'username' => 'bawanesumit01@gmail.com',
+        'password' => 'owarlhwqccxrggnk',
         'timeout' => NULL,
         'local_domain' => 'kalpakonline.co.in',
       ),
@@ -662,8 +661,8 @@
     ),
     'from' => 
     array (
-      'address' => 'hello@example.com',
-      'name' => 'Example',
+      'address' => 'bawanesumit01@gmail.com',
+      'name' => 'Kalpak Online',
     ),
     'markdown' => 
     array (

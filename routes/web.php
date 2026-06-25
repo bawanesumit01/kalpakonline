@@ -8,9 +8,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\Auth\ClientAuthController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminCustomerController;
+use App\Http\Controllers\Admin\AdminEnquiryController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +32,16 @@ Route::get('/clear', function () {
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/product/{id}', [HomeController::class, 'productDetails'])->name('product.details');
+
+// Static Pages
+Route::get('/about-us', [PageController::class, 'about'])->name('page.about');
+Route::get('/privacy-policy', [PageController::class, 'privacy'])->name('page.privacy');
+Route::get('/terms-conditions', [PageController::class, 'terms'])->name('page.terms');
+Route::get('/shipping-policy', [PageController::class, 'shipping'])->name('page.shipping');
+Route::get('/returns-refunds', [PageController::class, 'returns'])->name('page.returns');
+Route::get('/contact-us', [PageController::class, 'contact'])->name('page.contact');
+Route::post('/contact-us', [PageController::class, 'submitContact'])->name('page.contact.submit');
+Route::get('/faq', [PageController::class, 'faq'])->name('page.faq');
 
 Route::post('/cart/add',    [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart',         [CartController::class, 'viewCart'])->name('cart.view');
@@ -121,6 +133,13 @@ Route::middleware(['auth', 'role:superadmin|admin'])->prefix('account')->group(f
     Route::get('/customers-export', [AdminCustomerController::class, 'export'])->name('admin.customers.export');
     Route::get('/customers-statistics', [AdminCustomerController::class, 'statistics'])->name('admin.customers.statistics');
     Route::post('/customers/{id}/notify', [AdminCustomerController::class, 'sendNotification'])->name('admin.customers.notify');
+
+    // Enquiry Management
+    Route::get('/enquiries', [AdminEnquiryController::class, 'index'])->name('admin.enquiries.index');
+    Route::get('/enquiries/{id}', [AdminEnquiryController::class, 'show'])->name('admin.enquiries.show');
+    Route::post('/enquiries/{id}/respond', [AdminEnquiryController::class, 'respond'])->name('admin.enquiries.respond');
+    Route::post('/enquiries/{id}/status', [AdminEnquiryController::class, 'updateStatus'])->name('admin.enquiries.status');
+    Route::delete('/enquiries/{id}', [AdminEnquiryController::class, 'destroy'])->name('admin.enquiries.destroy');
 
 });
 

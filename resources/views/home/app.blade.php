@@ -469,7 +469,7 @@
                 </li>
 
                 <li class="nav-item border-dashed">
-                    <a href="#" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                    <a href="{{ route('page.about') }}" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
                         <i class="bi bi-info-circle"></i>
                         <span>About Us</span>
                     </a>
@@ -497,21 +497,21 @@
                 </li>
 
                 <li class="nav-item border-dashed">
-                    <a href="#" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
-                        <i class="bi bi-gear"></i>
-                        <span>Services</span>
+                    <a href="{{ route('page.shipping') }}" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="bi bi-truck"></i>
+                        <span>Shipping</span>
                     </a>
                 </li>
 
                 <li class="nav-item border-dashed">
-                    <a href="#" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
-                        <i class="bi bi-tags"></i>
-                        <span>Offers</span>
+                    <a href="{{ route('page.faq') }}" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                        <i class="bi bi-question-circle"></i>
+                        <span>FAQ</span>
                     </a>
                 </li>
 
                 <li class="nav-item border-dashed">
-                    <a href="#" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+                    <a href="{{ route('page.contact') }}" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
                         <i class="bi bi-telephone"></i>
                         <span>Contact Us</span>
                     </a>

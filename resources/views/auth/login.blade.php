@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kalpak Store</title>
     @include('components.css')
+    <link rel="shortcut icon" href="{{ asset('/assets/images/kp.png') }}" />
 </head>
 
 <body> 

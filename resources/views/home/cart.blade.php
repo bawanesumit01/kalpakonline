@@ -64,7 +64,7 @@
           <hr>
           <div class="d-flex justify-content-between mb-3">
             <span>Total</span>
-            <strong id="cart-total">&#8377; {{ number_format($total, 2) }}</strong>
+            <strong id="cart-total">&#8377; {{ number_format($totals->total, 2) }}</strong>
           </div>
           <a href="{{ route('checkout.index') }}" class="btn btn-primary w-100">Proceed to Checkout</a>
           <a href="{{ route('home.index') }}" class="btn btn-outline-secondary w-100 mt-2">
