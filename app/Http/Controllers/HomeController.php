@@ -14,24 +14,38 @@ use App\Models\ProductImage;
 class HomeController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Display the home page
      */
     public function index()
     {
         $categories = Category::all();
-        $products = Product::with('category.vendor')->where('status', 'active')->get();
+        $products = Product::where('status', 'active')->get();
          
-       return view('home.index', compact('categories','products'));
+        return view('home.index', compact('categories','products'));
     }
     
-    public function shop()
+    /**
+     * Display shop page with optional category filter
+     */
+    public function shop(Request $request)
     {
         $categories = Category::all();
-        $products = Product::with('category.vendor')->where('status', 'active')->get();
+        $categoryId = $request->query('category');
+        
+        $query = Product::where('status', 'active');
+        
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+        
+        $products = $query->get();
          
-       return view('home.shop', compact('categories','products'));
+        return view('home.shop', compact('categories', 'products', 'categoryId'));
     }
     
+    /**
+     * Display product details
+     */
     public function productDetails($id)
     {
         $categories = Category::all();
@@ -39,6 +53,4 @@ class HomeController extends Controller
     
         return view('home.product.product-details', compact('categories','product'));
     }
-
-    
 }

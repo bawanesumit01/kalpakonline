@@ -8,11 +8,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderTrackingController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Auth\ClientAuthController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminCustomerController;
 use App\Http\Controllers\Admin\AdminEnquiryController;
+use App\Http\Controllers\Admin\AdminDeliveryController;
+use App\Http\Controllers\Api\DeliveryTrackingController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +52,24 @@ Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.u
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::get('/cart/items', [CartController::class, 'getCartItems'])->name('cart.items');
 
+// ==================== DELIVERY TRACKING API ====================
+Route::prefix('api/delivery')->name('delivery.')->group(function () {
+    // Delivery boy - Send live location
+    Route::post('/location', [DeliveryTrackingController::class, 'updateLocation'])->name('location.update');
+    
+    // Delivery boy - Start delivery
+    Route::post('/start', [DeliveryTrackingController::class, 'startDelivery'])->name('start');
+    
+    // Delivery boy - Complete delivery
+    Route::post('/complete', [DeliveryTrackingController::class, 'completeDelivery'])->name('complete');
+    
+    // Customer - Get tracking data
+    Route::get('/order/{orderId}/tracking', [DeliveryTrackingController::class, 'getOrderTracking'])->name('order.tracking');
+    Route::get('/{assignmentId}/route', [DeliveryTrackingController::class, 'getDeliveryRoute'])->name('route');
+    Route::get('/order/{orderId}/live', [DeliveryTrackingController::class, 'getLiveTracking'])->name('order.live');
+});
+// ===============================================================
+
 // Checkout Routes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
@@ -68,6 +89,8 @@ Route::prefix('customer')->name('customer.')->group(function () {
 Route::middleware(['client'])->group(function () {
     Route::get('/client/profile',       [ProfileController::class, 'index'])->name('client.profile');
     Route::get('/client/orders',        [OrderController::class, 'index'])->name('client.orders');
+    Route::get('/order/{orderId}/track', [OrderTrackingController::class, 'track'])->name('order.track');
+    Route::get('/orders/history',        [OrderTrackingController::class, 'history'])->name('orders.history');
 });
 
 
@@ -140,6 +163,20 @@ Route::middleware(['auth', 'role:superadmin|admin'])->prefix('account')->group(f
     Route::post('/enquiries/{id}/respond', [AdminEnquiryController::class, 'respond'])->name('admin.enquiries.respond');
     Route::post('/enquiries/{id}/status', [AdminEnquiryController::class, 'updateStatus'])->name('admin.enquiries.status');
     Route::delete('/enquiries/{id}', [AdminEnquiryController::class, 'destroy'])->name('admin.enquiries.destroy');
+
+    // Delivery Management
+    Route::get('/delivery', [AdminDeliveryController::class, 'index'])->name('admin.delivery.index');
+    Route::get('/delivery/dashboard', [AdminDeliveryController::class, 'dashboard'])->name('admin.delivery.dashboard');
+    Route::get('/delivery/{id}', [AdminDeliveryController::class, 'show'])->name('admin.delivery.show');
+    Route::post('/delivery/assign', [AdminDeliveryController::class, 'assignDelivery'])->name('admin.delivery.assign');
+    
+    // Delivery Boys Management
+    Route::get('/delivery-boys', [AdminDeliveryController::class, 'boys'])->name('admin.delivery.boys');
+    Route::get('/delivery-boys/create', [AdminDeliveryController::class, 'createBoy'])->name('admin.delivery.boy.create');
+    Route::post('/delivery-boys/store', [AdminDeliveryController::class, 'storeBoy'])->name('admin.delivery.boy.store');
+    Route::get('/delivery-boys/{id}/edit', [AdminDeliveryController::class, 'editBoy'])->name('admin.delivery.boy.edit');
+    Route::put('/delivery-boys/{id}', [AdminDeliveryController::class, 'updateBoy'])->name('admin.delivery.boy.update');
+    Route::delete('/delivery-boys/{id}', [AdminDeliveryController::class, 'deleteBoy'])->name('admin.delivery.boy.delete');
 
 });
 

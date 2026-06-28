@@ -13,7 +13,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::MmUsFPX3aZyaBtiA',
+            '_route' => 'generated::nu82qCQjnpRUDowY',
           ),
           1 => NULL,
           2 => 
@@ -33,7 +33,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::26a1jo9C5eqwoJVC',
+            '_route' => 'generated::Hp9p4ptjcjQHvWt4',
           ),
           1 => NULL,
           2 => 
@@ -340,6 +340,63 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/api/delivery/location' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delivery.location.update',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/api/delivery/start' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delivery.start',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/api/delivery/complete' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delivery.complete',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/checkout' => 
       array (
         0 => 
@@ -500,6 +557,26 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => 'client.orders',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/orders/history' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'orders.history',
           ),
           1 => NULL,
           2 => 
@@ -938,6 +1015,105 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/account/delivery' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/account/delivery/dashboard' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.dashboard',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/account/delivery-boys' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.boys',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/account/delivery-boys/create' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.boy.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/account/delivery-boys/store' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.boy.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/register' => 
       array (
         0 => 
@@ -961,7 +1137,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::NdtaJfJInZQ4eHsG',
+            '_route' => 'generated::fic2WXB6DqeeHjR5',
           ),
           1 => NULL,
           2 => 
@@ -997,7 +1173,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::h9AA8MrJJ06UUHfL',
+            '_route' => 'generated::xpT7IGBF2JLucZdV',
           ),
           1 => NULL,
           2 => 
@@ -1127,7 +1303,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::2kD2VbsCmcwOHWuk',
+            '_route' => 'generated::2x3HTgNxj8SwVuoi',
           ),
           1 => NULL,
           2 => 
@@ -1181,7 +1357,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/product/([^/]++)(*:24)|/order/success/([^/]++)(*:54)|/account/(?|vendor/([^/]++)(?|/edit(*:96)|(*:103))|c(?|ategory/([^/]++)(?|/edit(*:140)|(*:148))|ustomers/(?|([^/]++)(?|(*:180)|/(?|edit(*:196)|addresses(?|(*:216)|/([^/]++)(*:233))|orders(*:248))|(*:257))|bulk\\-action(*:278)|([^/]++)/notify(*:301)))|products/([^/]++)(?|/edit(*:336)|(*:344))|orders/(?|([^/]++)(?|(*:374)|/(?|edit(*:390)|invoice(*:405))|(*:414))|bulk\\-update(*:435))|enquiries/([^/]++)(?|(*:465)|/(?|respond(*:484)|status(*:498))|(*:507)))|/reset\\-password/([^/]++)(*:542)|/verify\\-email/([^/]++)/([^/]++)(*:582)|/storage/(.*)(*:603))/?$}sDu',
+      0 => '{^(?|/product/([^/]++)(*:24)|/a(?|pi/delivery/(?|order/([^/]++)/tracking(*:74)|([^/]++)/route(*:95)|order/([^/]++)/live(*:121))|ccount/(?|vendor/([^/]++)(?|/edit(*:163)|(*:171))|c(?|ategory/([^/]++)(?|/edit(*:208)|(*:216))|ustomers/(?|([^/]++)(?|(*:248)|/(?|edit(*:264)|addresses(?|(*:284)|/([^/]++)(*:301))|orders(*:316))|(*:325))|bulk\\-action(*:346)|([^/]++)/notify(*:369)))|products/([^/]++)(?|/edit(*:404)|(*:412))|orders/(?|([^/]++)(?|(*:442)|/(?|edit(*:458)|invoice(*:473))|(*:482))|bulk\\-update(*:503))|enquiries/([^/]++)(?|(*:533)|/(?|respond(*:552)|status(*:566))|(*:575))|delivery(?|/(?|([^/]++)(*:607)|assign(*:621))|\\-boys/([^/]++)(?|/edit(*:653)|(*:661)))))|/order/(?|success/([^/]++)(*:699)|([^/]++)/track(*:721))|/reset\\-password/([^/]++)(*:755)|/verify\\-email/([^/]++)/([^/]++)(*:795)|/storage/(.*)(*:816))/?$}sDu',
     ),
     3 => 
     array (
@@ -1208,13 +1384,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      54 => 
+      74 => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'order.success',
+            '_route' => 'delivery.order.tracking',
           ),
           1 => 
           array (
@@ -1227,11 +1403,57 @@ app('router')->setCompiledRoutes(
           ),
           3 => NULL,
           4 => false,
-          5 => true,
+          5 => false,
           6 => NULL,
         ),
       ),
-      96 => 
+      95 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delivery.route',
+          ),
+          1 => 
+          array (
+            0 => 'assignmentId',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      121 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'delivery.order.live',
+          ),
+          1 => 
+          array (
+            0 => 'orderId',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      163 => 
       array (
         0 => 
         array (
@@ -1254,7 +1476,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      103 => 
+      171 => 
       array (
         0 => 
         array (
@@ -1295,7 +1517,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      140 => 
+      208 => 
       array (
         0 => 
         array (
@@ -1318,7 +1540,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      148 => 
+      216 => 
       array (
         0 => 
         array (
@@ -1359,7 +1581,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      180 => 
+      248 => 
       array (
         0 => 
         array (
@@ -1382,7 +1604,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      196 => 
+      264 => 
       array (
         0 => 
         array (
@@ -1405,7 +1627,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      216 => 
+      284 => 
       array (
         0 => 
         array (
@@ -1428,7 +1650,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      233 => 
+      301 => 
       array (
         0 => 
         array (
@@ -1451,7 +1673,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      248 => 
+      316 => 
       array (
         0 => 
         array (
@@ -1474,7 +1696,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      257 => 
+      325 => 
       array (
         0 => 
         array (
@@ -1515,7 +1737,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      278 => 
+      346 => 
       array (
         0 => 
         array (
@@ -1536,7 +1758,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      301 => 
+      369 => 
       array (
         0 => 
         array (
@@ -1558,7 +1780,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      336 => 
+      404 => 
       array (
         0 => 
         array (
@@ -1581,7 +1803,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      344 => 
+      412 => 
       array (
         0 => 
         array (
@@ -1622,7 +1844,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      374 => 
+      442 => 
       array (
         0 => 
         array (
@@ -1645,7 +1867,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      390 => 
+      458 => 
       array (
         0 => 
         array (
@@ -1668,7 +1890,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      405 => 
+      473 => 
       array (
         0 => 
         array (
@@ -1691,7 +1913,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      414 => 
+      482 => 
       array (
         0 => 
         array (
@@ -1732,7 +1954,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      435 => 
+      503 => 
       array (
         0 => 
         array (
@@ -1753,7 +1975,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      465 => 
+      533 => 
       array (
         0 => 
         array (
@@ -1776,7 +1998,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      484 => 
+      552 => 
       array (
         0 => 
         array (
@@ -1798,7 +2020,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      498 => 
+      566 => 
       array (
         0 => 
         array (
@@ -1820,7 +2042,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      507 => 
+      575 => 
       array (
         0 => 
         array (
@@ -1842,7 +2064,161 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      542 => 
+      607 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.show',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      621 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.assign',
+          ),
+          1 => 
+          array (
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      653 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.boy.edit',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      661 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.boy.update',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'PUT' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.delivery.boy.delete',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      699 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'order.success',
+          ),
+          1 => 
+          array (
+            0 => 'orderId',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      721 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'order.track',
+          ),
+          1 => 
+          array (
+            0 => 'orderId',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      755 => 
       array (
         0 => 
         array (
@@ -1865,7 +2241,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      582 => 
+      795 => 
       array (
         0 => 
         array (
@@ -1889,7 +2265,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      603 => 
+      816 => 
       array (
         0 => 
         array (
@@ -1927,7 +2303,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::MmUsFPX3aZyaBtiA' => 
+    'generated::nu82qCQjnpRUDowY' => 
     array (
       'methods' => 
       array (
@@ -1955,8 +2331,8 @@ app('router')->setCompiledRoutes(
                     return response(\\Illuminate\\Support\\Facades\\View::file(\'E:\\\\xampp\\\\htdocs\\\\kalpakonline\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\', [
                         \'exception\' => $exception,
                     ]), status: $exception ? 500 : 200);
-                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000005ae0000000000000000";}}',
-        'as' => 'generated::MmUsFPX3aZyaBtiA',
+                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000005c00000000000000000";}}',
+        'as' => 'generated::nu82qCQjnpRUDowY',
       ),
       'fallback' => false,
       'defaults' => 
@@ -1972,7 +2348,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::26a1jo9C5eqwoJVC' => 
+    'generated::Hp9p4ptjcjQHvWt4' => 
     array (
       'methods' => 
       array (
@@ -1995,13 +2371,13 @@ app('router')->setCompiledRoutes(
     \\Artisan::call(\'optimize\');
 
     return "Optimization commands executed successfully ✅";
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005b40000000000000000";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005c60000000000000000";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::26a1jo9C5eqwoJVC',
+        'as' => 'generated::Hp9p4ptjcjQHvWt4',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2605,6 +2981,225 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'delivery.location.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'api/delivery/location',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@updateLocation',
+        'controller' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@updateLocation',
+        'as' => 'delivery.location.update',
+        'namespace' => NULL,
+        'prefix' => '/api/delivery',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'delivery.start' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'api/delivery/start',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@startDelivery',
+        'controller' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@startDelivery',
+        'as' => 'delivery.start',
+        'namespace' => NULL,
+        'prefix' => '/api/delivery',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'delivery.complete' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'api/delivery/complete',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@completeDelivery',
+        'controller' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@completeDelivery',
+        'as' => 'delivery.complete',
+        'namespace' => NULL,
+        'prefix' => '/api/delivery',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'delivery.order.tracking' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'api/delivery/order/{orderId}/tracking',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@getOrderTracking',
+        'controller' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@getOrderTracking',
+        'as' => 'delivery.order.tracking',
+        'namespace' => NULL,
+        'prefix' => '/api/delivery',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'delivery.route' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'api/delivery/{assignmentId}/route',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@getDeliveryRoute',
+        'controller' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@getDeliveryRoute',
+        'as' => 'delivery.route',
+        'namespace' => NULL,
+        'prefix' => '/api/delivery',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'delivery.order.live' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'api/delivery/order/{orderId}/live',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@getLiveTracking',
+        'controller' => 'App\\Http\\Controllers\\Api\\DeliveryTrackingController@getLiveTracking',
+        'as' => 'delivery.order.live',
+        'namespace' => NULL,
+        'prefix' => '/api/delivery',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'checkout.index' => 
     array (
       'methods' => 
@@ -2973,6 +3568,82 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'order.track' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'order/{orderId}/track',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'client',
+        ),
+        'uses' => 'App\\Http\\Controllers\\OrderTrackingController@track',
+        'controller' => 'App\\Http\\Controllers\\OrderTrackingController@track',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'order.track',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'orders.history' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'orders/history',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'client',
+        ),
+        'uses' => 'App\\Http\\Controllers\\OrderTrackingController@history',
+        'controller' => 'App\\Http\\Controllers\\OrderTrackingController@history',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'orders.history',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'dashboard' => 
     array (
       'methods' => 
@@ -2992,7 +3663,7 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:55:"Laravel\\SerializableClosure\\UnsignedSerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:46:"function () {
     return \\view(\'dashboard\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005ca0000000000000000";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005e20000000000000000";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
@@ -4902,6 +5573,392 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'admin.delivery.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/delivery',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@index',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.dashboard' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/delivery/dashboard',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@dashboard',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@dashboard',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.dashboard',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/delivery/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@show',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@show',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.show',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.assign' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'account/delivery/assign',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@assignDelivery',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@assignDelivery',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.assign',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.boys' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/delivery-boys',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@boys',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@boys',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.boys',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.boy.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/delivery-boys/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@createBoy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@createBoy',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.boy.create',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.boy.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'account/delivery-boys/store',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@storeBoy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@storeBoy',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.boy.store',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.boy.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/delivery-boys/{id}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@editBoy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@editBoy',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.boy.edit',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.boy.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+      ),
+      'uri' => 'account/delivery-boys/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@updateBoy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@updateBoy',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.boy.update',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.delivery.boy.delete' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'account/delivery-boys/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@deleteBoy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\AdminDeliveryController@deleteBoy',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'admin.delivery.boy.delete',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'register' => 
     array (
       'methods' => 
@@ -4940,7 +5997,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::NdtaJfJInZQ4eHsG' => 
+    'generated::fic2WXB6DqeeHjR5' => 
     array (
       'methods' => 
       array (
@@ -4961,7 +6018,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::NdtaJfJInZQ4eHsG',
+        'as' => 'generated::fic2WXB6DqeeHjR5',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5015,7 +6072,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::h9AA8MrJJ06UUHfL' => 
+    'generated::xpT7IGBF2JLucZdV' => 
     array (
       'methods' => 
       array (
@@ -5036,7 +6093,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::h9AA8MrJJ06UUHfL',
+        'as' => 'generated::xpT7IGBF2JLucZdV',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5356,7 +6413,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::2kD2VbsCmcwOHWuk' => 
+    'generated::2x3HTgNxj8SwVuoi' => 
     array (
       'methods' => 
       array (
@@ -5377,7 +6434,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::2kD2VbsCmcwOHWuk',
+        'as' => 'generated::2x3HTgNxj8SwVuoi',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5483,7 +6540,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000005d30000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000005ed0000000000000000";}}',
         'as' => 'storage.local',
       ),
       'fallback' => false,

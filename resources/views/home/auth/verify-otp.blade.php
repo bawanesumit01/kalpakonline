@@ -20,7 +20,23 @@
           @endif
 
           @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+            <div class="alert alert-success">
+              <strong>✅ Success!</strong> 
+              <br>{{ session('success') }}
+            </div>
+          @endif
+
+          @if(session('warning'))
+            <div class="alert alert-warning">
+              <strong>⚠️ Warning:</strong> 
+              <br>{{ session('warning') }}
+            </div>
+          @endif
+
+          @if(session('info'))
+            <div class="alert alert-info">
+              {{ session('info') }}
+            </div>
           @endif
 
           <form action="{{ route('customer.verify.otp.submit') }}" method="POST">

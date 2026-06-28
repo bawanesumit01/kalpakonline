@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
 use App\Models\UserAddress;
+use App\Models\DeliveryAssignment;
 use App\Services\CartCalculationService;
 use Illuminate\Support\Facades\DB;
 
@@ -189,6 +190,17 @@ class CheckoutController extends Controller
                     $item->product->update(['stock_status' => 'out_of_stock']);
                 }
             }
+
+            // ── Create Delivery Assignment ──
+            DeliveryAssignment::create([
+                'order_id' => $order->id,
+                'delivery_boy_id' => null, // Not assigned yet
+                'status' => 'pending',
+                'delivery_address' => $validated['address'],
+                'delivery_latitude' => null, // Can be added later via admin
+                'delivery_longitude' => null, // Can be added later via admin
+                'assigned_at' => null,
+            ]);
 
             // Clear cart
             Cart::where($identifier)->delete();

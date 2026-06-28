@@ -1,659 +1,755 @@
 @extends('home.app')
 
 @section('content')
-
 <style>
-.shop-wrap { display: flex; gap: 0; min-height: 100vh; }
+  :root {
+    --primary: #000;
+    --light-gray: #f5f5f5;
+    --border-color: #e0e0e0;
+    --text-primary: #212121;
+    --text-secondary: #666;
+  }
 
-/* ── Sidebar ── */
-.shop-sidebar {
-  width: 260px; min-width: 260px;
-  background: #fff;
-  border-right: 1px solid #e9ecef;
-  padding: 24px 18px;
-  position: sticky; top: 0;
-  height: 100vh; overflow-y: auto;
-}
-.shop-sidebar::-webkit-scrollbar { width: 4px; }
-.shop-sidebar::-webkit-scrollbar-thumb { background: #dee2e6; border-radius: 4px; }
+  * { box-sizing: border-box; }
 
-.sidebar-heading {
-  font-size: 16px; font-weight: 700;
-  color: #212529; margin-bottom: 20px;
-  padding-bottom: 12px; border-bottom: 2px solid #f1f3f5;
-  letter-spacing: 0.3px;
-}
-.s-section { margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid #f1f3f5; }
-.s-section:last-of-type { border-bottom: none; }
-.s-title {
-  font-size: 12px; font-weight: 700;
-  color: #6c757d; text-transform: uppercase;
-  letter-spacing: 0.8px; margin-bottom: 12px;
-}
-.filter-label {
-  display: flex; align-items: center; gap: 9px;
-  font-size: 13.5px; color: #495057;
-  margin-bottom: 8px; cursor: pointer;
-  transition: color 0.15s;
-}
-.filter-label:hover { color: #212529; }
-.filter-label input[type=checkbox],
-.filter-label input[type=radio] { accent-color: var(--bs-primary); width: 15px; height: 15px; }
-.filter-count { margin-left: auto; font-size: 11px; color: #adb5bd; }
+  /* ════════ HEADER SECTION ════════ */
+  .shop-header {
+    background: white;
+    padding: 24px 20px;
+    border-bottom: 1px solid var(--border-color);
+  }
 
-/* Price slider */
-.price-slider { width: 100%; accent-color: var(--bs-primary); }
-.price-display {
-  display: flex; justify-content: space-between;
-  font-size: 12px; color: #6c757d; margin: 5px 0 10px;
-}
-.price-inputs { display: flex; gap: 8px; }
-.price-input {
-  flex: 1; padding: 6px 8px; font-size: 12px;
-  border: 1px solid #dee2e6; border-radius: 6px;
-  color: #495057; background: #f8f9fa;
-}
-.price-input:focus { outline: none; border-color: var(--bs-primary); }
+  .shop-header-title {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 
-/* Star rating */
-.star-row {
-  display: flex; align-items: center; gap: 6px;
-  margin-bottom: 7px; cursor: pointer;
-  font-size: 13px; color: #6c757d;
-  padding: 4px 6px; border-radius: 6px; transition: background 0.15s;
-}
-.star-row:hover { background: #f8f9fa; color: #212529; }
-.star-row.active { background: #fff8e1; }
-.stars { color: #f9a825; font-size: 14px; letter-spacing: -1px; }
+  .shop-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+  }
 
-/* Color swatches */
-.color-dots { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-.cdot {
-  width: 22px; height: 22px; border-radius: 50%;
-  cursor: pointer; border: 2px solid transparent;
-  transition: transform 0.15s, border-color 0.15s;
-}
-.cdot:hover { transform: scale(1.15); }
-.cdot.active { border-color: #495057; transform: scale(1.1); }
+  /* ════════ CATEGORY TABS ════════ */
+  .category-tabs {
+    background: white;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
-.btn-clear-all {
-  width: 100%; padding: 9px; border: 1px solid #dee2e6;
-  border-radius: 8px; cursor: pointer; font-size: 13px;
-  background: transparent; color: #6c757d; transition: all 0.15s;
-}
-.btn-clear-all:hover { background: #f8f9fa; color: #212529; }
+  .category-tabs::-webkit-scrollbar {
+    height: 4px;
+  }
 
-/* ── Main Area ── */
-.shop-main { flex: 1; min-width: 0; padding: 24px 20px; background: #f8f9fa; }
+  .category-tabs::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 2px;
+  }
 
-.shop-breadcrumb {
-  font-size: 12px; color: #6c757d; margin-bottom: 16px;
-}
-.shop-breadcrumb a { color: var(--bs-primary); text-decoration: none; }
-.shop-breadcrumb a:hover { text-decoration: underline; }
+  .tabs-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 24px;
+    padding: 0;
+    list-style: none;
+    white-space: nowrap;
+  }
 
-.top-bar {
-  display: flex; align-items: center; gap: 10px;
-  flex-wrap: wrap; margin-bottom: 14px;
-  background: #fff; padding: 12px 16px;
-  border-radius: 10px; border: 1px solid #e9ecef;
-}
-.search-box {
-  flex: 1; min-width: 200px; padding: 8px 14px;
-  border: 1px solid #dee2e6; border-radius: 8px;
-  font-size: 13.5px; color: #495057; background: #f8f9fa;
-  transition: border-color 0.15s;
-}
-.search-box:focus { outline: none; border-color: var(--bs-primary); background: #fff; }
-.sort-sel {
-  padding: 8px 12px; border: 1px solid #dee2e6;
-  border-radius: 8px; font-size: 13px; color: #495057;
-  background: #f8f9fa; cursor: pointer;
-}
-.sort-sel:focus { outline: none; border-color: var(--bs-primary); }
-.view-btns { display: flex; gap: 4px; }
-.vbtn {
-  padding: 8px 12px; border: 1px solid #dee2e6;
-  border-radius: 7px; cursor: pointer; font-size: 14px;
-  background: #f8f9fa; color: #6c757d; transition: all 0.15s;
-}
-.vbtn.active { background: var(--bs-primary); color: #fff; border-color: transparent; }
+  .category-tab {
+    padding: 8px 0;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border-bottom: 2px solid transparent;
+  }
 
-.active-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-.af-tag {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 4px 12px; background: #fff;
-  border: 1px solid #dee2e6; border-radius: 20px;
-  font-size: 12px; color: #495057; cursor: pointer;
-  transition: all 0.15s;
-}
-.af-tag:hover { border-color: #dc3545; color: #dc3545; }
+  .category-tab:hover {
+    color: var(--text-primary);
+  }
 
-.result-info { font-size: 13px; color: #6c757d; margin-bottom: 14px; }
+  .category-tab.active {
+    color: var(--text-primary);
+    font-weight: 600;
+    border-bottom-color: var(--text-primary);
+  }
 
-/* ── Product Grid ── */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-}
-.product-grid.list-view { grid-template-columns: 1fr; }
+  /* ════════ MAIN CONTENT ════════ */
+  .shop-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 20px;
+  }
 
-.pcard {
-  background: #fff; border: 1px solid #e9ecef;
-  border-radius: 12px; overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-}
-.pcard:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); border-color: #dee2e6; }
-.pcard.list-view { display: flex; }
+  /* ════════ FILTERS BAR ════════ */
+  .filters-bar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
 
-.pcard-img-wrap {
-  position: relative; background: #f8f9fa;
-  aspect-ratio: 1; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
-}
-.pcard.list-view .pcard-img-wrap { width: 160px; min-width: 160px; aspect-ratio: auto; }
-.pcard-img-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 12px; }
+  .search-box {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+  }
 
-.pcard-badge {
-  position: absolute; top: 10px; left: 10px;
-  padding: 3px 9px; border-radius: 20px;
-  font-size: 10px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.badge-sale { background: #fff3cd; color: #856404; }
-.badge-new  { background: #d1e7dd; color: #0a3622; }
-.badge-hot  { background: #f8d7da; color: #58151c; }
+  .search-box:focus {
+    outline: none;
+    border-color: var(--text-primary);
+  }
 
-.out-of-stock-overlay {
-  position: absolute; inset: 0;
-  background: rgba(255,255,255,0.7);
-  display: flex; align-items: center; justify-content: center;
-}
-.out-of-stock-overlay span {
-  background: #6c757d; color: #fff;
-  padding: 4px 12px; border-radius: 20px;
-  font-size: 11px; font-weight: 600;
-}
+  .sort-select {
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
 
-.pcard-body { padding: 12px 14px; flex: 1; }
-.pcard-cat { font-size: 10px; color: #adb5bd; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
-.pcard-name { font-size: 14px; font-weight: 600; color: #212529; margin-bottom: 5px; line-height: 1.4; }
-.pcard-price-row { display: flex; align-items: center; gap: 7px; margin: 6px 0; }
-.pcard-price { font-size: 16px; font-weight: 700; color: #212529; }
-.pcard-old { font-size: 12px; color: #adb5bd; text-decoration: line-through; }
-.pcard-disc { font-size: 11px; font-weight: 600; color: #198754; }
+  .sort-select:focus {
+    outline: none;
+    border-color: var(--text-primary);
+  }
 
-.pcard-footer {
-  display: flex; gap: 7px; padding: 10px 14px;
-  border-top: 1px solid #f1f3f5;
-}
-.btn-add-cart {
-  flex: 1; padding: 8px 10px; font-size: 12.5px; font-weight: 500;
-  border: 1px solid #dee2e6; border-radius: 8px; cursor: pointer;
-  background: #f8f9fa; color: #495057; transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 5px;
-}
-.btn-add-cart:hover:not(:disabled) { background: var(--bs-primary); color: #fff; border-color: transparent; }
-.btn-add-cart:disabled { opacity: 0.5; cursor: not-allowed; }
-.btn-wish {
-  padding: 8px 12px; border: 1px solid #dee2e6;
-  border-radius: 8px; cursor: pointer; background: transparent;
-  color: #adb5bd; font-size: 15px; transition: all 0.15s;
-}
-.btn-wish:hover { color: #dc3545; border-color: #f8d7da; }
-.btn-wish.active { color: #dc3545; border-color: #f8d7da; background: #fff5f5; }
+  /* ════════ PRODUCT GRID ════════ */
+  .product-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+  }
 
-/* ── Pagination ── */
-.shop-pagination { display: flex; gap: 4px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
-.pgbtn {
-  width: 34px; height: 34px; border: 1px solid #dee2e6;
-  border-radius: 7px; display: flex; align-items: center;
-  justify-content: center; cursor: pointer; font-size: 13px;
-  background: #fff; color: #6c757d; transition: all 0.15s;
-}
-.pgbtn.active { background: var(--bs-primary); color: #fff; border-color: transparent; }
-.pgbtn:hover:not(.active) { border-color: var(--bs-primary); color: var(--bs-primary); }
+  .product-card-modern {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
 
-/* ── Category filter pills (top) ── */
-.cat-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-.cat-pill {
-  padding: 6px 16px; border: 1px solid #dee2e6;
-  border-radius: 20px; font-size: 12.5px; cursor: pointer;
-  background: #fff; color: #6c757d; transition: all 0.15s;
-  white-space: nowrap;
-}
-.cat-pill.active { background: var(--bs-primary); color: #fff; border-color: transparent; }
-.cat-pill:hover:not(.active) { border-color: var(--bs-primary); color: var(--bs-primary); }
+  .product-card-modern:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
 
-.no-results {
-  grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #6c757d;
-}
-.no-results .icon { font-size: 48px; margin-bottom: 12px; }
+  .product-image-wrapper-modern {
+    position: relative;
+    background: var(--light-gray);
+    aspect-ratio: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .shop-sidebar { display: none; }
-  .shop-main { padding: 16px 12px; }
-  .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-}
+  .product-image-wrapper-modern a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .product-image-modern {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card-modern:hover .product-image-modern {
+    transform: scale(1.08);
+  }
+
+  .product-badge-modern {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: #000;
+    color: white;
+  }
+
+  .product-content-modern {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-title-modern {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    min-height: 28px;
+  }
+
+  .product-title-modern a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .product-title-modern a:hover {
+    color: #0d6efd;
+  }
+
+  .product-price-modern {
+    margin-bottom: 12px;
+  }
+
+  .price-current {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .product-actions-modern {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+  }
+
+  .quantity-wrapper-modern {
+    display: flex;
+    align-items: center;
+  }
+
+  .quantity-input-modern {
+    width: 60px;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .btn-add-cart-modern {
+    flex: 1;
+    padding: 10px 12px;
+    background: var(--text-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .btn-add-cart-modern:hover:not(:disabled) {
+    background: #333;
+  }
+
+  .btn-add-cart-modern:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  /* ════════ FREQUENTLY BOUGHT ════════ */
+  .frequently-bought {
+    background: var(--light-gray);
+    padding: 40px 20px;
+    margin-bottom: 48px;
+    border-radius: 8px;
+  }
+
+  .frequently-bought-content {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .frequently-bought h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .frequently-bought-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+
+  .frequently-bought-item {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+  }
+
+  .frequently-bought-item:hover {
+    background: var(--text-primary);
+    color: white;
+    border-color: var(--text-primary);
+  }
+
+  .frequently-bought-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 12px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .frequently-bought-name {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ════════ PAGINATION ════════ */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: white;
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .page-btn:hover {
+    border-color: var(--text-primary);
+  }
+
+  .page-btn.active {
+    background: var(--text-primary);
+    color: white;
+    border-color: var(--text-primary);
+  }
+
+  /* ════════ NO RESULTS ════════ */
+  .no-results {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .no-results-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .no-results-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+  }
+
+  .no-results-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+  }
+
+  /* ════════ RESPONSIVE ════════ */
+  @media (max-width: 768px) {
+    .product-grid-modern {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .frequently-bought-grid {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    .filters-bar {
+      flex-direction: column;
+    }
+
+    .search-box {
+      min-width: 100%;
+    }
+
+    .tabs-container {
+      gap: 16px;
+    }
+
+    .category-tab {
+      font-size: 13px;
+    }
+
+    .product-actions-modern {
+      flex-direction: column;
+    }
+
+    .quantity-wrapper-modern {
+      width: 100%;
+    }
+
+    .quantity-input-modern {
+      width: 100%;
+    }
+  }
 </style>
 
-<div class="shop-wrap">
+<!-- Header -->
+<div class="shop-header">
+  <div class="shop-header-title">
+    <h1>Shop All Products</h1>
+  </div>
+</div>
 
-  {{-- ════════════ SIDEBAR ════════════ --}}
-  <aside class="shop-sidebar">
-    <div class="sidebar-heading">🔍 Filters</div>
-
-    {{-- Categories --}}
-    <div class="s-section">
-      <div class="s-title">Categories</div>
-      <label class="filter-label">
-        <input type="radio" name="cat-filter" value="" onchange="applyFilters()" checked> All Categories
-      </label>
-      @foreach ($categories as $category)
-        <label class="filter-label">
-          <input type="radio" name="cat-filter" value="{{ $category->id }}" onchange="applyFilters()">
+<!-- Category Tabs -->
+<div class="category-tabs">
+  <ul class="tabs-container">
+    <li>
+      <button class="category-tab active" onclick="filterByTab('all', this)">All</button>
+    </li>
+    @foreach($categories as $category)
+      <li>
+        <button class="category-tab" onclick="filterByTab({{ $category->category_id }}, this)">
           {{ $category->category_name }}
-          <span class="filter-count">({{ $category->products_count ?? '' }})</span>
-        </label>
-      @endforeach
-    </div>
+        </button>
+      </li>
+    @endforeach
+  </ul>
+</div>
 
-    {{-- Price Range --}}
-    <div class="s-section">
-      <div class="s-title">Price Range</div>
-      <input type="range" class="price-slider" min="0" max="10000" value="10000"
-             id="price-range" oninput="updatePrice(this.value)">
-      <div class="price-display">
-        <span>₹0</span><span id="price-val">₹10,000</span>
-      </div>
-      <div class="price-inputs">
-        <input class="price-input w-100" type="number" placeholder="Min" id="pmin" oninput="applyFilters()">
-        <input class="price-input w-100" type="number" placeholder="Max" id="pmax" value="10000" oninput="applyFilters()">
-      </div>
-    </div>
+<!-- Main Content -->
+<div class="shop-container">
 
-  
+  <!-- Filters Bar -->
+  <div class="filters-bar">
+    <input type="text" id="searchInput" class="search-box" placeholder="Search products..." oninput="applyFilters()">
+    <select id="sortSelect" class="sort-select" onchange="applyFilters()">
+      <option value="popular">Sort By: Popular</option>
+      <option value="price-low">Sort By: Price Low to High</option>
+      <option value="price-high">Sort By: Price High to Low</option>
+      <option value="newest">Sort By: Newest</option>
+      <option value="name">Sort By: Name A-Z</option>
+    </select>
+  </div>
 
-    {{-- Availability --}}
-    <div class="s-section">
-      <div class="s-title">Availability</div>
-      <label class="filter-label">
-        <input type="checkbox" id="instock" onchange="applyFilters()"> In Stock Only
-      </label>
-      <label class="filter-label">
-        <input type="checkbox" id="onsale" onchange="applyFilters()"> On Sale Only
-      </label>
-    </div>
+  <!-- Product Grid -->
+  <div class="product-grid-modern" id="productGrid"></div>
 
-    <button class="btn-clear-all" onclick="clearAll()">✕ Clear All Filters</button>
-  </aside>
+  <!-- Pagination -->
+  <div class="pagination" id="pagination"></div>
 
-  {{-- ════════════ MAIN CONTENT ════════════ --}}
-  <div class="shop-main">
+</div>
 
-    {{-- Breadcrumb --}}
-    <div class="shop-breadcrumb">
-      <a href="{{ url('/') }}">Home</a> › <span>Shop</span>
-    </div>
-
-    {{-- Category Pills (top) --}}
-    <div class="cat-pills" id="cat-pills">
-      <div class="cat-pill active" onclick="filterByPill('',this)">All</div>
-      @foreach ($categories as $category)
-        <div class="cat-pill" onclick="filterByPill('{{ $category->id }}', this)"
-             data-cat-id="{{ $category->id }}">
-          {{ $category->category_name }}
+<!-- Frequently Bought Section -->
+<div class="frequently-bought">
+  <div class="frequently-bought-content">
+    <h2 id="frequentlyBoughtTitle">Frequently Bought</h2>
+    <div class="frequently-bought-grid" id="frequentlyBoughtGrid">
+      @foreach($categories->take(6) as $category)
+        <div class="frequently-bought-item" onclick="filterByCategory({{ $category->category_id }})">
+          <div style="background: var(--light-gray); width: 80px; height: 80px; margin: 0 auto 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+            📦
+          </div>
+          <div class="frequently-bought-name">{{ $category->category_name }}</div>
         </div>
       @endforeach
     </div>
-
-    {{-- Top Bar --}}
-    <div class="top-bar">
-      <input class="search-box" type="text" placeholder="Search products..." id="search-input" oninput="applyFilters()">
-      <select class="sort-sel" id="sort-sel" onchange="applyFilters()">
-        <option value="popular">Popular</option>
-        <option value="price-asc">Price: Low → High</option>
-        <option value="price-desc">Price: High → Low</option>
-        <option value="newest">Newest</option>
-        <option value="name-asc">Name: A → Z</option>
-      </select>
-      <div class="view-btns">
-        <button class="vbtn active" id="grid-btn" onclick="setView('grid')" title="Grid View">⊞</button>
-        <button class="vbtn" id="list-btn" onclick="setView('list')" title="List View">☰</button>
-      </div>
-    </div>
-
-    {{-- Active Filter Tags --}}
-    <div class="active-tags" id="active-tags"></div>
-
-    {{-- Result Info --}}
-    <div class="result-info" id="result-info">Loading...</div>
-
-    {{-- Product Grid --}}
-    <div class="product-grid" id="product-grid"></div>
-
-    {{-- Pagination --}}
-    <div class="shop-pagination" id="pagination"></div>
   </div>
 </div>
 
 @push('scripts')
 @php
-$productsJs = $products->map(function($p) {
+$productsData = $products->map(function($p) {
     return [
         'id'       => $p->id,
         'name'     => $p->product_name,
-        'cat_id'   => $p->category_id ?? null,
-        'cat_name' => optional($p->category)->category_name ?? 'Uncategorized',
-        'price'    => (float)($p->final_price ?? $p->selling_price ?? $p->price ?? 0),
-        'old_price'=> (float)($p->mrp ?? $p->price ?? 0),
-        'image'    => $p->main_image ? asset('/' . $p->main_image) : asset('/assets/images/default_product.png'),
-        'instock'  => ($p->quantity ?? 1) > 0,
-        'is_new'   => $p->created_at && \Carbon\Carbon::parse($p->created_at)->diffInDays(now()) <= 30,
-    ];
-})->values();
- 
-$categoriesJs = $categories->map(function($c) {
-    return [
-        'id'   => $c->id,
-        'name' => $c->category_name,
+        'cat_id'   => $p->category_id,
+        'cat_name' => $p->category->category_name ?? 'Other',
+        'price'    => (float)($p->final_price ?? $p->selling_price ?? 0),
+        'image'    => $p->main_image ? asset($p->main_image) : asset('/assets/images/default_product.png'),
+        'instock'  => $p->stock_quantity > 0,
     ];
 })->values();
 @endphp
+
 <script>
-// ─── Inject Laravel data as JS ───
-const allProducts   = {!! json_encode($productsJs) !!};
-const allCategories = {!! json_encode($categoriesJs) !!};
- 
-// ─── State ───
-let filtered   = [...allProducts];
-let viewMode   = 'grid';
-let minRating  = 0;
-let activeCatId= '';
-let page       = 1;
-const PER_PAGE = 12;
- 
-// ─── Helpers ───
-function pct(price, old) {
-  return old > price ? Math.round((1 - price / old) * 100) : 0;
-}
- 
-function formatPrice(n) {
-  return '₹' + Number(n).toLocaleString('en-IN');
-}
- 
-// ─── Render one card ───
-function renderCard(p) {
-  const isList = viewMode === 'list';
-  const disc   = pct(p.price, p.old_price);
-  const badge  = p.is_new ? 'new' : (disc >= 10 ? 'sale' : '');
-  const badgeLabel = p.is_new ? 'NEW' : (disc >= 10 ? disc + '% OFF' : '');
- 
-  return `
-  <div class="pcard${isList ? ' list-view' : ''}" id="pcard-${p.id}">
-    <div class="pcard-img-wrap">
-      <img src="${p.image}" alt="${p.name}" loading="lazy"
-           onerror="this.src='{{ asset('/assets/images/default_product.png') }}'">
-      ${badge ? `<span class="pcard-badge badge-${badge}">${badgeLabel}</span>` : ''}
-      ${!p.instock ? `<div class="out-of-stock-overlay"><span>Out of Stock</span></div>` : ''}
-    </div>
-    <div style="flex:1;min-width:0;display:flex;flex-direction:column;">
-      <div class="pcard-body">
-        <div class="pcard-cat">${p.cat_name}</div>
-        <div class="pcard-name">${p.name}</div>
-        <div class="pcard-price-row">
-          <span class="pcard-price">${formatPrice(p.price)}</span>
-          ${p.old_price > p.price
-            ? `<span class="pcard-old">${formatPrice(p.old_price)}</span>
-               <span class="pcard-disc">${disc}% off</span>`
-            : ''}
+  const allProducts = {!! json_encode($productsData) !!};
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('category');
+  const selectedCategory = categoryParam ? parseInt(categoryParam) : null;
+  
+  let filtered = [...allProducts];
+  let currentPage = 1;
+  const itemsPerPage = 12;
+  let activeCategory = selectedCategory || 'all';
+
+  function renderCard(product) {
+    return `
+      <div class="product-card-modern">
+        <div class="product-image-wrapper-modern">
+          <a href="/product/${product.id}">
+            <img src="${product.image}" alt="${product.name}" class="product-image-modern"
+                 onerror="this.src='{{ asset('/assets/images/default_product.png') }}'">
+          </a>
+          <div class="product-badge-modern">New</div>
         </div>
-        ${isList ? `<div style="font-size:12px;color:#adb5bd;margin-top:5px">
-          ${p.instock ? '✓ In Stock' : '✗ Out of Stock'}
-        </div>` : ''}
+        <div class="product-content-modern">
+          <h3 class="product-title-modern">
+            <a href="/product/${product.id}">
+              ${product.name}
+            </a>
+          </h3>
+          <div class="product-price-modern">
+            <span class="price-current">&#8377; ${Number(product.price).toLocaleString('en-IN')}</span>
+          </div>
+          <div class="product-actions-modern">
+            <div class="quantity-wrapper-modern">
+              <input type="number" class="quantity-input-modern quantity" value="1" min="1" data-product-id="${product.id}">
+            </div>
+            <button class="btn-add-cart-modern btn-cart" data-product-id="${product.id}">
+              <i class="bi bi-cart-plus"></i>
+              <span>Add to Cart</span>
+            </button>
+          </div>
+        </div>
       </div>
-      <div class="pcard-footer" style="margin-top:auto;">
-        <button class="btn-add-cart" onclick="addToCartJs(${p.id}, event)"
-          ${!p.instock ? 'disabled' : ''} data-product-id="${p.id}">
-          <svg width="14" height="14"><use xlink:href="#cart"></use></svg>
-          Add to Cart
-        </button>
-        <button class="btn-wish" onclick="toggleWish(${p.id}, this)" title="Wishlist">♡</button>
-      </div>
-    </div>
-  </div>`;
-}
- 
-// ─── Apply Filters ───
-function applyFilters() {
-  const q       = document.getElementById('search-input').value.toLowerCase().trim();
-  const sort    = document.getElementById('sort-sel').value;
-  const maxP    = parseFloat(document.getElementById('pmax').value) || 10000;
-  const minP    = parseFloat(document.getElementById('pmin').value) || 0;
-  const onlyStk = document.getElementById('instock').checked;
-  const onlySale= document.getElementById('onsale').checked;
-  const catRad  = document.querySelector('input[name="cat-filter"]:checked');
-  const catId   = catRad ? catRad.value : activeCatId;
- 
-  filtered = allProducts.filter(p => {
-    if (q && !p.name.toLowerCase().includes(q) && !p.cat_name.toLowerCase().includes(q)) return false;
-    if (catId && String(p.cat_id) !== String(catId)) return false;
-    if (p.price > maxP || p.price < minP) return false;
-    if (onlyStk && !p.instock) return false;
-    if (onlySale && p.old_price <= p.price) return false;
-    return true;
-  });
- 
-  if (sort === 'price-asc')  filtered.sort((a,b) => a.price - b.price);
-  else if (sort === 'price-desc') filtered.sort((a,b) => b.price - a.price);
-  else if (sort === 'newest')    filtered.sort((a,b) => (b.is_new ? 1 : 0) - (a.is_new ? 1 : 0));
-  else if (sort === 'name-asc')  filtered.sort((a,b) => a.name.localeCompare(b.name));
- 
-  page = 1;
-  renderAll();
-}
- 
-function renderAll() {
-  const grid  = document.getElementById('product-grid');
-  const total = filtered.length;
-  const start = (page - 1) * PER_PAGE;
-  const slice = filtered.slice(start, start + PER_PAGE);
- 
-  document.getElementById('result-info').textContent =
-    `Showing ${Math.min(start+1, total)}–${Math.min(start+slice.length, total)} of ${total} product${total !== 1 ? 's' : ''}`;
- 
-  grid.className = 'product-grid' + (viewMode === 'list' ? ' list-view' : '');
- 
-  grid.innerHTML = slice.length
-    ? slice.map(renderCard).join('')
-    : `<div class="no-results">
-         <div class="icon">🔍</div>
-         <div style="font-weight:600;margin-bottom:4px">No products found</div>
-         <div style="font-size:13px">Try adjusting your filters or search term</div>
-       </div>`;
- 
-  renderPagination(total);
-  renderActiveTags();
-}
- 
-function renderPagination(total) {
-  const pages = Math.ceil(total / PER_PAGE);
-  const pg    = document.getElementById('pagination');
-  if (pages <= 1) { pg.innerHTML = ''; return; }
-  let h = `<div class="pgbtn" onclick="changePage(${Math.max(1,page-1)})">‹</div>`;
-  for (let i = 1; i <= pages; i++)
-    h += `<div class="pgbtn${i===page?' active':''}" onclick="changePage(${i})">${i}</div>`;
-  h += `<div class="pgbtn" onclick="changePage(${Math.min(pages,page+1)})">›</div>`;
-  pg.innerHTML = h;
-}
- 
-function changePage(p) { page = p; renderAll(); window.scrollTo(0,80); }
- 
-function renderActiveTags() {
-  const tags = document.getElementById('active-tags');
-  let h = '';
-  const catRad = document.querySelector('input[name="cat-filter"]:checked');
-  if (catRad && catRad.value) {
-    const cat = allCategories.find(c => String(c.id) === catRad.value);
-    if (cat) h += `<div class="af-tag" onclick="clearCategory()">📁 ${cat.name} ×</div>`;
+    `;
   }
-  if (minRating > 0) h += `<div class="af-tag" onclick="setRating(0,null)">${minRating}★+ ×</div>`;
-  if (document.getElementById('instock').checked)
-    h += `<div class="af-tag" onclick="document.getElementById('instock').checked=false;applyFilters()">In Stock ×</div>`;
-  if (document.getElementById('onsale').checked)
-    h += `<div class="af-tag" onclick="document.getElementById('onsale').checked=false;applyFilters()">On Sale ×</div>`;
-  tags.innerHTML = h;
-}
- 
-// ─── Category Pill click ───
-function filterByPill(catId, el) {
-  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  activeCatId = catId;
-  // sync sidebar radio
-  const radio = document.querySelector(`input[name="cat-filter"][value="${catId}"]`);
-  if (radio) radio.checked = true;
-  applyFilters();
-}
- 
-function clearCategory() {
-  activeCatId = '';
-  document.querySelector('input[name="cat-filter"][value=""]').checked = true;
-  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-  document.querySelector('.cat-pill').classList.add('active');
-  applyFilters();
-}
- 
-// ─── Price ───
-function updatePrice(v) {
-  document.getElementById('price-val').textContent = '₹' + parseInt(v).toLocaleString('en-IN');
-  document.getElementById('pmax').value = v;
-  applyFilters();
-}
- 
-// ─── Rating ───
-function setRating(r, el) {
-  minRating = r;
-  document.querySelectorAll('.star-row').forEach(x => x.classList.remove('active'));
-  if (el) el.classList.add('active');
-  const radios = document.querySelectorAll('.star-row input[type=radio]');
-  if (r === 0 && radios[0]) radios[0].checked = true;
-  applyFilters();
-}
- 
-// ─── View Toggle ───
-function setView(v) {
-  viewMode = v;
-  document.getElementById('grid-btn').classList.toggle('active', v === 'grid');
-  document.getElementById('list-btn').classList.toggle('active', v === 'list');
-  renderAll();
-}
- 
-// ─── Wishlist (client-side only) ───
-const wishlist = new Set();
-function toggleWish(id, btn) {
-  if (wishlist.has(id)) { wishlist.delete(id); btn.classList.remove('active'); btn.innerHTML = '♡'; }
-  else { wishlist.add(id); btn.classList.add('active'); btn.innerHTML = '♥'; }
-}
- 
-// ─── Add to Cart (wired to your existing AJAX) ───
-function addToCartJs(productId, e) {
-  const btn = e.currentTarget;
-  btn.disabled = true;
-  btn.innerHTML = 'Adding...';
- 
-  $.ajax({
-    url: "{{ route('cart.add') }}",
-    method: 'POST',
-    data: {
-      _token:     $('meta[name="csrf-token"]').attr('content'),
-      product_id: productId,
-      quantity:   1,
-    },
-    success: function (res) {
-      if (res.success) {
-        $('.cart-count').text(res.cart_count);
-        renderOffcanvasCart();
-        showToast(res.message, 'success');
-        setTimeout(() => {
-          const el = document.getElementById('offcanvasCart');
-          if (el) new bootstrap.Offcanvas(el).show();
-        }, 300);
-        btn.innerHTML = '<svg width="14" height="14"><use xlink:href="#cart"></use></svg> ✓ Added';
-        btn.style.background = 'var(--bs-primary)';
-        btn.style.color = '#fff';
-        btn.style.borderColor = 'transparent';
+
+  function applyFilters() {
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const sort = document.getElementById('sortSelect').value;
+
+    filtered = allProducts.filter(p => {
+      if (activeCategory !== 'all' && activeCategory !== null && p.cat_id != activeCategory) return false;
+      if (search && !p.name.toLowerCase().includes(search)) return false;
+      return true;
+    });
+
+    if (sort === 'price-low') filtered.sort((a, b) => a.price - b.price);
+    else if (sort === 'price-high') filtered.sort((a, b) => b.price - a.price);
+    else if (sort === 'newest') filtered.sort((a, b) => a.id - b.id);
+    else if (sort === 'name') filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+    currentPage = 1;
+    renderAll();
+    updateFrequentlyBought();
+  }
+
+  function renderAll() {
+    const grid = document.getElementById('productGrid');
+    const total = filtered.length;
+    const start = (currentPage - 1) * itemsPerPage;
+    const page = filtered.slice(start, start + itemsPerPage);
+
+    grid.innerHTML = page.length 
+      ? page.map(renderCard).join('')
+      : '<div class="no-results"><div class="no-results-icon">🔍</div><div class="no-results-text">No products found</div><div class="no-results-desc">Try adjusting your filters or search term</div></div>';
+
+    renderPagination(total);
+  }
+
+  function renderPagination(total) {
+    const pages = Math.ceil(total / itemsPerPage);
+    const pg = document.getElementById('pagination');
+    if (pages <= 1) { pg.innerHTML = ''; return; }
+    let html = '';
+    for (let i = 1; i <= pages; i++) {
+      html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+    }
+    pg.innerHTML = html;
+  }
+
+  function goToPage(p) { currentPage = p; renderAll(); window.scrollTo(0, 0); }
+
+  function filterByTab(catId, btn) {
+    document.querySelectorAll('.category-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCategory = catId === 'all' ? 'all' : parseInt(catId);
+    if (catId !== 'all') {
+      window.location.href = `{{ route('shop') }}?category=${catId}`;
+    } else {
+      window.location.href = `{{ route('shop') }}`;
+    }
+  }
+
+  function filterByCategory(catId) {
+    window.location.href = `{{ route('shop') }}?category=${catId}`;
+  }
+
+  function updateFrequentlyBought() {
+    const grid = document.getElementById('frequentlyBoughtGrid');
+    const title = document.getElementById('frequentlyBoughtTitle');
+    
+    if (activeCategory !== 'all' && activeCategory !== null) {
+      const categoryProducts = allProducts.filter(p => p.cat_id == activeCategory);
+      
+      const category = categoryProducts.length > 0 ? categoryProducts[0].cat_name : 'Category';
+      title.textContent = `More from ${category}`;
+      
+      let html = '';
+      categoryProducts.slice(0, 6).forEach(product => {
+        html += `
+          <div class="frequently-bought-item" onclick="goToProductDetails(${product.id})">
+            <img src="${product.image}" alt="${product.name}" class="frequently-bought-icon"
+                 onerror="this.src='{{ asset('/assets/images/default_product.png') }}'">
+            <div class="frequently-bought-name">${product.name}</div>
+          </div>
+        `;
+      });
+      grid.innerHTML = html;
+    } else {
+      title.textContent = 'Frequently Bought';
+      let allCategoriesHtml = '';
+      const allCategories = {!! json_encode($categories->map(fn($c) => ['id' => $c->category_id, 'name' => $c->category_name])->take(6)) !!};
+      allCategories.forEach(category => {
+        allCategoriesHtml += `
+          <div class="frequently-bought-item" onclick="filterByCategory(${category.id})">
+            <div style="background: var(--light-gray); width: 80px; height: 80px; margin: 0 auto 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+              📦
+            </div>
+            <div class="frequently-bought-name">${category.name}</div>
+          </div>
+        `;
+      });
+      grid.innerHTML = allCategoriesHtml;
+    }
+  }
+
+  function goToProductDetails(productId) {
+    window.location.href = `/product/${productId}`;
+  }
+
+  $(document).ready(function() {
+    // Highlight active tab
+    if (activeCategory !== 'all' && activeCategory !== null) {
+      document.querySelectorAll('.category-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      const activeTab = document.querySelector(`.category-tab[onclick*="filterByTab(${activeCategory}"]`);
+      if (activeTab) activeTab.classList.add('active');
+    }
+    applyFilters();
+    updateFrequentlyBought();
+
+    // =====================
+    // ADD TO CART (Same as Home Page)
+    // =====================
+    $(document).on('click', '.btn-cart', function(e) {
+      e.preventDefault();
+
+      const btn = $(this);
+      const productId = btn.attr('data-product-id');
+      const quantity = btn.closest('.product-actions-modern').find('.quantity').val() || 1;
+
+      if (!productId) {
+        alert('Product ID missing!');
+        return;
       }
-    },
-    error: function (xhr) {
-      console.error(xhr.status, xhr.responseText);
-      if (xhr.status === 419) alert('CSRF mismatch.');
-      else alert('Error ' + xhr.status);
-    },
-    complete: function () {
-      btn.disabled = false;
-      setTimeout(() => {
-        btn.innerHTML = '<svg width="14" height="14"><use xlink:href="#cart"></use></svg> Add to Cart';
-        btn.style.background = '';
-        btn.style.color = '';
-        btn.style.borderColor = '';
-      }, 2000);
+
+      btn.prop('disabled', true).html('Adding...');
+
+      $.ajax({
+        url: "{{ route('cart.add') }}",
+        method: 'POST',
+        data: {
+          _token: $('meta[name="csrf-token"]').attr('content'),
+          product_id: productId,
+          quantity: quantity,
+        },
+        success: function(res) {
+          if (res.success) {
+            $('.cart-count').text(res.cart_count);
+            renderOffcanvasCart();
+            showToast(res.message, 'success');
+            setTimeout(function() {
+              const offcanvasEl = document.getElementById('offcanvasCart');
+              if (offcanvasEl) {
+                new bootstrap.Offcanvas(offcanvasEl).show();
+              }
+            }, 300);
+          }
+        },
+        error: function(xhr) {
+          console.error('Error:', xhr.status, xhr.responseText);
+          alert('Error adding to cart');
+        },
+        complete: function() {
+          btn.prop('disabled', false).html('<i class="bi bi-cart-plus"></i> <span>Add to Cart</span>');
+        }
+      });
+    });
+
+    function renderOffcanvasCart() {
+      $.ajax({
+        url: "{{ route('cart.items') }}",
+        method: 'GET',
+        success: function(res) {
+          if (res.success) {
+            $('#offcanvas-cart-items').html(res.html);
+            $('.offcanvas-total').html('&#8377; ' + res.cartTotal);
+            $('.cart-count').text(res.cart_count);
+            $('#offcanvas-cart-footer').toggle(res.cart_count > 0);
+          }
+        }
+      });
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = `
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:9999">
+          <div class="toast show align-items-center text-white bg-${type} border-0">
+            <div class="d-flex">
+              <div class="toast-body">${message}</div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+          </div>
+        </div>`;
+      $('body').append(toast);
+      setTimeout(() => $('.toast-container').last().remove(), 3000);
     }
   });
-}
- 
-// ─── Clear All ───
-function clearAll() {
-  document.querySelector('input[name="cat-filter"][value=""]').checked = true;
-  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-  document.querySelector('.cat-pill').classList.add('active');
-  document.getElementById('price-range').value = 10000;
-  document.getElementById('price-val').textContent = '₹10,000';
-  document.getElementById('pmin').value = '';
-  document.getElementById('pmax').value = 10000;
-  document.getElementById('search-input').value = '';
-  document.getElementById('instock').checked = false;
-  document.getElementById('onsale').checked  = false;
-  document.querySelectorAll('.star-row').forEach((x,i) => x.classList.toggle('active', i===0));
-  minRating = 0; activeCatId = '';
-  applyFilters();
-}
- 
-// ─── Toast (reuse from home page) ───
-function showToast(message, type = 'success') {
-  const toast = `
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:9999">
-      <div class="toast show align-items-center text-white bg-${type} border-0">
-        <div class="d-flex">
-          <div class="toast-body">${message}</div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-        </div>
-      </div>
-    </div>`;
-  $('body').append(toast);
-  setTimeout(() => $('.toast-container').last().remove(), 3000);
-}
- 
-// ─── Offcanvas cart helpers (same as home page) ───
-function renderOffcanvasCart() {
-  $.ajax({
-    url: "{{ route('cart.items') }}",
-    method: 'GET',
-    success: function (res) {
-      if (res.success) {
-        $('#offcanvas-cart-items').html(res.html);
-        $('.offcanvas-total').html('&#8377; ' + res.cartTotal);
-        $('.cart-count').text(res.cart_count);
-        $('#offcanvas-cart-footer').toggle(res.cart_count > 0);
-      }
-    }
-  });
-}
- 
-// ─── Init ───
-$(document).ready(function () { applyFilters(); });
 </script>
 @endpush
 @endsection

@@ -33,11 +33,19 @@ class Category extends Model
         'cat_image',
     ];
 
-       /**
+    /**
      * Vendor belongs to Category
      */
     public function vendor()
     {
         return $this->belongsTo(Vendor::class, 'vendor_id');
+    }
+
+    /**
+     * Category has many products
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'category_id');
     }
 }

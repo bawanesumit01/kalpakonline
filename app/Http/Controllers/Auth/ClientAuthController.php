@@ -28,39 +28,45 @@ class ClientAuthController extends Controller
     // =====================
     // SEND OTP
     // =====================
-   public function sendOtp(Request $request)
-{
-    $request->validate([
-        'mobile' => 'required|digits:10',
-    ]);
+    public function sendOtp(Request $request)
+    {
+        $request->validate([
+            'mobile' => 'required|digits:10',
+        ]);
 
-    $otp = rand(100000, 999999);
+        $otp = rand(100000, 999999);
 
-    // ✅ firstOrCreate only creates, doesn't update existing user
-    // Use updateOrCreate instead
-    $user = User::updateOrCreate(
-        [
-            'mobile' => $request->mobile,  // find by mobile
-        ],
-        [
-            'name'           => 'User' . $request->mobile,
-            'email'          => $request->mobile . '@kalpak.com',
-            'password'       => bcrypt(str()->random(16)),
-            'role'           => 'client',
-            'otp'            => $otp,        // ✅ always updates otp
-            'otp_expires_at' => Carbon::now()->addMinutes(10), // ✅ always updates expiry
-        ]
-    );
+        // Create or update user
+        $user = User::updateOrCreate(
+            [
+                'mobile' => $request->mobile,
+            ],
+            [
+                'name'           => 'User' . $request->mobile,
+                'email'          => $request->mobile . '@kalpak.com',
+                'password'       => bcrypt(str()->random(16)),
+                'role'           => 'client',
+                'otp'            => $otp,
+                'otp_expires_at' => Carbon::now()->addMinutes(10),
+            ]
+        );
 
-    // ✅ Confirm OTP saved in DB
-    \Log::info('OTP saved for ' . $request->mobile . ' OTP: ' . $otp);
+        // Log OTP
+        \Log::info('OTP generated for ' . $request->mobile . ' OTP: ' . $otp);
 
-    session(['otp_mobile' => $request->mobile]);
+        // Send OTP via SMS
+        $smsSent = $this->sendSms($request->mobile, $otp);
 
-    // ✅ Show OTP on screen for testing
-    return redirect()->route('customer.verify.otp')
-                     ->with('success', 'Testing Mode — Your OTP is: ' . $otp);
-}
+        session(['otp_mobile' => $request->mobile]);
+
+        if ($smsSent) {
+            return redirect()->route('customer.verify.otp')
+                           ->with('success', '✅ OTP sent successfully! Your OTP: ' . $otp . ' (Valid for 10 minutes)');
+        } else {
+            return redirect()->route('customer.verify.otp')
+                           ->with('warning', '⚠️ Testing Mode — Your OTP is: ' . $otp . ' (Valid for 10 minutes)');
+        }
+    }
 
     // =====================
     // SHOW VERIFY OTP PAGE
@@ -142,29 +148,44 @@ class ClientAuthController extends Controller
     // SEND SMS via Fast2SMS
     // =====================
     private function sendSms($mobile, $otp)
-{
-    try {
-        $response = Http::withHeaders([
-            'authorization' => env('FAST2SMS_API_KEY'),
-        ])->get('https://www.fast2sms.com/dev/bulkV2', [
-            'route'            => 'otp',
-            'variables_values' => $otp,
-            'flash'            => 0,
-            'numbers'          => $mobile,
-        ]);
+    {
+        try {
+            $apiKey = env('FAST2SMS_API_KEY');
+            
+            // Check if API key is set
+            if (!$apiKey || $apiKey === 'your_fast2sms_api_key_here') {
+                \Log::warning('Fast2SMS API key not configured. Using test mode.');
+                return false;
+            }
 
-        $result = $response->json();
+            // For OTP API - use variables_values parameter
+            $url = 'https://www.fast2sms.com/dev/bulkV2?' . http_build_query([
+                'authorization'    => $apiKey,
+                'route'            => 'otp',
+                'numbers'          => $mobile,
+                'variables_values' => $otp,  // OTP value goes here
+            ]);
 
-        // ✅ This will log response so we can debug
-        \Log::info('Fast2SMS Response: ' . json_encode($result));
+            $response = Http::timeout(10)->get($url);
 
-        return $result['return'] ?? false;
+            $result = $response->json();
 
-    } catch (\Exception $e) {
-        \Log::error('Fast2SMS Error: ' . $e->getMessage());
-        return false;
+            \Log::info('Fast2SMS Response: ' . json_encode($result));
+
+            // Check if message was sent successfully
+            if (isset($result['return']) && $result['return'] == true) {
+                \Log::info('OTP sent successfully to ' . $mobile);
+                return true;
+            } else {
+                \Log::error('Fast2SMS Error: ' . json_encode($result));
+                return false;
+            }
+
+        } catch (\Exception $e) {
+            \Log::error('Fast2SMS Exception: ' . $e->getMessage());
+            return false;
+        }
     }
-}
 
     // =====================
     // MERGE GUEST CART

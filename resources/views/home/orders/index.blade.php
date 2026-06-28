@@ -168,6 +168,22 @@
                                     </p>
                                 </div>
                             </div>
+
+                            <!-- Tracking Button -->
+                            <div class="mt-4 pt-3 border-top">
+                                <a href="{{ route('order.track', $order->id) }}" class="btn btn-primary btn-sm">
+                                    <i class="fa fa-map-marker-alt"></i> Track Delivery
+                                </a>
+                                @if($order->status === 'delivered')
+                                    <span class="badge bg-success ms-2">
+                                        <i class="fa fa-check-circle"></i> Delivered
+                                    </span>
+                                @elseif(in_array($order->status, ['picked_up', 'assigned', 'confirmed']))
+                                    <span class="badge bg-info ms-2">
+                                        <i class="fa fa-box"></i> Out for Delivery
+                                    </span>
+                                @endif
+                            </div>
                             </div>
                         </div>
                     @endforeach
