@@ -162,7 +162,7 @@
                                     <div class="mdc-text-field mdc-text-field--outlined">
                                         <select class="mdc-text-field__input" id="role" name="role" required>
                                             <option value="" disabled selected></option>
-                                            <option value="admin">Admin</option>
+                                            <option value="admin">Admin (Vendor)</option>
                                             <option value="client">Client</option>
                                         </select>
                                         <div class="mdc-notched-outline">
@@ -178,99 +178,16 @@
 
                                     </div>
                                 </div>
-                                @if (auth()->user()->role === 'superadmin')
-                                    <!-- Permissions -->
-                                    <div class="col-md-12 my-3">
-                                        <h6 class="mb-2">Permissions</h6>
 
-                                        <div class="row">
+                                <!-- Actions -->
+                                <div class="flex items-center justify-end mt-5 d-flex gap-3 pt2 col-md-12">
 
-
-
-                                            <div class="col-md-3 mdc-form-field">
-                                                <div class="mdc-checkbox">
-                                                    <input type="checkbox" id="basic-disabled-checkbox2"
-                                                        class="mdc-checkbox__native-control" name="permissions[]"
-                                                        value="dashboard" />
-                                                    <div class="mdc-checkbox__background">
-                                                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                                            <path class="mdc-checkbox__checkmark-path" fill="none"
-                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-                                                        </svg>
-                                                        <div class="mdc-checkbox__mixedmark"></div>
-                                                    </div>
-                                                </div>
-                                                <label for="basic-disabled-checkbox2"
-                                                    id="basic-disabled-checkbox-label2">Dashboard</label>
-
-                                            </div>
-
-                                            <div class="col-md-3 mdc-form-field">
-                                                <div class="mdc-checkbox">
-                                                    <input type="checkbox" id="basic-disabled-checkbox2"
-                                                        class="mdc-checkbox__native-control" name="permissions[]"
-                                                        value="vendors" />
-                                                    <div class="mdc-checkbox__background">
-                                                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                                            <path class="mdc-checkbox__checkmark-path" fill="none"
-                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-                                                        </svg>
-                                                        <div class="mdc-checkbox__mixedmark"></div>
-                                                    </div>
-                                                </div>
-                                                <label for="basic-disabled-checkbox2"
-                                                    id="basic-disabled-checkbox-label2">Vendors</label>
-
-                                            </div>
-
-                                            <div class="col-md-3 mdc-form-field">
-                                                <div class="mdc-checkbox">
-                                                    <input type="checkbox" id="basic-disabled-checkbox2"
-                                                        class="mdc-checkbox__native-control" name="permissions[]"
-                                                        value="category" />
-                                                    <div class="mdc-checkbox__background">
-                                                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                                            <path class="mdc-checkbox__checkmark-path" fill="none"
-                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-                                                        </svg>
-                                                        <div class="mdc-checkbox__mixedmark"></div>
-                                                    </div>
-                                                </div>
-                                                <label for="basic-disabled-checkbox2"
-                                                    id="basic-disabled-checkbox-label2">Category</label>
-
-                                            </div>
-
-                                            <div class="col-md-3 mdc-form-field">
-                                                <div class="mdc-checkbox">
-                                                    <input type="checkbox" id="basic-disabled-checkbox"
-                                                        class="mdc-checkbox__native-control" name="permissions[]"
-                                                        value="products" />
-                                                    <div class="mdc-checkbox__background">
-                                                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                                            <path class="mdc-checkbox__checkmark-path" fill="none"
-                                                                d="M1.73,12.91 8.1,19.28 22.79,4.59" />
-                                                        </svg>
-                                                        <div class="mdc-checkbox__mixedmark"></div>
-                                                    </div>
-                                                </div>
-                                                <label for="basic-disabled-checkbox"
-                                                    id="basic-disabled-checkbox-label">Products</label>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Actions -->
-                                        <div class="flex items-center justify-end mt-5 d-flex gap-3 pt2 ">
-
-                                            <button type="submit"
-                                                class="mdc-typography--button mdc-button mdc-button--raised mdc-button--dense mdc-ripple-upgraded"
-                                                style="--mdc-ripple-fg-size: 44px; --mdc-ripple-fg-scale: 2.0637770928470114; --mdc-ripple-fg-translate-start: 12.137451171875px, 0.1999969482421875px; --mdc-ripple-fg-translate-end: 15.10000228881836px, -6px;">
-                                                Create
-                                            </button>
-                                        </div>
-                                    </div>
-                                @endif
+                                    <button type="submit"
+                                        class="mdc-typography--button mdc-button mdc-button--raised mdc-button--dense mdc-ripple-upgraded"
+                                        style="--mdc-ripple-fg-size: 44px; --mdc-ripple-fg-scale: 2.0637770928470114; --mdc-ripple-fg-translate-start: 12.137451171875px, 0.1999969482421875px; --mdc-ripple-fg-translate-end: 15.10000228881836px, -6px;">
+                                        Create
+                                    </button>
+                                </div>
                         </form>
 
 

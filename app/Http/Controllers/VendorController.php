@@ -16,7 +16,14 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $vendors = Vendor::with('user')->get();
+        if (auth()->user()->role === 'superadmin') {
+            $vendors = Vendor::with('user')->get();
+        } else {
+            // Non-superadmin can only see their own vendor
+            $vendorId = auth()->user()->vendor->vendor_id;
+            $vendors = Vendor::where('vendor_id', $vendorId)->with('user')->get();
+        }
+
         return view('admin.vendor.index', compact('vendors'));
     }
 
@@ -25,6 +32,10 @@ class VendorController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'superadmin') {
+            abort(403, 'Unauthorized - Only superadmin can create vendors');
+        }
+
         return view('admin.vendor.create');
     }
 
@@ -33,15 +44,13 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-       
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'vendor_name' => ['required', 'string', 'max:255'],
-            'role' => ['required', 'string', 'max:255'],
+            'role' => ['required', 'string', 'in:admin,client'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
             'mobile' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'permissions' => 'nullable|array',
         ]);
 
         DB::transaction(function () use ($request) {
@@ -52,7 +61,6 @@ class VendorController extends Controller
                 'email' => $request->email,
                 'mobile' => $request->mobile,
                 'password' => Hash::make($request->password),
-                'permissions' => $request->permissions ?? [],
             ]);
 
             Vendor::create([
@@ -80,6 +88,10 @@ class VendorController extends Controller
      */
     public function edit($vendor_id)
     {
+        if (auth()->user()->role !== 'superadmin') {
+            abort(403, 'Unauthorized - Only superadmin can edit vendors');
+        }
+
         // Find vendor and eager load user
         $vendor = Vendor::with('user')->findOrFail($vendor_id);
 
@@ -104,7 +116,6 @@ class VendorController extends Controller
             'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'mobile' => ['required'],
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'permissions' => 'nullable|array',
         ]);
 
         // Update user
@@ -112,7 +123,6 @@ class VendorController extends Controller
         $user->role = $request->role;
         $user->email = $request->email;
         $user->mobile = $request->mobile;
-        $user->permissions = $request->permissions ?? [];
 
         // Update password only if filled
         if ($request->filled('password')) {
@@ -136,6 +146,10 @@ class VendorController extends Controller
      */
     public function destroy($vendor_id)
     {
+        if (auth()->user()->role !== 'superadmin') {
+            abort(403, 'Unauthorized - Only superadmin can delete vendors');
+        }
+
         // Find the vendor
         $vendor = Vendor::with('user')->findOrFail($vendor_id);
 

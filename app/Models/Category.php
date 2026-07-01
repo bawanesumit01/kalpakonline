@@ -31,7 +31,28 @@ class Category extends Model
         'vendor_id',
         'category_name',
         'cat_image',
+        'slug',
     ];
+
+    /**
+     * Boot method to auto-generate slug
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($category) {
+            if (empty($category->slug)) {
+                $category->slug = \Illuminate\Support\Str::slug($category->category_name);
+            }
+        });
+
+        static::updating(function ($category) {
+            if (empty($category->slug) || $category->isDirty('category_name')) {
+                $category->slug = \Illuminate\Support\Str::slug($category->category_name);
+            }
+        });
+    }
 
     /**
      * Vendor belongs to Category

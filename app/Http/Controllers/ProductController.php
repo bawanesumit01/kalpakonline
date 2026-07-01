@@ -22,16 +22,11 @@ class ProductController extends Controller
     public function index()
     {
         if (auth()->user()->role === 'superadmin') {
-
-            $products = Product::with('category.vendor')->get();
+            $products = Product::with('category', 'vendor')->get();
         } else {
-
             $vendorId = auth()->user()->vendor->vendor_id;
-
-            $products = Product::whereHas('category', function ($query) use ($vendorId) {
-                $query->where('vendor_id', $vendorId);
-            })
-                ->with('category')
+            $products = Product::where('vendor_id', $vendorId)
+                ->with('category', 'vendor')
                 ->get();
         }
 
@@ -43,84 +38,70 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // if (auth()->user()->role === 'superadmin') {
-        //     $categories = Category::with('vendor')->get();
-        // } else {
-
-        //     $vendorId = auth()->user()->vendor->vendor_id;
-        //     $categories = Category::with('vendor')->where('vendor_id', $vendorId)->get();
-        // }
-         $categories = Category::with('vendor')->get();
-        $vendors = Vendor::with('user')->get();
+        if (auth()->user()->role === 'superadmin') {
+            $categories = Category::with('vendor')->get();
+            $vendors = Vendor::with('user')->get();
+        } else {
+            // For vendor admin, show only their categories
+            $vendorId = auth()->user()->vendor->vendor_id;
+            $categories = Category::where('vendor_id', $vendorId)->get();
+            $vendors = Vendor::where('vendor_id', $vendorId)->get();
+        }
 
         return view('admin.products.create', compact('categories', 'vendors'));
-
     }
 
 
 
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required|string|max:255',
-            'product_sku' => 'required|string|max:100|unique:products,product_sku',
-            'vendor_id' => 'required|integer',
-            'category_id' => 'required|integer|exists:categories,category_id',
+        try {
+            // VALIDATION
+            $request->validate([
+                'product_name' => 'required|string|max:255',
+                'product_sku' => 'required|string|max:100|unique:products,product_sku',
+                'vendor_id' => 'required|integer',
+                'category_id' => 'required|integer|exists:categories,category_id',
 
-            'cost_price' => 'required|numeric|min:0',
-            'selling_price' => 'required|numeric|min:0|gte:cost_price',
-            'discount_percent' => 'nullable|numeric|min:0|max:100',
+                'cost_price' => 'required|numeric|min:0',
+                'selling_price' => 'required|numeric|min:0',
 
-            'stock_quantity' => 'required|integer|min:0',
-            'min_stock_alert' => 'nullable|integer|min:0',
-            'stock_status' => 'required|in:in_stock,out_of_stock,pre_order',
+                'stock_quantity' => 'required|integer|min:0',
+                'min_stock_alert' => 'nullable|integer|min:0',
+                'stock_status' => 'required|in:in_stock,out_of_stock,pre_order',
 
-            'short_description' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
+                'short_description' => 'nullable|string|max:255',
+                'description' => 'nullable|string',
 
-            'main_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'gallery_images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
+                'main_image' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+                'gallery_images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
 
-            'status' => 'required|in:active,inactive,draft',
-        ]);
+                'status' => 'required|in:active,inactive,draft',
+            ]);
 
-        // ðŸ”¹ Category
-        $category = Category::findOrFail($request->category_id);
-        $categoryFolder = Str::slug($category->category_name, '_');
+            // Get Category
+            $category = Category::findOrFail($request->category_id);
+            $categoryFolder = Str::slug($category->category_name, '_');
 
-        // ðŸ”¹ Paths
-        $mainPath = "products/{$categoryFolder}/main";
-        $galleryPath = "products/{$categoryFolder}/gallery";
+            // Set Paths
+            $mainPath = "products/{$categoryFolder}/main";
+            $galleryPath = "products/{$categoryFolder}/gallery";
 
-        // ðŸ”¹ Create product
-        $product = Product::create(
-            $request->except(['main_image', 'gallery_images', 'final_price'])
-        );
+            // Create product
+            $product = Product::create(
+                $request->except(['main_image', 'gallery_images', 'final_price'])
+            );
 
-        // âœ… MAIN IMAGE (original name)
-        if ($request->hasFile('main_image')) {
-            $image = $request->file('main_image');
+            // Handle MAIN IMAGE
+            if ($request->hasFile('main_image')) {
+                $image = $request->file('main_image');
 
-            $originalName = time() . '_' . $image->getClientOriginalName();
+                if (!$image->isValid()) {
+                    throw new \Exception('Main image file is corrupted or invalid.');
+                }
 
-            $destinationPath = public_path($mainPath);
-
-            if (!File::exists($destinationPath)) {
-                File::makeDirectory($destinationPath, 0755, true, true);
-            }
-            
-            $image->move($destinationPath, $originalName);
-
-            $product->main_image = "{$mainPath}/{$originalName}";
-            $product->save();
-        }
-
-        // âœ… GALLERY IMAGES (original name)
-        if ($request->hasFile('gallery_images')) {
-            foreach ($request->file('gallery_images') as $image) {
                 $originalName = time() . '_' . $image->getClientOriginalName();
-
-                $destinationPath = public_path($galleryPath);
+                $destinationPath = public_path($mainPath);
 
                 if (!File::exists($destinationPath)) {
                     File::makeDirectory($destinationPath, 0755, true, true);
@@ -128,16 +109,53 @@ class ProductController extends Controller
                 
                 $image->move($destinationPath, $originalName);
 
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'image_path' => "{$galleryPath}/{$originalName}",
-                ]);
+                $product->main_image = "{$mainPath}/{$originalName}";
+                $product->save();
             }
-        }
 
-        return redirect()
-            ->route('products.index')
-            ->with('success', 'Product created successfully');
+            // Handle GALLERY IMAGES
+            if ($request->hasFile('gallery_images')) {
+                foreach ($request->file('gallery_images') as $image) {
+                    if (!$image->isValid()) {
+                        throw new \Exception('One or more gallery images are corrupted or invalid.');
+                    }
+
+                    $originalName = time() . '_' . $image->getClientOriginalName();
+                    $destinationPath = public_path($galleryPath);
+
+                    if (!File::exists($destinationPath)) {
+                        File::makeDirectory($destinationPath, 0755, true, true);
+                    }
+                    
+                    $image->move($destinationPath, $originalName);
+
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_path' => "{$galleryPath}/{$originalName}",
+                    ]);
+                }
+            }
+
+            return redirect()
+                ->route('products.index')
+                ->with('success', 'Product created successfully!');
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Validation errors are automatically handled by Laravel
+            return redirect()->back()->withErrors($e->errors())->withInput();
+            
+        } catch (\Exception $e) {
+            // Log the error for debugging
+            \Log::error('Product Creation Error: ' . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+
+            // Return with error message
+            return redirect()->back()
+                ->with('error', 'Error creating product: ' . $e->getMessage())
+                ->withInput();
+        }
     }
 
 
@@ -162,89 +180,72 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        // âœ… FIND PRODUCT MANUALLY
-        $product = Product::findOrFail($id);
+        try {
+            // Find product manually
+            $product = Product::findOrFail($id);
 
-        // ðŸ”Ž Debug (use once)
-        // dd($request->all(), $product->id);
+            // VALIDATION
+            $request->validate([
+                'product_name' => 'required|string|max:255',
+                'product_sku' => 'required|string|max:100|unique:products,product_sku,' . $product->id . ',id',
+                'vendor_id' => 'required|integer',
+                'category_id' => 'required|integer|exists:categories,category_id',
 
-        // âœ… VALIDATION
-        $request->validate([
-            'product_name' => 'required|string|max:255',
-            'product_sku' => 'required|string|max:100|unique:products,product_sku,' . $product->id . ',id',
-            'vendor_id' => 'required|integer',
-            'category_id' => 'required|integer|exists:categories,category_id',
+                'cost_price' => 'required|numeric|min:0',
+                'selling_price' => 'required|numeric|min:0',
 
-            'cost_price' => 'required|numeric|min:0',
-            'selling_price' => 'required|numeric|min:0|gte:cost_price',
-            'discount_percent' => 'nullable|numeric|min:0|max:100',
+                'stock_quantity' => 'required|integer|min:0',
+                'min_stock_alert' => 'nullable|integer|min:0',
+                'stock_status' => 'required|in:in_stock,out_of_stock,pre_order',
 
-            'stock_quantity' => 'required|integer|min:0',
-            'min_stock_alert' => 'nullable|integer|min:0',
-            'stock_status' => 'required|in:in_stock,out_of_stock,pre_order',
+                'short_description' => 'nullable|string|max:255',
+                'description' => 'nullable|string',
 
-            'short_description' => 'nullable|string|max:255',
-            'description' => 'nullable|string',
+                'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+                'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
 
-            'main_image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'gallery_images.*' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-
-            'status' => 'required|in:active,inactive,draft',
-        ]);
-
-        // âœ… CATEGORY FOLDER
-        $category = Category::findOrFail($request->category_id);
-        $categoryFolder = Str::slug($category->category_name, '_');
-
-        $mainPath = "products/{$categoryFolder}/main";
-        $galleryPath = "products/{$categoryFolder}/gallery";
-
-        // âœ… UPDATE PRODUCT DATA
-        $product->update([
-            'product_name' => $request->product_name,
-            'product_sku' => $request->product_sku,
-            'vendor_id' => $request->vendor_id,
-            'category_id' => $request->category_id,
-            'cost_price' => $request->cost_price,
-            'selling_price' => $request->selling_price,
-            'discount_percent' => $request->discount_percent,
-            'stock_quantity' => $request->stock_quantity,
-            'min_stock_alert' => $request->min_stock_alert,
-            'stock_status' => $request->stock_status,
-            'short_description' => $request->short_description,
-            'description' => $request->description,
-            'status' => $request->status,
-        ]);
-
-        // âœ… UPDATE MAIN IMAGE
-        if ($request->hasFile('main_image')) {
-
-            if ($product->main_image && File::exists(public_path($product->main_image))) {
-                File::delete(public_path($product->main_image));
-            }
-
-            $image = $request->file('main_image');
-            $name = time() . '_' . $image->getClientOriginalName();
-
-            $destinationPath = public_path($mainPath);
-
-            if (!File::exists($destinationPath)) {
-                File::makeDirectory($destinationPath, 0755, true, true);
-            }
-            
-            $image->move($destinationPath, $name);
-
-            $product->update([
-                'main_image' => "{$mainPath}/{$name}",
+                'status' => 'required|in:active,inactive,draft',
             ]);
-        }
 
-        // âœ… ADD NEW GALLERY IMAGES (OLD REMAIN)
-        if ($request->hasFile('gallery_images')) {
-            foreach ($request->file('gallery_images') as $image) {
+            // Get Category Folder
+            $category = Category::findOrFail($request->category_id);
+            $categoryFolder = Str::slug($category->category_name, '_');
+
+            $mainPath = "products/{$categoryFolder}/main";
+            $galleryPath = "products/{$categoryFolder}/gallery";
+
+            // Update product data
+            $product->update([
+                'product_name' => $request->product_name,
+                'product_sku' => $request->product_sku,
+                'vendor_id' => $request->vendor_id,
+                'category_id' => $request->category_id,
+                'cost_price' => $request->cost_price,
+                'selling_price' => $request->selling_price,
+                'stock_quantity' => $request->stock_quantity,
+                'min_stock_alert' => $request->min_stock_alert,
+                'stock_status' => $request->stock_status,
+                'short_description' => $request->short_description,
+                'description' => $request->description,
+                'status' => $request->status,
+            ]);
+
+            // Update main image
+            if ($request->hasFile('main_image')) {
+
+                if ($product->main_image && File::exists(public_path($product->main_image))) {
+                    File::delete(public_path($product->main_image));
+                }
+
+                $image = $request->file('main_image');
+                
+                if (!$image->isValid()) {
+                    throw new \Exception('Main image file is corrupted or invalid.');
+                }
 
                 $name = time() . '_' . $image->getClientOriginalName();
-               $destinationPath = public_path($galleryPath);
+
+                $destinationPath = public_path($mainPath);
 
                 if (!File::exists($destinationPath)) {
                     File::makeDirectory($destinationPath, 0755, true, true);
@@ -252,48 +253,91 @@ class ProductController extends Controller
                 
                 $image->move($destinationPath, $name);
 
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'image_path' => "{$galleryPath}/{$name}",
+                $product->update([
+                    'main_image' => "{$mainPath}/{$name}",
                 ]);
             }
-        }
 
-        return redirect()
-            ->route('products.index')
-            ->with('success', 'Product updated successfully');
-    } 
+            // Add new gallery images (old remain)
+            if ($request->hasFile('gallery_images')) {
+                foreach ($request->file('gallery_images') as $image) {
+
+                    if (!$image->isValid()) {
+                        throw new \Exception('One or more gallery images are corrupted or invalid.');
+                    }
+
+                    $name = time() . '_' . $image->getClientOriginalName();
+                    $destinationPath = public_path($galleryPath);
+
+                    if (!File::exists($destinationPath)) {
+                        File::makeDirectory($destinationPath, 0755, true, true);
+                    }
+                    
+                    $image->move($destinationPath, $name);
+
+                    ProductImage::create([
+                        'product_id' => $product->id,
+                        'image_path' => "{$galleryPath}/{$name}",
+                    ]);
+                }
+            }
+
+            return redirect()
+                ->route('products.index')
+                ->with('success', 'Product updated successfully');
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->errors())->withInput();
+            
+        } catch (\Exception $e) {
+            \Log::error('Product Update Error: ' . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+
+            return redirect()->back()
+                ->with('error', 'Error updating product: ' . $e->getMessage())
+                ->withInput();
+        }
+    }
+
     /**
-         * Remove the specified resource from storage.
-         */
-   
+     * Remove the specified resource from storage.
+     */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-    
-        // 🔹 Delete Main Image
-        if ($product->main_image && Storage::disk('public')->exists($product->main_image)) {
-            Storage::disk('public')->delete($product->main_image);
-        }
-    
-        // 🔹 Delete Gallery Images
-        $galleryImages = ProductImage::where('product_id', $product->id)->get();
-    
-        foreach ($galleryImages as $image) {
-            if ($image->image_path && Storage::disk('public')->exists($image->image_path)) {
-                Storage::disk('public')->delete($image->image_path);
+        try {
+            $product = Product::findOrFail($id);
+        
+            // Delete Main Image
+            if ($product->main_image && File::exists(public_path($product->main_image))) {
+                File::delete(public_path($product->main_image));
             }
+        
+            // Delete Gallery Images
+            $galleryImages = ProductImage::where('product_id', $product->id)->get();
+        
+            foreach ($galleryImages as $image) {
+                if ($image->image_path && File::exists(public_path($image->image_path))) {
+                    File::delete(public_path($image->image_path));
+                }
+            }
+        
+            // Delete gallery records
+            ProductImage::where('product_id', $product->id)->delete();
+        
+            // Delete product
+            $product->delete();
+        
+            return redirect()
+                ->route('products.index')
+                ->with('success', 'Product deleted successfully');
+
+        } catch (\Exception $e) {
+            \Log::error('Product Delete Error: ' . $e->getMessage());
+
+            return redirect()->back()
+                ->with('error', 'Error deleting product: ' . $e->getMessage());
         }
-    
-        // 🔹 Delete gallery records
-        ProductImage::where('product_id', $product->id)->delete();
-    
-        // 🔹 Delete product
-        $product->delete();
-    
-        return redirect()
-            ->route('products.index')
-            ->with('success', 'Product deleted successfully');
     }
-    
 }

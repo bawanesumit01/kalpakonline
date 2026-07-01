@@ -73,8 +73,8 @@ class Product extends Model
         parent::boot();
 
         static::saving(function ($product) {
-            $discount = ($product->selling_price * $product->discount_percent) / 100;
-            $product->final_price = $product->selling_price - $discount;
+            // final_price = cost_price (what customer pays)
+            $product->final_price = $product->cost_price;
 
             // Auto stock status
             if ($product->stock_quantity <= 0) {

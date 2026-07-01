@@ -129,7 +129,7 @@
 
             <div class="category-grid-modern" data-aos="fade-up" data-aos-delay="100">
                 @foreach ($categories as $category)
-                    <a href="#" class="category-card-modern">
+                    <a href="{{ route('shop', ['category' => $category->slug]) }}" class="category-card-modern">
                         <div class="category-image-modern">
                             <img src="{{ !empty($category->cat_image) ? asset('/categoryImage/' . $category->cat_image) : asset('/categoryImage/default_category_img.png') }}"
                                 alt="{{ $category->category_name ?? 'Category' }}">
@@ -159,13 +159,18 @@
 
             <div class="product-grid-modern" data-aos="fade-up" data-aos-delay="100">
                 @foreach ($products as $product)
+                    @php
+                        $discount = $product->selling_price && $product->selling_price > 0 
+                            ? round(((float)$product->selling_price - (float)$product->final_price) / (float)$product->selling_price * 100)
+                            : 0;
+                    @endphp
                     <div class="product-card-modern">
                         <div class="product-image-wrapper-modern">
                             <a href="{{ route('product.details', $product->id) }}">
                                 <img src="{{ asset('/' . $product->main_image) }}"
                                     alt="{{ $product->product_name ?? null }}" class="product-image-modern">
                             </a>
-                            <div class="product-badge-modern">New</div>
+                            <div class="product-badge-modern">SALE</div>
                         </div>
                         <div class="product-content-modern">
                             <h3 class="product-title-modern">
@@ -174,7 +179,13 @@
                                 </a>
                             </h3>
                             <div class="product-price-modern">
-                                <span class="price-current">&#8377; {{ $product->final_price ?? null }}</span>
+                                @if($product->selling_price && $product->selling_price != $product->final_price)
+                                    <span class="price-original">&#8377; {{ number_format($product->selling_price, 2) }}</span>
+                                @endif
+                                <span class="price-current">&#8377; {{ number_format($product->final_price ?? 0, 2) }}</span>
+                                @if($discount > 0)
+                                    <span class="price-discount">{{ $discount }}% off</span>
+                                @endif
                             </div>
                             <div class="product-actions-modern">
                                 <div class="quantity-wrapper-modern">

@@ -567,12 +567,33 @@
 
 .product-price-modern {
     margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.price-original {
+    font-size: 0.875rem;
+    color: var(--text-gray);
+    text-decoration: line-through;
+    font-weight: 500;
 }
 
 .price-current {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--primary-color);
+}
+
+.price-discount {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #dc3545;
+    background: #fff3cd;
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
 }
 
 .product-actions-modern {

@@ -30,17 +30,20 @@ class HomeController extends Controller
     public function shop(Request $request)
     {
         $categories = Category::all();
-        $categoryId = $request->query('category');
+        $categorySlug = $request->query('category');
         
         $query = Product::where('status', 'active');
         
-        if ($categoryId) {
-            $query->where('category_id', $categoryId);
+        if ($categorySlug) {
+            $category = Category::where('slug', $categorySlug)->first();
+            if ($category) {
+                $query->where('category_id', $category->category_id);
+            }
         }
         
         $products = $query->get();
          
-        return view('home.shop', compact('categories', 'products', 'categoryId'));
+        return view('home.shop', compact('categories', 'products', 'categorySlug'));
     }
     
     /**

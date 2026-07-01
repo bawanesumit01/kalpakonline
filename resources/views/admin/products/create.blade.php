@@ -46,6 +46,29 @@
                         <form class="shadow pt-3" method="POST" action="{{ route('products.store') }}"
                             enctype="multipart/form-data">
                             @csrf
+
+                            {{-- DISPLAY GENERAL ERROR MESSAGE --}}
+                            @if (session('error'))
+                                <div class="alert alert-danger mx-3" role="alert">
+                                    <h4 class="alert-heading"><i class="fa fa-exclamation-circle"></i> Error!</h4>
+                                    <hr>
+                                    <p class="mb-0"><strong>{{ session('error') }}</strong></p>
+                                </div>
+                            @endif
+
+                            {{-- DISPLAY ALL VALIDATION ERRORS AT TOP --}}
+                            @if ($errors->any())
+                                <div class="alert alert-danger mx-3" role="alert">
+                                    <h4 class="alert-heading"><i class="fa fa-exclamation-circle"></i> Validation Errors!</h4>
+                                    <hr>
+                                    <ul class="mb-0">
+                                        @foreach ($errors->all() as $error)
+                                            <li><strong>{{ $error }}</strong></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
                             <div class="row m-2">
                                 <!-- product_name Name -->
                                 <div class="col-md-4 my-2">

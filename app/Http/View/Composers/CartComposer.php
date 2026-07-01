@@ -16,6 +16,10 @@ class CartComposer
         }
 
         $cartItems = Cart::where($identifier)->with('product')->get();
+        
+        // Remove items with deleted/null products
+        $cartItems = $cartItems->filter(fn($item) => $item->product !== null);
+        
         $cartCount = $cartItems->sum('quantity');
         $cartTotal = $cartItems->sum(fn($item) => $item->product->final_price * $item->quantity);
 

@@ -224,12 +224,31 @@
 
   .product-price-modern {
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .price-original {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: line-through;
   }
 
   .price-current {
     font-size: 16px;
     font-weight: 700;
     color: var(--text-primary);
+  }
+
+  .price-discount {
+    font-size: 12px;
+    font-weight: 700;
+    color: #dc3545;
+    background: #fff3cd;
+    padding: 2px 6px;
+    border-radius: 3px;
   }
 
   .product-actions-modern {
@@ -507,6 +526,7 @@ $productsData = $products->map(function($p) {
         'cat_id'   => $p->category_id,
         'cat_name' => $p->category->category_name ?? 'Other',
         'price'    => (float)($p->final_price ?? $p->selling_price ?? 0),
+        'selling_price' => (float)($p->selling_price ?? $p->final_price ?? 0),
         'image'    => $p->main_image ? asset($p->main_image) : asset('/assets/images/default_product.png'),
         'instock'  => $p->stock_quantity > 0,
     ];
@@ -517,14 +537,22 @@ $productsData = $products->map(function($p) {
   const allProducts = {!! json_encode($productsData) !!};
   const urlParams = new URLSearchParams(window.location.search);
   const categoryParam = urlParams.get('category');
-  const selectedCategory = categoryParam ? parseInt(categoryParam) : null;
   
   let filtered = [...allProducts];
   let currentPage = 1;
   const itemsPerPage = 12;
-  let activeCategory = selectedCategory || 'all';
+  let activeCategory = 'all';
+
+  // Initialize active category based on slug
+  @if($categorySlug)
+    const activeCategory_obj = {!! json_encode($categories->first(fn($c) => $c->slug === $categorySlug)) !!};
+    if (activeCategory_obj) {
+      activeCategory = activeCategory_obj.category_id;
+    }
+  @endif
 
   function renderCard(product) {
+    const discount = calculateDiscount(product);
     return `
       <div class="product-card-modern">
         <div class="product-image-wrapper-modern">
@@ -532,7 +560,7 @@ $productsData = $products->map(function($p) {
             <img src="${product.image}" alt="${product.name}" class="product-image-modern"
                  onerror="this.src='{{ asset('/assets/images/default_product.png') }}'">
           </a>
-          <div class="product-badge-modern">New</div>
+          <div class="product-badge-modern">SALE</div>
         </div>
         <div class="product-content-modern">
           <h3 class="product-title-modern">
@@ -541,7 +569,9 @@ $productsData = $products->map(function($p) {
             </a>
           </h3>
           <div class="product-price-modern">
+            <span class="price-original">&#8377; ${Number(product.selling_price).toLocaleString('en-IN')}</span>
             <span class="price-current">&#8377; ${Number(product.price).toLocaleString('en-IN')}</span>
+            ${discount > 0 ? `<span class="price-discount">${discount}% off</span>` : ''}
           </div>
           <div class="product-actions-modern">
             <div class="quantity-wrapper-modern">
@@ -555,6 +585,12 @@ $productsData = $products->map(function($p) {
         </div>
       </div>
     `;
+  }
+
+  function calculateDiscount(product) {
+    if (!product.selling_price || product.selling_price === 0) return 0;
+    const discount = ((product.selling_price - product.price) / product.selling_price) * 100;
+    return Math.round(discount);
   }
 
   function applyFilters() {
@@ -606,16 +642,24 @@ $productsData = $products->map(function($p) {
   function filterByTab(catId, btn) {
     document.querySelectorAll('.category-tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    activeCategory = catId === 'all' ? 'all' : parseInt(catId);
-    if (catId !== 'all') {
-      window.location.href = `{{ route('shop') }}?category=${catId}`;
-    } else {
+    if (catId === 'all') {
       window.location.href = `{{ route('shop') }}`;
+    } else {
+      // Find the slug for this category
+      const categories = {!! json_encode($categories->map(fn($c) => ['id' => $c->category_id, 'slug' => $c->slug])) !!};
+      const category = categories.find(c => c.id == catId);
+      if (category) {
+        window.location.href = `{{ route('shop') }}?category=${category.slug}`;
+      }
     }
   }
 
   function filterByCategory(catId) {
-    window.location.href = `{{ route('shop') }}?category=${catId}`;
+    const categories = {!! json_encode($categories->map(fn($c) => ['id' => $c->category_id, 'slug' => $c->slug])) !!};
+    const category = categories.find(c => c.id == catId);
+    if (category) {
+      window.location.href = `{{ route('shop') }}?category=${category.slug}`;
+    }
   }
 
   function updateFrequentlyBought() {

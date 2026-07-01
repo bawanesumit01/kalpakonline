@@ -21,7 +21,7 @@
                          </a>
                      </div>
                  @endif
-                 @if ($user->hasPermission('vendors'))
+                 @if ($user->hasPermission('vendors') && $user->role === 'superadmin')
                      <div class="mdc-list-item mdc-drawer-item">
                          <a class="mdc-drawer-link gap-3 {{ request()->routeIs('vendor.index') ? 'active' : '' }}"
                              href="{{ route('vendor.index') }}">
@@ -29,7 +29,7 @@
                          </a>
                      </div>
                  @endif
-                 @if ($user->hasPermission('category'))
+                 @if ($user->hasPermission('category') && ($user->role === 'superadmin' || $user->role === 'admin'))
                      <div class="mdc-list-item mdc-drawer-item">
                          <a class="mdc-drawer-link gap-3 {{ request()->routeIs('category.index') ? 'active' : '' }}"
                              href="{{ route('category.index') }}">
@@ -37,7 +37,7 @@
                          </a>
                      </div>
                  @endif
-                 @if ($user->hasPermission('products'))
+                 @if ($user->hasPermission('products') && ($user->role === 'superadmin' || $user->role === 'admin'))
                      <div class="mdc-list-item mdc-drawer-item">
                          <a class="mdc-drawer-link gap-3 {{ request()->routeIs('products.index') ? 'active' : '' }}"
                              href="{{ route('products.index') }}">
@@ -46,37 +46,45 @@
                      </div>
                  @endif
 
-                 <!-- Orders Management -->
-                 <div class="mdc-list-item mdc-drawer-item">
-                     <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}"
-                         href="{{ route('admin.orders.index') }}">
-                         <i class="fa-solid fa-receipt"></i> Orders
-                     </a>
-                 </div>
+                 <!-- Orders Management - Only Superadmin -->
+                 @if ($user->role === 'superadmin')
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}"
+                             href="{{ route('admin.orders.index') }}">
+                             <i class="fa-solid fa-receipt"></i> Orders
+                         </a>
+                     </div>
+                 @endif
 
-                 <!-- Customers Management -->
-                 <div class="mdc-list-item mdc-drawer-item">
-                     <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}"
-                         href="{{ route('admin.customers.index') }}">
-                         <i class="fa-solid fa-users"></i> Customers
-                     </a>
-                 </div>
+                 <!-- Customers Management - Only Superadmin -->
+                 @if ($user->role === 'superadmin')
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}"
+                             href="{{ route('admin.customers.index') }}">
+                             <i class="fa-solid fa-users"></i> Customers
+                         </a>
+                     </div>
+                 @endif
 
-                 <!-- Enquiries Management -->
-                 <div class="mdc-list-item mdc-drawer-item">
-                     <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.enquiries.*') ? 'active' : '' }}"
-                         href="{{ route('admin.enquiries.index') }}">
-                         <i class="fa-solid fa-envelope"></i> Enquiries
-                     </a>
-                 </div>
+                 <!-- Enquiries Management - Only Superadmin -->
+                 @if ($user->role === 'superadmin')
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.enquiries.*') ? 'active' : '' }}"
+                             href="{{ route('admin.enquiries.index') }}">
+                             <i class="fa-solid fa-envelope"></i> Enquiries
+                         </a>
+                     </div>
+                 @endif
 
-                 <!-- Delivery Tracking Management -->
-                 <div class="mdc-list-item mdc-drawer-item">
-                     <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.delivery.*') ? 'active' : '' }}"
-                         href="{{ route('admin.delivery.index') }}">
-                         <i class="fa-solid fa-motorcycle"></i> Deliveries
-                     </a>
-                 </div>
+                 <!-- Delivery Tracking Management - Only Superadmin -->
+                 @if ($user->role === 'superadmin')
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.delivery.*') ? 'active' : '' }}"
+                             href="{{ route('admin.delivery.index') }}">
+                             <i class="fa-solid fa-motorcycle"></i> Deliveries
+                         </a>
+                     </div>
+                 @endif
 
                  <!--<div class="mdc-list-item mdc-drawer-item">-->
                  <!--    <a class="mdc-expansion-panel-link gap-3" href="#" data-toggle="expansionPanel"-->
