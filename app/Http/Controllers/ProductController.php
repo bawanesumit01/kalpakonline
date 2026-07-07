@@ -89,7 +89,9 @@ class ProductController extends Controller
 
             // Create product
             $product = Product::create(
-                $request->except(['main_image', 'gallery_images', 'final_price'])
+                array_map(function($value) {
+                    return is_string($value) ? trim($value) : $value;
+                }, $request->except(['main_image', 'gallery_images', 'final_price']))
             );
 
             // Handle MAIN IMAGE
