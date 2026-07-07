@@ -131,6 +131,7 @@
                                             <tr>
                                                 <th class="text-left">Product</th>
                                                 <th class="text-center">Qty</th>
+                                                <th class="text-center">Unit</th>
                                                 <th class="text-right">Price</th>
                                                 <th class="text-right">Subtotal</th>
                                             </tr>
@@ -145,6 +146,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="text-center">{{ $item->quantity }}</td>
+                                                <td class="text-center">{{ $item->unit ?? '-' }}</td>
                                                 <td class="text-right">₹{{ number_format($item->price, 2) }}</td>
                                                 <td class="text-right fw-semibold">₹{{ number_format($item->subtotal, 2) }}</td>
                                             </tr>

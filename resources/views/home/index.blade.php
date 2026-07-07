@@ -178,6 +178,11 @@
                                     {{ $product->product_name ?? null }}
                                 </a>
                             </h3>
+                            @if($product->unit)
+                                <div class="text-muted small mb-2">
+                                    <i class="fa-solid fa-box"></i> {{ $product->unit }}
+                                </div>
+                            @endif
                             <div class="product-price-modern">
                                 @if($product->selling_price && $product->selling_price != $product->final_price)
                                     <span class="price-original">&#8377; {{ number_format($product->selling_price, 2) }}</span>

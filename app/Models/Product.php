@@ -30,6 +30,7 @@ class Product extends Model
         'stock_quantity',
         'min_stock_alert',
         'stock_status',
+        'unit',
         'main_image',
         'status',
     ];

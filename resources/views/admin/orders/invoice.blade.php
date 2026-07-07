@@ -95,6 +95,7 @@
                                     <tr>
                                         <th>Product</th>
                                         <th class="text-center">Qty</th>
+                                        <th class="text-center">Unit</th>
                                         <th class="text-end">Price</th>
                                         <th class="text-end">Amount</th>
                                     </tr>
@@ -108,6 +109,7 @@
                                             <small class="text-muted">ID: {{ $item->product_id }}</small>
                                         </td>
                                         <td class="text-center">{{ $item->quantity }}</td>
+                                        <td class="text-center">{{ $item->unit ?? '-' }}</td>
                                         <td class="text-end">₹{{ number_format($item->price, 2) }}</td>
                                         <td class="text-end fw-semibold">₹{{ number_format($item->subtotal, 2) }}</td>
                                     </tr>

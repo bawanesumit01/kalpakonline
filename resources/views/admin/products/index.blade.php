@@ -45,16 +45,16 @@
                                     <tr>
                                         <th class="text-left">Id</th>
                                         <th>Product</th>
+                                        <th>Unit</th>
                                         <th>SKU</th>
                                         @if (auth()->user()->role === 'superadmin')
                                             <th>Vendor</th>
                                         @endif
                                         <th>Category</th>
-                                        <th>Cost</th>
                                         <th>Selling</th>
+                                        <th>Cost</th>
                                         <th>Discount(%)</th>
                                         <th>Final Price</th>
-                                        {{-- <th>Tax Rate</th> --}}
                                         <th>Stock</th>
                                         <th> Min Stock Alert</th>
                                         <th>Stock Status </th>
@@ -68,13 +68,14 @@
                                         <tr>
                                             <td class="text-left">{{ $product->id }}</td>
                                             <td class="text-left">{{ $product->product_name }}</td>
+                                            <td class="text-left">{{ $product->unit ?? '-' }}</td>
                                             <td class="text-left">{{ $product->product_sku }}</td>
                                             @if (auth()->user()->role === 'superadmin')
                                                 <td class="text-left">{{ $product->vendor->vendor_name ?? null }}</td>
                                             @endif
                                             <td class="text-left">{{ $product->category->category_name ?? null }}</td>
-                                            <td class="text-left">{{ $product->cost_price }}</td>
                                             <td class="text-left">{{ $product->selling_price }}</td>
+                                            <td class="text-left">{{ $product->cost_price }}</td>
                                             <td class="text-left">{{ $product->discount_percent }}</td>
                                             <td class="text-left">{{ $product->final_price }}</td>
                                             <td class="text-left">{{ $product->stock_quantity }}</td>

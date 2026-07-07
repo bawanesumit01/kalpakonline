@@ -160,24 +160,6 @@
 
                                     </div>
                                 </div>
-                                <!-- cost_price -->
-                                <div class="col-md-4 my-2">
-                                    <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" id="cost_price" type="number"
-                                            name="cost_price" value="{{ old('cost_price') }}" required autofocus
-                                            autocomplete="cost_price">
-                                        <div class="mdc-notched-outline">
-                                            <div class="mdc-notched-outline__leading"></div>
-                                            <div class="mdc-notched-outline__notch">
-                                                <label for="cost_price" class="mdc-floating-label">Cost Price</label>
-                                            </div>
-                                            <div class="mdc-notched-outline__trailing"></div>
-                                        </div>
-                                        @error('cost_price')
-                                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
                                 <!-- selling_price -->
                                 <div class="col-md-4 my-2">
                                     <div class="mdc-text-field mdc-text-field--outlined">
@@ -193,6 +175,24 @@
                                             <div class="mdc-notched-outline__trailing"></div>
                                         </div>
                                         @error('selling_price')
+                                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- cost_price -->
+                                <div class="col-md-4 my-2">
+                                    <div class="mdc-text-field mdc-text-field--outlined">
+                                        <input class="mdc-text-field__input" id="cost_price" type="number"
+                                            name="cost_price" value="{{ old('cost_price') }}" required autofocus
+                                            autocomplete="cost_price">
+                                        <div class="mdc-notched-outline">
+                                            <div class="mdc-notched-outline__leading"></div>
+                                            <div class="mdc-notched-outline__notch">
+                                                <label for="cost_price" class="mdc-floating-label">Cost Price</label>
+                                            </div>
+                                            <div class="mdc-notched-outline__trailing"></div>
+                                        </div>
+                                        @error('cost_price')
                                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
                                     </div>
@@ -311,6 +311,24 @@
                                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
 
+                                    </div>
+                                </div>
+                                <!-- unit -->
+                                <div class="col-md-4 my-2">
+                                    <div class="mdc-text-field mdc-text-field--outlined">
+                                        <input class="mdc-text-field__input" id="unit" type="text"
+                                            name="unit" value="{{ old('unit') }}" 
+                                            autocomplete="unit">
+                                        <div class="mdc-notched-outline">
+                                            <div class="mdc-notched-outline__leading"></div>
+                                            <div class="mdc-notched-outline__notch">
+                                                <label for="unit" class="mdc-floating-label">Unit</label>
+                                            </div>
+                                            <div class="mdc-notched-outline__trailing"></div>
+                                        </div>
+                                        @error('unit')
+                                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- short_description -->

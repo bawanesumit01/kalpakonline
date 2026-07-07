@@ -158,7 +158,7 @@
                                     @foreach($order->items as $item)
                                     <div class="mb-3 pb-3 border-bottom">
                                         <p class="fw-semibold mb-1">{{ $item->product_name }}</p>
-                                        <p class="text-muted small mb-1">Qty: {{ $item->quantity }}</p>
+                                        <p class="text-muted small mb-1">Qty: {{ $item->quantity }} {{ $item->unit ?? '' }}</p>
                                         <p class="text-muted small mb-0">₹{{ number_format($item->price, 2) }} × {{ $item->quantity }}</p>
                                         <p class="fw-semibold text-primary">₹{{ number_format($item->subtotal, 2) }}</p>
                                     </div>

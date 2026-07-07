@@ -126,6 +126,15 @@
         {{-- Product Name --}}
         <h3 class="fw-bold mb-3">{{ $product->product_name }}</h3>
 
+        {{-- Package Size --}}
+        @if($product->unit)
+            <div class="mb-3">
+                <span class="badge bg-info-subtle text-info px-3 py-2">
+                    <i class="fa-solid fa-box"></i> {{ $product->unit }}
+                </span>
+            </div>
+        @endif
+
         {{-- Price --}}
         <div class="d-flex align-items-center gap-3 mb-3">
             <span class="fs-2 fw-bold text-dark">₹{{ $product->final_price ?? '00' }}</span>

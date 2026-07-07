@@ -523,6 +523,7 @@ $productsData = $products->map(function($p) {
     return [
         'id'       => $p->id,
         'name'     => $p->product_name,
+        'unit'     => $p->unit,
         'cat_id'   => $p->category_id,
         'cat_name' => $p->category->category_name ?? 'Other',
         'price'    => (float)($p->final_price ?? $p->selling_price ?? 0),
@@ -568,6 +569,7 @@ $productsData = $products->map(function($p) {
               ${product.name}
             </a>
           </h3>
+          ${product.unit ? `<div class="text-muted small mb-2"><i class="fa-solid fa-box"></i> ${product.unit}</div>` : ''}
           <div class="product-price-modern">
             <span class="price-original">&#8377; ${Number(product.selling_price).toLocaleString('en-IN')}</span>
             <span class="price-current">&#8377; ${Number(product.price).toLocaleString('en-IN')}</span>

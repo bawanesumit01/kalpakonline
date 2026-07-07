@@ -69,6 +69,7 @@ class ProductController extends Controller
                 'stock_quantity' => 'required|integer|min:0',
                 'min_stock_alert' => 'nullable|integer|min:0',
                 'stock_status' => 'required|in:in_stock,out_of_stock,pre_order',
+                'unit' => 'nullable|string|max:50',
 
                 'short_description' => 'nullable|string|max:255',
                 'description' => 'nullable|string',
@@ -199,6 +200,7 @@ class ProductController extends Controller
                 'stock_quantity' => 'required|integer|min:0',
                 'min_stock_alert' => 'nullable|integer|min:0',
                 'stock_status' => 'required|in:in_stock,out_of_stock,pre_order',
+                'unit' => 'nullable|string|max:50',
 
                 'short_description' => 'nullable|string|max:255',
                 'description' => 'nullable|string',

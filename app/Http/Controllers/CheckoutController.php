@@ -180,6 +180,7 @@ class CheckoutController extends Controller
                     'product_id' => $item->product_id,
                     'product_name' => $item->product->product_name ?? $item->product->name,
                     'quantity' => $item->quantity,
+                    'unit' => $item->product->unit,
                     'price' => $item->product->final_price,
                     'subtotal' => $item->product->final_price * $item->quantity,
                 ]);
