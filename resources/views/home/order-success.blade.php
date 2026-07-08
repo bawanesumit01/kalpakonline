@@ -83,10 +83,18 @@
                                 </div>
                                 <div class="order-item-info">
                                     <h6 class="item-name">{{ $item->product->product_name }}</h6>
+                                    @if($item->unit)
+                                    <p class="item-details">
+                                        Size: <span>{{ $item->unit }}</span> | 
+                                        Qty: <span>{{ $item->quantity }}</span> × 
+                                        ₹<span>{{ number_format($item->price, 2) }}</span>
+                                    </p>
+                                    @else
                                     <p class="item-details">
                                         Qty: <span>{{ $item->quantity }}</span> × 
                                         ₹<span>{{ number_format($item->price, 2) }}</span>
                                     </p>
+                                    @endif
                                 </div>
                                 <div class="order-item-price">
                                     ₹ {{ number_format($item->subtotal, 2) }}
@@ -144,6 +152,11 @@
                             <p class="address-text">{{ $order->address }}</p>
                             @if($order->address_line2)
                             <p class="address-text">{{ $order->address_line2 }}</p>
+                            @endif
+                            @if($order->landmark)
+                            <p class="address-text">
+                                <strong><i class="bi bi-location-pin"></i> Landmark:</strong> {{ $order->landmark }}
+                            </p>
                             @endif
                             <p class="address-text">
                                 {{ $order->city }}, {{ $order->state }} - {{ $order->pincode }}

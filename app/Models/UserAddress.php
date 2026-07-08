@@ -19,6 +19,7 @@ class UserAddress extends Model
         'state',
         'pincode',
         'country',
+        'landmark',
         'is_default',
         'address_type',
     ];

@@ -60,6 +60,7 @@
                                 <thead class="table-light">
                                     <tr>
                                         <th>Product</th>
+                                        <th>Size</th>
                                         <th>Qty</th>
                                         <th>Price</th>
                                         <th>Subtotal</th>
@@ -71,12 +72,13 @@
                                             <td>
                                                 @if($item->product)
                                                     <a href="{{ route('product.details', $item->product->id) }}">
-                                                        {{ $item->product->name }}
+                                                        {{ $item->product->product_name }}
                                                     </a>
                                                 @else
                                                     <span class="text-muted">(Product deleted)</span>
                                                 @endif
                                             </td>
+                                            <td>{{ $item->unit ?? '-' }}</td>
                                             <td>{{ $item->quantity }}</td>
                                             <td>₹{{ number_format($item->price, 2) }}</td>
                                             <td>₹{{ number_format($item->subtotal, 2) }}</td>
@@ -130,6 +132,9 @@
                                         {{ $order->address }}
                                         @if($order->address_line2)
                                             <br>{{ $order->address_line2 }}
+                                        @endif
+                                        @if($order->landmark)
+                                            <br><strong><i class="bi bi-location-pin"></i> Landmark:</strong> {{ $order->landmark }}
                                         @endif
                                         <br>{{ $order->city }}, {{ $order->state }} - {{ $order->pincode }}
                                         <br>{{ $order->country }}<br>

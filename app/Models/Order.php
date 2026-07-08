@@ -21,6 +21,7 @@ class Order extends Model
         'state',
         'pincode',
         'country',
+        'landmark',
         'payment_method',
         'payment_status',
         'order_notes',

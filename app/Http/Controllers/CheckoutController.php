@@ -74,6 +74,7 @@ class CheckoutController extends Controller
                 'state' => 'required|string|max:100',
                 'pincode' => 'required|string|size:6|regex:/^[0-9]{6}$/',
                 'country' => 'nullable|string|max:100',
+                'landmark' => 'nullable|string|max:255',
                 'payment_method' => 'required|in:cod',
                 'order_notes' => 'nullable|string|max:1000',
                 'promo_code' => 'nullable|string|max:50',
@@ -142,6 +143,7 @@ class CheckoutController extends Controller
                     'state' => $validated['state'],
                     'pincode' => $validated['pincode'],
                     'country' => $validated['country'] ?? 'India',
+                    'landmark' => $validated['landmark'] ?? null,
                     'is_default' => false,
                     'address_type' => 'home',
                 ]);
@@ -161,6 +163,7 @@ class CheckoutController extends Controller
                 'state' => $validated['state'],
                 'pincode' => $validated['pincode'],
                 'country' => $validated['country'] ?? 'India',
+                'landmark' => $validated['landmark'] ?? null,
                 'payment_method' => $validated['payment_method'],
                 'payment_status' => 'pending',
                 'order_notes' => $validated['order_notes'] ?? null,

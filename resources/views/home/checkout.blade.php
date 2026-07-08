@@ -163,6 +163,15 @@
                                            value="India" 
                                            readonly>
                                 </div>
+                                <div class="col-12">
+                                    <label class="form-label-modern">Landmark (Optional)</label>
+                                    <input type="text" 
+                                           class="form-control-modern" 
+                                           name="landmark" 
+                                           value="{{ old('landmark') }}"
+                                           placeholder="e.g., Near Railway Station, Opposite City Park, Next to School">
+                                    <small class="text-muted">Helps delivery boy locate your address easily</small>
+                                </div>
                             </div>
                         </div>
                     </div>

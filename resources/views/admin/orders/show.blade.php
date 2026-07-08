@@ -117,6 +117,9 @@
                                     @if($order->address_line2)
                                     <p class="mb-1">{{ $order->address_line2 }}</p>
                                     @endif
+                                    @if($order->landmark)
+                                    <p class="mb-1"><strong><i class="fa-solid fa-location-pin"></i> Landmark:</strong> {{ $order->landmark }}</p>
+                                    @endif
                                     <p class="mb-1">{{ $order->city }}, {{ $order->state }} - {{ $order->pincode }}</p>
                                     <p class="mb-0">{{ $order->country ?? 'India' }}</p>
                                 </div>
