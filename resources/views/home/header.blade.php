@@ -1,15 +1,96 @@
 <header>
-    {{-- ✅ Marquee Announcement Bar --}}
-    <div style="background: #3ca090; color: #fff; padding: 2px 0; position: relative;">
-        <marquee behavior="scroll" direction="left" scrollamount="5" onmouseover="this.stop()" onmouseout="this.start()">
-            <span class="mx-5">🛒 Free Delivery on orders above ₹499</span>
-            <span class="mx-5">⚡ Flash Sale — Up to 50% OFF on selected items!</span>
-            <span class="mx-5">🎁 Use code <strong>KALPAK10</strong> for 10% off your first order</span>
-            <span class="mx-5">🚚 Same Day Delivery available in select areas</span>
-            <span class="mx-5">✅ 100% Genuine & Quality Products</span>
-            <span class="mx-5">📞 Customer Support: +91 XXXXXXXXXX</span>
-        </marquee>
+    {{-- ✅ Enhanced Marquee Announcement Bar --}}
+    <div style="background: linear-gradient(135deg, #3ca090 0%, #2d8072 100%); color: #fff; padding: 12px 0;">
+        <div>
+            @if(isset($marqueeMessages) && is_array($marqueeMessages) && count($marqueeMessages) > 0)
+                @foreach($marqueeMessages as $msg)
+                    <span>
+                        {{-- Display Font Awesome icon if available --}}
+                        @if(is_array($msg) && isset($msg['icon']) && !empty($msg['icon']))
+                            <i class="{{ $msg['icon'] }}" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                        @elseif(is_object($msg) && isset($msg->icon) && !empty($msg->icon))
+                            <i class="{{ $msg->icon }}" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                        @endif
+                        {{-- Display message text --}}
+                        <span>{{ is_array($msg) ? (isset($msg['text']) ? $msg['text'] : '') : (is_object($msg) ? $msg->message : $msg) }}</span>
+                    </span>
+                @endforeach
+                {{-- Duplicate for seamless scroll --}}
+                @foreach($marqueeMessages as $msg)
+                    <span>
+                        @if(is_array($msg) && isset($msg['icon']) && !empty($msg['icon']))
+                            <i class="{{ $msg['icon'] }}" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                        @elseif(is_object($msg) && isset($msg->icon) && !empty($msg->icon))
+                            <i class="{{ $msg->icon }}" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                        @endif
+                        <span>{{ is_array($msg) ? (isset($msg['text']) ? $msg['text'] : '') : (is_object($msg) ? $msg->message : $msg) }}</span>
+                    </span>
+                @endforeach
+            @else
+                {{-- Fallback with Font Awesome icons --}}
+                <span>
+                    <i class="fas fa-shipping-fast" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                    <span>Free Delivery on orders above ₹499</span>
+                </span>
+                <span>
+                    <i class="fas fa-bolt" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                    <span>Flash Sale — Up to 50% OFF on selected items!</span>
+                </span>
+                <span>
+                    <i class="fas fa-gift" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                    <span>Use code KALPAK10 for 10% off your first order</span>
+                </span>
+                <span>
+                    <i class="fas fa-shipping-fast" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                    <span>Free Delivery on orders above ₹499</span>
+                </span>
+            @endif
+        </div>
     </div>
+
+    <style>
+        @keyframes scroll-content {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        header > div:first-child {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        header > div:first-child > div {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: scroll-content 40s linear infinite;
+            min-width: 200%;
+            padding: 0 20px;
+        }
+
+        header > div:first-child > div:hover {
+            animation-play-state: paused;
+        }
+
+        header > div:first-child > div > span {
+            flex-shrink: 0;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header > div:first-child > div {
+                animation-duration: 30s;
+            }
+        }
+    </style>
     <div class="container-fluid card shadow">
         <div class="row border-bottom">
 

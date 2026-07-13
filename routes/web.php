@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminCustomerController;
 use App\Http\Controllers\Admin\AdminEnquiryController;
 use App\Http\Controllers\Admin\AdminDeliveryController;
+use App\Http\Controllers\Admin\MarqueeSettingController;
 use App\Http\Controllers\Api\DeliveryTrackingController;
 
 use Illuminate\Support\Facades\Route;
@@ -179,6 +180,13 @@ Route::middleware(['auth', 'role:superadmin|admin'])->prefix('account')->group(f
     Route::get('/delivery-boys/{id}/edit', [AdminDeliveryController::class, 'editBoy'])->name('admin.delivery.boy.edit');
     Route::put('/delivery-boys/{id}', [AdminDeliveryController::class, 'updateBoy'])->name('admin.delivery.boy.update');
     Route::delete('/delivery-boys/{id}', [AdminDeliveryController::class, 'deleteBoy'])->name('admin.delivery.boy.delete');
+
+    // Marquee (Announcement Banner) - Dynamic Messages
+    Route::get('/marquee', [MarqueeSettingController::class, 'index'])->name('admin.marquee.index');
+    Route::post('/marquee', [MarqueeSettingController::class, 'store'])->name('admin.marquee.store');
+    Route::put('/marquee/{id}', [MarqueeSettingController::class, 'update'])->name('admin.marquee.update');
+    Route::delete('/marquee/{id}', [MarqueeSettingController::class, 'destroy'])->name('admin.marquee.destroy');
+    Route::post('/marquee/order', [MarqueeSettingController::class, 'updateOrder'])->name('admin.marquee.updateOrder');
 
 });
 

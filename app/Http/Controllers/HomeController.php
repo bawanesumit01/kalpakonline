@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\MarqueeMessage;
 
 class HomeController extends Controller
 {
@@ -20,6 +21,9 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
+        
+        // Get marquee messages from database (with defaults as fallback)
+        $marqueeMessages = MarqueeMessage::getMessages();
         
         // Get top 10 best-selling products (products with orders, sorted by most sold)
         $bestSellers = Product::select('products.id', 'products.product_name', 'products.final_price', 
@@ -63,7 +67,7 @@ class HomeController extends Controller
             $products = $bestSellers;
         }
          
-        return view('home.index', compact('categories','products'));
+        return view('home.index', compact('categories','products', 'marqueeMessages'));
     }
     
     /**

@@ -59,10 +59,13 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     </noscript>
 
+    {{-- ✅ Font Awesome Free Icons --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9OVH63lEVgUGeCpSnM5z50/200KtEI+Z5KTAVVF8SK4x9pLSiggV0+V5ygoZsJ7S7DY62kstUNJJtXzF17V3+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     {{-- AOS Animation Library --}}
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.2.0/css/all.min.css">
 
 </head>
 
@@ -545,6 +548,7 @@
     <script defer
         src="{{ asset('/assets/home/js/script.js') }}?v={{ filemtime(public_path('assets/home/js/script.js')) }}">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/js/all.min.js"></script>
 
     {{-- AOS Animation Library --}}
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -559,6 +563,91 @@
     </script>
 
     @stack('scripts')
+
+    {{-- WhatsApp Floating Button --}}
+    <style>
+        .whatsapp-floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            z-index: 999;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .whatsapp-floating-btn:hover {
+            background-color: #20ba5a;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-floating-btn i {
+            font-size: 30px;
+            color: white;
+        }
+
+        .whatsapp-floating-btn:before {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid #25d366;
+            animation: pulse-whatsapp 1.5s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes pulse-whatsapp {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .whatsapp-floating-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .whatsapp-floating-btn i {
+                font-size: 28px;
+            }
+
+            .whatsapp-floating-btn:before {
+                width: 65px;
+                height: 65px;
+            }
+        }
+    </style>
+
+    <a href="https://wa.me/919923464686?text=Hi%20Kalpak%20Online%20I%20need%20assistance" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       class="whatsapp-floating-btn" 
+       title="Chat with us on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 
 </body>
 

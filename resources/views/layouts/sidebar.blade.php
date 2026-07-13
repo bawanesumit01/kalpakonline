@@ -86,6 +86,16 @@
                      </div>
                  @endif
 
+                 <!-- Marquee Settings - Only Superadmin -->
+                 @if ($user->role === 'superadmin')
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('admin.marquee.*') ? 'active' : '' }}"
+                             href="{{ route('admin.marquee.index') }}">
+                             <i class="fa-solid fa-rectangle-ad"></i> Marquee
+                         </a>
+                     </div>
+                 @endif
+
                  <!--<div class="mdc-list-item mdc-drawer-item">-->
                  <!--    <a class="mdc-expansion-panel-link gap-3" href="#" data-toggle="expansionPanel"-->
                  <!--        data-target="ui-sub-menu">-->
