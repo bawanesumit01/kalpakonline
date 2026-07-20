@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\AdminCustomerController;
 use App\Http\Controllers\Admin\AdminEnquiryController;
 use App\Http\Controllers\Admin\AdminDeliveryController;
 use App\Http\Controllers\Admin\MarqueeSettingController;
+use App\Http\Controllers\Admin\HeroSliderController;
+use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Api\DeliveryTrackingController;
 
 use Illuminate\Support\Facades\Route;
@@ -187,6 +189,17 @@ Route::middleware(['auth', 'role:superadmin|admin'])->prefix('account')->group(f
     Route::put('/marquee/{id}', [MarqueeSettingController::class, 'update'])->name('admin.marquee.update');
     Route::delete('/marquee/{id}', [MarqueeSettingController::class, 'destroy'])->name('admin.marquee.destroy');
     Route::post('/marquee/order', [MarqueeSettingController::class, 'updateOrder'])->name('admin.marquee.updateOrder');
+
+    // Hero Slider Management
+    Route::get('/hero-slider', [HeroSliderController::class, 'index'])->name('hero-slider.index');
+    Route::post('/hero-slider', [HeroSliderController::class, 'store'])->name('hero-slider.store');
+    Route::put('/hero-slider/{id}', [HeroSliderController::class, 'update'])->name('hero-slider.update');
+    Route::delete('/hero-slider/{id}', [HeroSliderController::class, 'destroy'])->name('hero-slider.destroy');
+    Route::post('/hero-slider/order', [HeroSliderController::class, 'updateOrder'])->name('hero-slider.updateOrder');
+
+    // Site Settings Management
+    Route::get('/site-settings', [SiteSettingController::class, 'edit'])->name('site-settings.edit');
+    Route::put('/site-settings', [SiteSettingController::class, 'update'])->name('site-settings.update');
 
 });
 

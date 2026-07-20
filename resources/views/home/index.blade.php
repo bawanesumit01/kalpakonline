@@ -1,75 +1,73 @@
 @extends('home.app')
 
 @section('content')
-    <!-- Hero Section -->
+    <!-- Hero Section with Image Slider Background -->
     <section class="hero-section-modern">
-        <div class="hero-background">
-            <div class="hero-shape hero-shape-1"></div>
-            <div class="hero-shape hero-shape-2"></div>
-            <div class="hero-shape hero-shape-3"></div>
-        </div>
+        <!-- Hero Slider Background -->
+        @if(isset($heroSliders) && count($heroSliders) > 0)
+            <div id="heroSliderContainer" class="hero-slider-container">
+                @foreach($heroSliders as $index => $slider)
+                    <div class="hero-slide" data-slide="{{ $index }}" style="display: {{ $index === 0 ? 'block' : 'none' }};">
+                        <!-- Background Image -->
+                        <div class="hero-slide-background" style="background-image: url('{{ asset($slider->image_path) }}'); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                        
+                        
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Hero Content Overlay -->
+            <div class="hero-background">
+                <div class="hero-shape hero-shape-1"></div>
+                <div class="hero-shape hero-shape-2"></div>
+                <div class="hero-shape hero-shape-3"></div>
+            </div>
+        @else
+            <!-- No Hero Sliders - Hide Background Shapes -->
+            <div class="hero-background" style="display: none;">
+                <div class="hero-shape hero-shape-1"></div>
+                <div class="hero-shape hero-shape-2"></div>
+                <div class="hero-shape hero-shape-3"></div>
+            </div>
+        @endif
+
         <div class="container-lg">
-            <div class="row align-items-center" style="min-height: 60vh;">
-                <div class="col-lg-6 col-md-8">
+            <div class="row" style="min-height: 60vh;">
+               
+
+                <!-- Center Section - Main Content -->
+                <div class="col-lg-9 col-md-8">
                     <div class="hero-content-modern" data-aos="fade-up">
-                        <span class="hero-badge-modern">
-                            <i class="bi bi-stars"></i> Welcome to Kalpak Online
-                        </span>
-                        <h1 class="hero-title-modern">
-                            Your Daily Essentials,<br>
-                            <span class="gradient-text">Delivered Fresh</span>
-                        </h1>
-                        <p class="hero-description-modern">
-                            Experience hassle-free shopping with a wide range of quality products from groceries to mobile
-                            accessories, all at your fingertips.
-                        </p>
+                        
                         <div class="hero-buttons-modern">
                             <a href="{{ route('shop') }}" class="btn-primary-modern">
                                 Start Shopping
                                 <i class="bi bi-arrow-right"></i>
                             </a>
-                            <a href="#products" class="btn-outline-modern">
-                                <i class="bi bi-grid-3x3-gap"></i>
-                                Explore Products
-                            </a>
-                        </div>
-                        <div class="hero-stats-modern">
-                            <div class="stat-card-modern">
-                                <h3 class="stat-number">1000+</h3>
-                                <p class="stat-label">Products</p>
-                            </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-card-modern">
-                                <h3 class="stat-number">5000+</h3>
-                                <p class="stat-label">Happy Customers</p>
-                            </div>
-                            <div class="stat-divider"></div>
-                            <div class="stat-card-modern">
-                                <h3 class="stat-number">24/7</h3>
-                                <p class="stat-label">Support</p>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 d-none d-lg-block">
-                    <div class="hero-image-modern" data-aos="fade-left" data-aos-delay="200">
-                        <div class="floating-card floating-card-1">
-                            <i class="bi bi-basket"></i>
-                            <span>Fresh Products</span>
-                        </div>
-                        <div class="floating-card floating-card-2">
-                            <i class="bi bi-truck"></i>
-                            <span>Fast Delivery</span>
-                        </div>
-                        <div class="floating-card floating-card-3">
-                            <i class="bi bi-shield-check"></i>
-                            <span>Secure Payment</span>
-                        </div>
+
+                <!-- Right Section - Video Player -->
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="hero-video-section" data-aos="fade-left" data-aos-delay="200">
+                        @if(isset($heroSliders) && count($heroSliders) > 0 && $heroSliders[0]->video_url)
+                            <div class="hero-video-player">
+                                <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                                    <source src="{{ asset($heroSliders[0]->video_url) }}" type="video/mp4">
+                                </video>
+                                <div class="video-overlay">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Hero Slider CSS & JS: Extracted to assets/css/pages/home.css and assets/js/pages/home.js -->
 
     <!-- Features Section -->
     <section class="features-section-modern">
@@ -82,7 +80,7 @@
                                 <i class="bi bi-box-seam"></i>
                             </div>
                         </div>
-                        <h3 class="feature-title-modern">Wide Product Range</h3>
+                        <h3 class="feature-title-modern">{{ $totalProducts }}+ Products</h3>
                         <p class="feature-description-modern">All your daily needs from edible oil to mobile accessories in
                             one place.</p>
                         <div class="feature-number">01</div>
@@ -95,9 +93,9 @@
                                 <i class="bi bi-shield-check"></i>
                             </div>
                         </div>
-                        <h3 class="feature-title-modern">Quality & Trusted</h3>
-                        <p class="feature-description-modern">Carefully selected, reliable and genuine products for every
-                            customer.</p>
+                        <!-- {{ $totalCustomers }} use can use later when custor are increase -->
+                        <h3 class="feature-title-modern">500+ Customers</h3>
+                        <p class="feature-description-modern">Trusted by thousands of happy customers across the region.</p>
                         <div class="feature-number">02</div>
                     </div>
                 </div>
@@ -108,7 +106,7 @@
                                 <i class="bi bi-lightning-charge"></i>
                             </div>
                         </div>
-                        <h3 class="feature-title-modern">Fast Delivery</h3>
+                        <h3 class="feature-title-modern">24/7 Support</h3>
                         <p class="feature-description-modern">Quick and reliable delivery service to your doorstep with
                             care.</p>
                         <div class="feature-number">03</div>
@@ -270,198 +268,5 @@
         </div>
     </section>
 
-    @push('scripts')
-        <script>
-            $(document).ready(function() {
-                // =====================
-                // ADD TO CART
-                // =====================
-                $(document).on('click', '.btn-cart', function(e) {
-                    e.preventDefault();
-
-                    const btn = $(this);
-                    const productId = btn.attr('data-product-id');
-                    const quantity = btn.closest('.button-area').find('.quantity').val() || 1;
-
-                    // DEBUG — check these values in browser console
-                    console.log('Product ID:', productId);
-                    console.log('Quantity:', quantity);
-                    console.log('CSRF Token:', $('meta[name="csrf-token"]').attr('content'));
-
-                    if (!productId) {
-                        alert('Product ID missing on button! Add data-product-id attribute.');
-                        return;
-                    }
-
-                    btn.prop('disabled', true).text('Adding...');
-
-                    $.ajax({
-                        url: "{{ route('cart.add') }}",
-                        method: 'POST',
-                        data: {
-                            _token: $('meta[name="csrf-token"]').attr('content'),
-                            product_id: productId,
-                            quantity: quantity,
-                        },
-                        success: function(res) {
-                            if (res.success) {
-                                $('.cart-count').text(res.cart_count);
-
-                                // ✅ First render cart, then open offcanvas
-                                renderOffcanvasCart();
-                                showToast(res.message, 'success');
-
-                                setTimeout(function() {
-                                    const offcanvasEl = document.getElementById(
-                                        'offcanvasCart');
-                                    if (offcanvasEl) {
-                                        new bootstrap.Offcanvas(offcanvasEl).show();
-                                    }
-                                }, 300); // small delay to let render complete
-                            }
-                        },
-                        error: function(xhr) {
-                            console.error('AJAX Error:', xhr.status, xhr.responseText);
-
-                            if (xhr.status === 419) {
-                                alert(
-                                    'CSRF token mismatch. Make sure meta csrf tag is in your <head>.'
-                                    );
-                            } else if (xhr.status === 404) {
-                                alert('Route not found. Check route name cart.add exists.');
-                            } else if (xhr.status === 500) {
-                                alert('Server error. Check Laravel logs: storage/logs/laravel.log');
-                            } else {
-                                alert('Error ' + xhr.status + ': ' + xhr.responseText);
-                            }
-                        },
-                        complete: function() {
-                            btn.prop('disabled', false).html(
-                                '<svg width="18" height="18"><use xlink:href="#cart"></use></svg> Add to Cart'
-                            );
-                        }
-                    });
-                });
-                // =====================
-                // QUANTITY INCREASE
-                // =====================
-                $(document).on('click', '.offcanvas-qty-increase', function() {
-                    const cartId = $(this).data('cart-id');
-                    const qtyEl = $(`.offcanvas-qty[data-cart-id="${cartId}"]`);
-                    const newQty = parseInt(qtyEl.text()) + 1;
-                    updateOffcanvasQty(cartId, newQty);
-                });
-
-                // =====================
-                // QUANTITY DECREASE
-                // =====================
-                $(document).on('click', '.offcanvas-qty-decrease', function() {
-                    const cartId = $(this).data('cart-id');
-                    const qtyEl = $(`.offcanvas-qty[data-cart-id="${cartId}"]`);
-                    const newQty = parseInt(qtyEl.text()) - 1;
-
-                    if (newQty < 1) {
-                        removeOffcanvasItem(cartId);
-                    } else {
-                        updateOffcanvasQty(cartId, newQty);
-                    }
-                });
-
-                // =====================
-                // REMOVE ITEM
-                // =====================
-                $(document).on('click', '.offcanvas-remove', function() {
-                    const cartId = $(this).data('cart-id');
-                    removeOffcanvasItem(cartId);
-                });
-
-                // =====================
-                // HELPERS
-                // =====================
-                function updateOffcanvasQty(cartId, quantity) {
-                    $.post("{{ route('cart.update') }}", {
-                        _token: "{{ csrf_token() }}",
-                        cart_id: cartId,
-                        quantity: quantity,
-                    }, function(res) {
-                        if (res.success) {
-                            $(`.offcanvas-qty[data-cart-id="${cartId}"]`).text(quantity);
-                            $(`.offcanvas-subtotal[data-cart-id="${cartId}"]`).html('&#8377; ' + res.subtotal);
-                            $('.offcanvas-total').html('&#8377; ' + res.cartTotal);
-                            updateCartBadge();
-                        }
-                    });
-                }
-
-                function removeOffcanvasItem(cartId) {
-                    $.post("{{ route('cart.remove') }}", {
-                        _token: "{{ csrf_token() }}",
-                        cart_id: cartId,
-                    }, function(res) {
-                        if (res.success) {
-                            $(`#offcanvas-item-${cartId}`).fadeOut(300, function() {
-                                $(this).remove();
-                                $('.cart-count').text(res.cart_count);
-                                $('.offcanvas-total').html('&#8377; ' + res.cartTotal);
-
-                                if (res.cart_count == 0) {
-                                    $('#offcanvas-cart-items').html(`
-                        <div class="text-center py-5" id="empty-cart-msg">
-                            <p class="mt-3 text-muted">Your cart is empty</p>
-                            <a href="/" class="btn btn-primary btn-sm mt-2" data-bs-dismiss="offcanvas">Start Shopping</a>
-                        </div>
-                    `);
-                                    $('#offcanvas-cart-footer').hide();
-                                }
-                            });
-                        }
-                    });
-                }
-
-                function renderOffcanvasCart() {
-                    $.ajax({
-                        url: "{{ route('cart.items') }}",
-                        method: 'GET',
-                        success: function(res) {
-                            if (res.success) {
-                                $('#offcanvas-cart-items').html(res.html);
-                                $('.offcanvas-total').html('&#8377; ' + res.cartTotal);
-                                $('.cart-count').text(res.cart_count);
-
-                                if (res.cart_count > 0) {
-                                    $('#offcanvas-cart-footer').show();
-                                } else {
-                                    $('#offcanvas-cart-footer').hide();
-                                }
-                            }
-                        },
-                        error: function(xhr) {
-                            console.error('renderOffcanvasCart error:', xhr.status, xhr.responseText);
-                        }
-                    });
-                }
-
-                function updateCartBadge() {
-                    $.get("{{ route('cart.items') }}", function(res) {
-                        $('.cart-count').text(res.cart_count);
-                    });
-                }
-
-                function showToast(message, type = 'success') {
-                    const toast = `
-        <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:9999">
-            <div class="toast show align-items-center text-white bg-${type} border-0">
-                <div class="d-flex">
-                    <div class="toast-body">${message}</div>
-                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-                </div>
-            </div>
-        </div>`;
-                    $('body').append(toast);
-                    setTimeout(() => $('.toast-container').last().remove(), 3000);
-                }
-
-            });
-        </script>
-    @endpush
+    <!-- Large cart/product script: Extracted to assets/js/pages/home.js -->
 @endsection

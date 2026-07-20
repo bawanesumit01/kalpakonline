@@ -94,6 +94,22 @@
                              <i class="fa-solid fa-rectangle-ad"></i> Marquee
                          </a>
                      </div>
+
+                     <!-- Hero Slider Settings - Only Superadmin -->
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('hero-slider.*') ? 'active' : '' }}"
+                             href="{{ route('hero-slider.index') }}">
+                             <i class="fa-solid fa-film"></i> Hero Slider
+                         </a>
+                     </div>
+
+                     <!-- Site Settings - Only Superadmin -->
+                     <div class="mdc-list-item mdc-drawer-item">
+                         <a class="mdc-drawer-link gap-3 {{ request()->routeIs('site-settings.*') ? 'active' : '' }}"
+                             href="{{ route('site-settings.edit') }}">
+                             <i class="fa-solid fa-sliders"></i> Site Settings
+                         </a>
+                     </div>
                  @endif
 
                  <!--<div class="mdc-list-item mdc-drawer-item">-->
@@ -122,7 +138,8 @@
              </nav>
          </div>
          <div class="profile-actions">
-             <a href="javascript:;" class="pt-1">Settings</a>
+             <a class="pt-1 {{ request()->routeIs('site-settings.*') ? 'active' : '' }}"
+                             href="{{ route('site-settings.edit') }}">Settings</a>
              <span class="divider pt-4"></span>
              <form method="POST" action="{{ route('logout') }}">
                  @csrf

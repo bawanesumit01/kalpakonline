@@ -13,7 +13,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::TwSHsgkRdXWHMLpO',
+            '_route' => 'generated::G1LyweuVHacIDpZm',
           ),
           1 => NULL,
           2 => 
@@ -33,7 +33,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::BbGyfFimnP1CTlum',
+            '_route' => 'generated::gK3TXMOWjZvyV3HE',
           ),
           1 => NULL,
           2 => 
@@ -1150,6 +1150,78 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/account/hero-slider' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'hero-slider.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'hero-slider.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/account/site-settings' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'site-settings.edit',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'site-settings.update',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'PUT' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/register' => 
       array (
         0 => 
@@ -1173,7 +1245,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::wDsYTqvasctKKelS',
+            '_route' => 'generated::cBSJkbQtTiGOyLsO',
           ),
           1 => NULL,
           2 => 
@@ -1209,7 +1281,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::YKpSmdt6MQ2z8D0d',
+            '_route' => 'generated::qfdm8LgErSAl7XIa',
           ),
           1 => NULL,
           2 => 
@@ -1339,7 +1411,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::CuabDInFz1HgRAjk',
+            '_route' => 'generated::2ykFAbVNfHEB1Fso',
           ),
           1 => NULL,
           2 => 
@@ -1393,7 +1465,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/product/([^/]++)(*:24)|/a(?|pi/delivery/(?|order/([^/]++)/tracking(*:74)|([^/]++)/route(*:95)|order/([^/]++)/live(*:121))|ccount/(?|vendor/([^/]++)(?|/edit(*:163)|(*:171))|c(?|ategory/([^/]++)(?|/edit(*:208)|(*:216))|ustomers/(?|([^/]++)(?|(*:248)|/(?|edit(*:264)|addresses(?|(*:284)|/([^/]++)(*:301))|orders(*:316))|(*:325))|bulk\\-action(*:346)|([^/]++)/notify(*:369)))|products/([^/]++)(?|/edit(*:404)|(*:412))|orders/(?|([^/]++)(?|(*:442)|/(?|edit(*:458)|invoice(*:473))|(*:482))|bulk\\-update(*:503))|enquiries/([^/]++)(?|(*:533)|/(?|respond(*:552)|status(*:566))|(*:575))|delivery(?|/(?|([^/]++)(*:607)|assign(*:621))|\\-boys/([^/]++)(?|/edit(*:653)|(*:661)))|marquee/(?|([^/]++)(?|(*:693))|order(*:707))))|/order/(?|success/([^/]++)(*:744)|([^/]++)/track(*:766))|/reset\\-password/([^/]++)(*:800)|/verify\\-email/([^/]++)/([^/]++)(*:840)|/storage/(.*)(*:861))/?$}sDu',
+      0 => '{^(?|/product/([^/]++)(*:24)|/a(?|pi/delivery/(?|order/([^/]++)/tracking(*:74)|([^/]++)/route(*:95)|order/([^/]++)/live(*:121))|ccount/(?|vendor/([^/]++)(?|/edit(*:163)|(*:171))|c(?|ategory/([^/]++)(?|/edit(*:208)|(*:216))|ustomers/(?|([^/]++)(?|(*:248)|/(?|edit(*:264)|addresses(?|(*:284)|/([^/]++)(*:301))|orders(*:316))|(*:325))|bulk\\-action(*:346)|([^/]++)/notify(*:369)))|products/([^/]++)(?|/edit(*:404)|(*:412))|orders/(?|([^/]++)(?|(*:442)|/(?|edit(*:458)|invoice(*:473))|(*:482))|bulk\\-update(*:503))|enquiries/([^/]++)(?|(*:533)|/(?|respond(*:552)|status(*:566))|(*:575))|delivery(?|/(?|([^/]++)(*:607)|assign(*:621))|\\-boys/([^/]++)(?|/edit(*:653)|(*:661)))|marquee/(?|([^/]++)(?|(*:693))|order(*:707))|hero\\-slider/(?|([^/]++)(?|(*:743))|order(*:757))))|/order/(?|success/([^/]++)(*:794)|([^/]++)/track(*:816))|/reset\\-password/([^/]++)(*:850)|/verify\\-email/([^/]++)/([^/]++)(*:890)|/storage/(.*)(*:911))/?$}sDu',
     ),
     3 => 
     array (
@@ -2270,7 +2342,69 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      744 => 
+      743 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'hero-slider.update',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'PUT' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'hero-slider.destroy',
+          ),
+          1 => 
+          array (
+            0 => 'id',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      757 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'hero-slider.updateOrder',
+          ),
+          1 => 
+          array (
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      794 => 
       array (
         0 => 
         array (
@@ -2293,7 +2427,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      766 => 
+      816 => 
       array (
         0 => 
         array (
@@ -2316,7 +2450,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      800 => 
+      850 => 
       array (
         0 => 
         array (
@@ -2339,7 +2473,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      840 => 
+      890 => 
       array (
         0 => 
         array (
@@ -2363,7 +2497,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      861 => 
+      911 => 
       array (
         0 => 
         array (
@@ -2401,7 +2535,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::TwSHsgkRdXWHMLpO' => 
+    'generated::G1LyweuVHacIDpZm' => 
     array (
       'methods' => 
       array (
@@ -2429,8 +2563,8 @@ app('router')->setCompiledRoutes(
                     return response(\\Illuminate\\Support\\Facades\\View::file(\'E:\\\\xampp\\\\htdocs\\\\kalpakonline\\\\vendor\\\\laravel\\\\framework\\\\src\\\\Illuminate\\\\Foundation\\\\Configuration\'.\'/../resources/health-up.blade.php\', [
                         \'exception\' => $exception,
                     ]), status: $exception ? 500 : 200);
-                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000006460000000000000000";}}',
-        'as' => 'generated::TwSHsgkRdXWHMLpO',
+                }";s:5:"scope";s:54:"Illuminate\\Foundation\\Configuration\\ApplicationBuilder";s:4:"this";N;s:4:"self";s:32:"00000000000005d70000000000000000";}}',
+        'as' => 'generated::G1LyweuVHacIDpZm',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2446,7 +2580,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::BbGyfFimnP1CTlum' => 
+    'generated::gK3TXMOWjZvyV3HE' => 
     array (
       'methods' => 
       array (
@@ -2469,13 +2603,13 @@ app('router')->setCompiledRoutes(
     \\Artisan::call(\'optimize\');
 
     return "Optimization commands executed successfully ✅";
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000000000064c0000000000000000";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000005dd0000000000000000";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::BbGyfFimnP1CTlum',
+        'as' => 'generated::gK3TXMOWjZvyV3HE',
       ),
       'fallback' => false,
       'defaults' => 
@@ -6247,6 +6381,274 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'hero-slider.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/hero-slider',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@index',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'hero-slider.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'hero-slider.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'account/hero-slider',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@store',
+        'controller' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@store',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'hero-slider.store',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'hero-slider.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+      ),
+      'uri' => 'account/hero-slider/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@update',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'hero-slider.update',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'hero-slider.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'account/hero-slider/{id}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@destroy',
+        'controller' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'hero-slider.destroy',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'hero-slider.updateOrder' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'account/hero-slider/order',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@updateOrder',
+        'controller' => 'App\\Http\\Controllers\\Admin\\HeroSliderController@updateOrder',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'hero-slider.updateOrder',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'site-settings.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/site-settings',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\SiteSettingController@edit',
+        'controller' => 'App\\Http\\Controllers\\Admin\\SiteSettingController@edit',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'site-settings.edit',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'site-settings.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+      ),
+      'uri' => 'account/site-settings',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'role:superadmin|admin',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\SiteSettingController@update',
+        'controller' => 'App\\Http\\Controllers\\Admin\\SiteSettingController@update',
+        'namespace' => NULL,
+        'prefix' => '/account',
+        'where' => 
+        array (
+        ),
+        'as' => 'site-settings.update',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'register' => 
     array (
       'methods' => 
@@ -6285,7 +6687,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::wDsYTqvasctKKelS' => 
+    'generated::cBSJkbQtTiGOyLsO' => 
     array (
       'methods' => 
       array (
@@ -6306,7 +6708,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::wDsYTqvasctKKelS',
+        'as' => 'generated::cBSJkbQtTiGOyLsO',
       ),
       'fallback' => false,
       'defaults' => 
@@ -6360,7 +6762,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::YKpSmdt6MQ2z8D0d' => 
+    'generated::qfdm8LgErSAl7XIa' => 
     array (
       'methods' => 
       array (
@@ -6381,7 +6783,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::YKpSmdt6MQ2z8D0d',
+        'as' => 'generated::qfdm8LgErSAl7XIa',
       ),
       'fallback' => false,
       'defaults' => 
@@ -6701,7 +7103,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::CuabDInFz1HgRAjk' => 
+    'generated::2ykFAbVNfHEB1Fso' => 
     array (
       'methods' => 
       array (
@@ -6722,7 +7124,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::CuabDInFz1HgRAjk',
+        'as' => 'generated::2ykFAbVNfHEB1Fso',
       ),
       'fallback' => false,
       'defaults' => 
@@ -6828,7 +7230,7 @@ app('router')->setCompiledRoutes(
                         $config,
                         $isProduction
                     ))($request, $path);
-                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000006690000000000000000";}}',
+                }";s:5:"scope";s:47:"Illuminate\\Filesystem\\FilesystemServiceProvider";s:4:"this";N;s:4:"self";s:32:"00000000000005fa0000000000000000";}}',
         'as' => 'storage.local',
       ),
       'fallback' => false,

@@ -1,0 +1,43 @@
+/* ====================================
+   FOOTER COMPONENT STYLES
+   ==================================== */
+
+.footer-link {
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: #3ca090 !important;
+    transform: translateX(2px);
+}
+
+.social-links a {
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: #3ca090 !important;
+    border-color: #3ca090 !important;
+    transform: translateY(-2px);
+}
+
+.footer-section h6 {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+footer p {
+    line-height: 1.6;
+}
+
+/* ════════ RESPONSIVE FOOTER ════════ */
+@media (max-width: 768px) {
+    .footer-section {
+        margin-bottom: 2rem;
+    }
+
+    .footer-section h6 {
+        font-size: 0.85rem !important;
+    }
+}

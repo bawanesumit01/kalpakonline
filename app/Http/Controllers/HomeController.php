@@ -11,6 +11,7 @@ use App\Models\Vendor;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\MarqueeMessage;
+use App\Models\HeroSlider;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,15 @@ class HomeController extends Controller
         
         // Get marquee messages from database (with defaults as fallback)
         $marqueeMessages = MarqueeMessage::getMessages();
+        
+        // Get hero sliders from database
+        $heroSliders = HeroSlider::getActiveSliders();
+        
+        // Get total active products count
+        $totalProducts = Product::where('status', 'active')->count();
+        
+        // Get total customers count
+        $totalCustomers = User::where('role', 'client')->count();
         
         // Get top 10 best-selling products (products with orders, sorted by most sold)
         $bestSellers = Product::select('products.id', 'products.product_name', 'products.final_price', 
@@ -67,7 +77,7 @@ class HomeController extends Controller
             $products = $bestSellers;
         }
          
-        return view('home.index', compact('categories','products', 'marqueeMessages'));
+        return view('home.index', compact('categories','products', 'marqueeMessages', 'heroSliders', 'totalProducts', 'totalCustomers'));
     }
     
     /**

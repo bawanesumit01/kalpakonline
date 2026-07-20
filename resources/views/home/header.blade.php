@@ -7,9 +7,9 @@
                     <span>
                         {{-- Display Font Awesome icon if available --}}
                         @if(is_array($msg) && isset($msg['icon']) && !empty($msg['icon']))
-                            <i class="{{ $msg['icon'] }}" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                            <i class="{{ $msg['icon'] }} marquee-icon"></i>
                         @elseif(is_object($msg) && isset($msg->icon) && !empty($msg->icon))
-                            <i class="{{ $msg->icon }}" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                            <i class="{{ $msg->icon }} marquee-icon"></i>
                         @endif
                         {{-- Display message text --}}
                         <span>{{ is_array($msg) ? (isset($msg['text']) ? $msg['text'] : '') : (is_object($msg) ? $msg->message : $msg) }}</span>
@@ -19,9 +19,9 @@
                 @foreach($marqueeMessages as $msg)
                     <span>
                         @if(is_array($msg) && isset($msg['icon']) && !empty($msg['icon']))
-                            <i class="{{ $msg['icon'] }}" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                            <i class="{{ $msg['icon'] }} marquee-icon"></i>
                         @elseif(is_object($msg) && isset($msg->icon) && !empty($msg->icon))
-                            <i class="{{ $msg->icon }}" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                            <i class="{{ $msg->icon }} marquee-icon"></i>
                         @endif
                         <span>{{ is_array($msg) ? (isset($msg['text']) ? $msg['text'] : '') : (is_object($msg) ? $msg->message : $msg) }}</span>
                     </span>
@@ -29,68 +29,26 @@
             @else
                 {{-- Fallback with Font Awesome icons --}}
                 <span>
-                    <i class="fas fa-shipping-fast" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                    <i class="fas fa-shipping-fast marquee-icon"></i>
                     <span>Free Delivery on orders above ₹499</span>
                 </span>
                 <span>
-                    <i class="fas fa-bolt" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                    <i class="fas fa-bolt marquee-icon"></i>
                     <span>Flash Sale — Up to 50% OFF on selected items!</span>
                 </span>
                 <span>
-                    <i class="fas fa-gift" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                    <i class="fas fa-gift marquee-icon"></i>
                     <span>Use code KALPAK10 for 10% off your first order</span>
                 </span>
                 <span>
-                    <i class="fas fa-shipping-fast" style="font-size: 18px; color: #fff; display: inline-block; min-width: 20px; text-align: center;"></i>
+                    <i class="fas fa-shipping-fast marquee-icon"></i>
                     <span>Free Delivery on orders above ₹499</span>
                 </span>
             @endif
         </div>
     </div>
 
-    <style>
-        @keyframes scroll-content {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
-        }
-        
-        header > div:first-child {
-            width: 100%;
-            overflow: hidden;
-        }
-        
-        header > div:first-child > div {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            animation: scroll-content 40s linear infinite;
-            min-width: 200%;
-            padding: 0 20px;
-        }
 
-        header > div:first-child > div:hover {
-            animation-play-state: paused;
-        }
-
-        header > div:first-child > div > span {
-            flex-shrink: 0;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            header > div:first-child > div {
-                animation-duration: 30s;
-            }
-        }
-    </style>
     <div class="container-fluid card shadow">
         <div class="row border-bottom">
 
@@ -98,7 +56,7 @@
                 class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
                 <div class="d-flex align-items-center my-3 my-sm-0">
                     <a href="{{ route('home.index') }}">
-                        <img src="{{ asset('/assets/images/kalpak-logo.png') }}" alt="logo" class="img-fluid">
+                        <img src="{{ asset($siteSetting->logo_path ?? 'assets/images/kalpak-logo.png') }}" alt="{{ $siteSetting->site_name ?? 'logo' }}" class="img-fluid">
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"

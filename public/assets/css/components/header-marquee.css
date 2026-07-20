@@ -1,0 +1,11 @@
+/* ====================================
+   HEADER MARQUEE COMPONENT STYLES
+   ==================================== */
+
+.marquee-icon {
+    font-size: 18px;
+    color: #fff;
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+}

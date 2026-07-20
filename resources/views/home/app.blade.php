@@ -48,7 +48,14 @@
     <link rel="stylesheet" type="text/css"
         href="{{ asset('/assets/home/css/home-modern.css') }}?v={{ filemtime(public_path('assets/home/css/home-modern.css')) }}">
     
-    {{-- Modern Checkout Page Styles --}}
+    {{-- Extracted Styles --}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/pages/home.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/pages/shop.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/pages/product-details.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/pages/order-success.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/components/header-marquee.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/components/footer.css') }}">
+        {{-- Modern Checkout Page Styles --}}
     <link rel="stylesheet" type="text/css"
         href="{{ asset('/assets/home/css/checkout-modern.css') }}?v={{ filemtime(public_path('assets/home/css/checkout-modern.css')) }}">
 
@@ -552,15 +559,17 @@
 
     {{-- AOS Animation Library --}}
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Initialize AOS (Animate On Scroll)
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true,
-            offset: 100
-        });
-    </script>
+    <script src="{{ asset('/assets/js/aos-init.js') }}"></script>
+
+    {{-- Page-Specific Scripts --}}
+    <script src="{{ asset('/assets/js/pages/home.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/shop.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/product-details.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/checkout.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/cart.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/otp-timer.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/faq.js') }}"></script>
+    <script src="{{ asset('/assets/js/pages/order-success.js') }}"></script>
 
     @stack('scripts')
 

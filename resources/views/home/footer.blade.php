@@ -7,7 +7,7 @@
             <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
                 <div class="footer-section">
                     <div class="mb-4">
-                        <img src="{{ asset('/assets/images/kalpak-logo.png') }}" width="220" height="65" alt="Kalpak Online Logo" class="img-fluid">
+                        <img src="{{ asset($siteSetting->logo_path ?? 'assets/images/kalpak-logo.png') }}" width="220" height="65" alt="{{ $siteSetting->site_name ?? 'Kalpak Online Logo' }}" class="img-fluid">
                     </div>
                     <p class="text-light mb-3 small">Your trusted destination for quality products and exceptional customer service.</p>
                     
@@ -137,7 +137,7 @@
                                 <i class="bi bi-telephone" style="color: #3ca090; margin-top: 2px;"></i>
                                 <div>
                                     <p class="small text-muted mb-1">Customer Support</p>
-                                    <a href="tel:+919876543210" class="text-light text-decoration-none fw-bold">+91-98765-43210</a>
+                                    <a href="tel:+918669988077" class="text-light text-decoration-none fw-bold">+91-8669988077</a> , <a href="tel:+918669988075" class="text-light text-decoration-none fw-bold">+91-8669988075</a>
                                 </div>
                             </div>
                         </li>
@@ -146,7 +146,7 @@
                                 <i class="bi bi-envelope" style="color: #3ca090; margin-top: 2px;"></i>
                                 <div>
                                     <p class="small text-muted mb-1">Email</p>
-                                    <a href="mailto:support@kalpakonline.co.in" class="text-light text-decoration-none fw-bold">support@kalpakonline.co.in</a>
+                                    <a href="mailto:support@kalpakonline.co.in" class="text-light text-decoration-none fw-bold">Kalpakudyoginfo@gmail.com</a>
                                 </div>
                             </div>
                         </li>
@@ -155,7 +155,7 @@
                                 <i class="bi bi-geo-alt" style="color: #3ca090; margin-top: 2px;"></i>
                                 <div>
                                     <p class="small text-muted mb-1">Address</p>
-                                    <p class="small text-light mb-0">Kalpak Online<br>Mumbai, Maharashtra<br>India</p>
+                                    <p class="small text-light mb-0">Kalpak . Plot number 4, Sham nagar, sector 3, besa pipla road, pipla - 440034.</p>
                                 </div>
                             </div>
                         </li>
@@ -189,45 +189,4 @@
     </div>
 </footer>
 
-<!-- Footer Styles -->
-<style>
-    .footer-link {
-        transition: all 0.3s ease;
-        display: inline-block;
-    }
-
-    .footer-link:hover {
-        color: #3ca090 !important;
-        transform: translateX(2px);
-    }
-
-    .social-links a {
-        transition: all 0.3s ease;
-    }
-
-    .social-links a:hover {
-        background-color: #3ca090 !important;
-        border-color: #3ca090 !important;
-        transform: translateY(-2px);
-    }
-
-    .footer-section h6 {
-        color: #ffffff;
-        font-weight: 700;
-    }
-
-    footer p {
-        line-height: 1.6;
-    }
-
-    /* Responsive Footer */
-    @media (max-width: 768px) {
-        .footer-section {
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h6 {
-            font-size: 0.85rem !important;
-        }
-    }
-</style>
+<!-- Footer Styles: Extracted to assets/css/components/footer.css -->

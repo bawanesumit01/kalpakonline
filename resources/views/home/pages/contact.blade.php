@@ -27,7 +27,7 @@
                             <h6 class="card-title fw-bold mb-2">📧 Email Us</h6>
                             <p class="card-text text-muted mb-2">
                                 <a href="mailto:support@kalpakonline.co.in" class="text-decoration-none">
-                                    support@kalpakonline.co.in
+                                    Kalpakudyoginfo@gmail.com
                                 </a>
                             </p>
                             <p class="card-text small text-muted">We typically reply within 24 hours.</p>
@@ -38,8 +38,10 @@
                         <div class="card-body">
                             <h6 class="card-title fw-bold mb-2">📞 Call Us</h6>
                             <p class="card-text text-muted mb-2">
-                                <a href="tel:+919876543210" class="text-decoration-none">
-                                    +91-98765-43210
+                                <a href="tel:+918669988077" class="text-decoration-none">
+                                    +91-8669988077
+                                </a> , <a href="tel:+918669988075" class="text-decoration-none">
+                                    +91-8669988075
                                 </a>
                             </p>
                             <p class="card-text small text-muted">Monday - Friday, 10 AM to 6 PM IST</p>
@@ -51,9 +53,7 @@
                             <h6 class="card-title fw-bold mb-2">📍 Visit Us</h6>
                             <p class="card-text text-muted mb-2">
                                 Kalpak Online<br>
-                                123 Business Street<br>
-                                Mumbai, Maharashtra 400001<br>
-                                India
+                                Plot number 4, Sham nagar,<br> sector 3, besa pipla road, <br>pipla - 440034.
                             </p>
                         </div>
                     </div>
